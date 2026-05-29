@@ -52,7 +52,7 @@ routes work, but does not override agent decisions.
 
 | Layer | Name | Persona | Authority |
 |---|---|---|---|
-| QC | Quality Council | 3-judge panel: Coverage, Correctness, Clarity | Tag artifacts QC_FAILED with reason; cannot fabricate content |
+| QC | Quality Council | 4-judge panel: Coverage, Correctness, Clarity, Skip-Validity | Tag artifacts QC_FAILED with reason; cannot fabricate content |
 
 ---
 
@@ -68,11 +68,15 @@ routes work, but does not override agent decisions.
 
 *A08 only spawns if FRONTEND_UI layer is present.
 
-## Parallel Execution
+## Execution Model
 
-Within a single module, all relevant Tier-2/3/4 agents work in **parallel**.
-The Orchestrator merges their output. Each agent reads only its scope-relevant
-files plus the 12 registers from Phase 2.
+Praetor runs as a single model adopting many expert personas within one
+context. Within a single module, all relevant Tier-2/3/4 agents are dispatched
+together and **sequentially simulated** — none waits on another's approval, and
+they share state only through the registers (read) and the Coverage Ledger
+(write), exactly as independent agents would. The Orchestrator merges their
+output. Each agent reads only its scope-relevant files plus the 12 registers
+from Phase 2.
 
 ## Refusal Conditions (per agent)
 

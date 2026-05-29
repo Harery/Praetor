@@ -1,52 +1,67 @@
-# Artifact Status Protocol
+# Artifact Status — Single Source of Truth
 
-## The 7 Status Values
+This file is the **canonical registry** of every STATUS value an artifact may
+carry. Any other file that lists or counts status values must defer to this
+one. U4 (Status Tag Discipline) forbids ad-hoc tags — that rule is only
+coherent if every tag an agent legitimately uses appears HERE.
 
-```
-READY                       — Default. Artifact can be executed/adopted/filed as-is.
-READY_EXPOSES_BUG           — Test is correct and executable; current code will fail it.
+## Core statuses (7)
 
-INFERRED                    — Depends on an INFERRED register entry; reliability conditional.
-BLOCKED_BY_MISSING_CODE     — References code that doesn't exist; cannot execute yet.
-DUPLICATE_OF_<id>           — Already covered at same layer; reference only.
-RELATED_TO_<id>             — Same scenario at different architectural layer; both kept.
+| Status | Meaning |
+|---|---|
+| `READY` | Ready to execute / adopt / file. Default. |
+| `READY_EXPOSES_BUG` | Test is correct; current code will fail it. |
+| `INFERRED` | Based on inference; needs human confirmation. |
+| `BLOCKED_BY_MISSING_CODE` | Cannot execute until referenced code exists. |
+| `DUPLICATE_OF_<id>` | Already covered at same layer; reference only. |
+| `RELATED_TO_<id>` | Same scenario at a different layer; both kept. |
+| `DEFERRED_TO_<phase\|module>` | Intentionally postponed; out of scope. |
 
-DEFERRED_TO_<phase|module>  — Intentionally out of scope for this run.
-```
+## Extended statuses (category-specific)
 
-## Extended Status Values (per category)
+These are NOT ad-hoc — they are part of the protocol and pass U4. They exist
+because some audiences need a precise reason a piece of work could not be done.
 
-Categories add specialized statuses:
+| Status | Used by | Meaning |
+|---|---|---|
+| `NO_WORK_FOUND` | any | Scope analyzed; nothing applicable. Triggers Judge 4. |
+| `UNTESTABLE_AS_WRITTEN` | [ENG] | Code can't be tested in isolation; needs refactor. |
+| `BLOCKED_NEEDS_INSTRUMENTATION` | [ENG]/[OPS] | Needs observability that doesn't exist yet. |
+| `BLOCKED_BY_TEST_DATA` | [BIZ] UAT | Pre-setup state not achievable in staging. |
+| `BLOCKED_NO_RESOLUTION` | [OPS] | Failure mode has no known remediation path. |
+| `BLOCKED_NO_UI_PATH` | [SUP] | No user-facing path exists to reproduce. |
+| `AUDIT_GAP` | [COMP] | Control claimed but no implementation evidence. |
+| `OUT_OF_SCOPE` | any | Outside the declared run configuration. |
+| `MANUAL_CONTROL` | [COMP] | Control is satisfied by a manual process, not code. |
+| `QC_FAILED` | QC | Failed a Quality Council judge; reason attached. |
+| `UNCORRECTABLE_DISTRIBUTION` | A02 | Priority bands genuinely can't be balanced. |
+| `COMPLIANCE_CLAIM_UNVERIFIED` | A02/A16 | Compliance marker present, code absent. |
 
-```
-[ENG]   UNTESTABLE_AS_WRITTEN    — code structure prevents isolated testing; refactor first
-[OPS]   BLOCKED_NEEDS_INSTRUMENTATION  — failure mode unobservable
-[SUP]   BLOCKED_NO_RESOLUTION    — no resolution path defined; needs engineering RB
-[BIZ]   BLOCKED_NO_UI_PATH       — BR exists only at code level
-[COMP]  AUDIT_GAP                — control required but evidence missing
-        OUT_OF_SCOPE             — framework not declared in scope
-        MANUAL_CONTROL           — implemented via process, not code
-```
+## Risk-lifecycle statuses (A17 only)
 
-Quality Council also tags:
-```
-QC_FAILED                   — Did not pass Quality Council review; reason cited
-```
+The Risk Agent (A17) tracks the lifecycle of a *risk*, not the readiness of an
+*artifact*. Risk-register entries (`RR-`) carry one of these values; they are
+a distinct vocabulary from the artifact statuses above, and U4's "only
+protocol-defined tags" rule covers them because they are defined here:
 
-## Usage Rule
+| Status | Meaning |
+|---|---|
+| `OPEN` | Risk acknowledged; mitigation not started. |
+| `MITIGATING` | Mitigation work in progress. |
+| `MITIGATED` | Fix shipped; verify before closing. |
+| `ACCEPTED` | Business decision to accept; needs executive sign-off. |
+| `CLOSED` | Verified and closed. |
 
-Every artifact has exactly ONE status. If multiple apply, the most severe
-wins (BLOCKED > INFERRED > READY_EXPOSES_BUG > READY).
+A risk-register entry (`RR-<MODULE>-<NNN>`) carries exactly one of these.
+A generated artifact (TC/BV/RB/…) carries one of the core/extended statuses
+above. The two vocabularies never mix on the same item.
 
-`READY_EXPOSES_BUG` is the correct tag when a test is well-formed and ready
-to execute, but the code under test will fail it. This is **not a defect of
-the test** — it's how the test signals the code defect. The associated risk
-register entry (from A06/A09/A17) carries the severity; the test itself is
-just doing its job.
+## Counting rule
 
-## Wrap-Up Reporting
+When any doc states a status count, it must say:
+**"7 core statuses + extended set (see ARTIFACT_STATUS.md)"** rather than a
+bare number that silently excludes the extended set.
 
-Phase 6 wrap-up reports status distribution per category, e.g.:
-```
-[ENG] M_AUTH: 13 READY, 2 BLOCKED_BY_MISSING_CODE, 0 INFERRED, 0 DUPLICATE
-```
+The CHEATSHEET may show a *short list* of the most common tags for quick
+reference, but it links here and labels the list "common subset," not
+"the statuses."

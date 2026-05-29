@@ -4,7 +4,7 @@
 - A02 Domain Mapping Agent (Domain-Driven Design Lead)
 - A03 Tooling Discovery Agent (DevOps Tools Architect)
 
-Both run in parallel. Silent until Phase 3.
+Both are dispatched together (sequentially simulated). Silent until Phase 3.
 
 ## v2 Changes
 - **A03 is new** — detects org tooling (CI, monitoring, ticketing, help-desk,

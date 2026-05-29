@@ -9,29 +9,43 @@ A Citations Index emitted at the END of every module response, listing every
 
 ```
 ## Citations Index — M_<MODULE>
-| Ref ID | file:line | Used in | Verified |
+| Ref ID | file:line | Used in | Re-derived |
 |---|---|---|---|
 | C-001 | src/auth/controller.ts:23-58 | TC-M_AUTH-CONTROLLER-LOGIN-001..013, BV-..., CM-... | ✓ |
 | C-002 | src/auth/controller.ts:14-15  | BR-005 source, TC-...-004 | ✓ |
 | C-003 | README.md:8 | BR-002 source | ✓ |
 ```
 
-The `Verified` column = ✓ if the agent actually opened the file and confirmed
-the cited content matches. ✗ if it was extracted from another artifact
-without re-verification.
+The `Re-derived` column = ✓ if the agent re-opened the file during this pass
+and confirmed the cited content matches the claim. ✗ if it was carried over
+from another artifact without re-opening.
 
 ## Why
 
-Lets a reviewer spot-check ~10 random references quickly. Catches fabrication
-or misremembered line numbers.
+Lets a reviewer spot-check references quickly and catches the most common
+failure mode — citation drift (line numbers that no longer point at the
+claimed code).
+
+## Standard
+
+Praetor runs as a single model in one context window. "Judge 2" and the
+re-derivation pass are roles the same model performs; they are a strong
+discipline, **not an independent external verifier**. Therefore:
+
+- The standard is: **every `file:line` claim is re-opened and re-confirmed
+  before emission, with no sampling skipped on purpose.**
+- The standard is NOT a guarantee of zero error. Treat the Citations Index as
+  a re-derived draft that a human should spot-check — especially before any
+  citation is used as compliance or audit evidence.
+- Describe the standard as "re-derived at emit; human spot-check recommended."
 
 ## Discipline
 
 - Every `file:line` claim in a module's artifacts MUST appear in the Citations Index
-- A claim can be `Verified = ✗` (cited from earlier source) but must still appear
+- A claim can be `Re-derived = ✗` (carried from an earlier source) but must still appear
 - The Citations Index MUST be complete; abbreviation or "sampled" is FORBIDDEN
-- The Quality Council Judge 2 (Correctness) verifies **100%** of citations
-  per module. No sampling.
+- Judge 2 (Correctness) attempts re-derivation of every citation in the module.
+  No deliberate sampling.
 
 ## Chunking Interaction
 

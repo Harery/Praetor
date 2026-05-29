@@ -1,6 +1,7 @@
 # Phase 5 — Quality Council Review
 
-**Owner**: Quality Council (3-judge panel: Coverage, Correctness, Clarity).
+**Owner**: Quality Council (4-judge panel: Coverage, Correctness, Clarity,
+Skip-Validity).
 
 ## How It Runs
 
@@ -8,19 +9,22 @@ Quality Council reviews inline with Phase 4 — before any artifact is emitted
 in the module response. The flow:
 
 1. Tier-2/3/4 agents produce artifacts
-2. Quality Council reviews each artifact in parallel along three axes
+2. Quality Council reviews each artifact along its applicable axes
+   (Judges 1–3 always; Judge 4 only for `NO_WORK_FOUND` artifacts)
 3. Failures get a single rework chance (silent)
 4. Final emission tags artifacts with READY or QC_FAILED
 
-## Three Judges
+## Four Judges
 
-| Judge | Persona | Question | Triggers QC_FAILED |
-|---|---|---|---|
-| 1 | Test coverage analyst, 12y | Coverage: did agent cover its scope? | Missing branches, untested paths |
-| 2 | Senior code reviewer, 15y | Correctness: is everything accurate? | Bad citations, wrong logic |
-| 3 | Technical writer, 10y | Clarity: will the audience understand? | Jargon for wrong audience |
+| Judge | Persona | Question | Applies to | Triggers QC_FAILED |
+|---|---|---|---|---|
+| 1 | Test coverage analyst, 12y | Coverage: did agent cover its scope? | Every artifact | Missing branches, untested paths |
+| 2 | Senior code reviewer, 15y | Correctness: is everything accurate? | Every artifact | Citation drift, wrong logic |
+| 3 | Technical writer, 10y | Clarity: will the audience understand? | Every artifact | Jargon for wrong audience |
+| 4 | Senior auditor, 15y | Skip-Validity: is a declared skip defensible? | `NO_WORK_FOUND` only | Skip collapses vs. risk register |
 
-Any single judge can flag. Passing requires all three to assent.
+Any single applicable judge can flag. Passing requires all applicable judges
+to assent (Judges 1–3 always; Judge 4 when the artifact is `NO_WORK_FOUND`).
 
 ## QC_FAILED Output
 

@@ -58,10 +58,13 @@ Judge 4 reviews only artifacts with `STATUS: NO_WORK_FOUND`. Consensus is not
 required to pass — any single judge can flag. Passing requires all applicable
 judges to assent.
 
-### Rule 1a — 100% Citation Verification 
-Judge 2 (Correctness) MUST verify every file:line citation in the module
-by opening the cited file and confirming the cited content matches what the
-agent claimed. No sampling. No "looks plausible."
+### Rule 1a — Citation Re-derivation
+Judge 2 (Correctness) re-derives every file:line citation in the module by
+opening the cited file and confirming the cited content matches what the
+agent claimed. No deliberate sampling; no "looks plausible." This is a
+single-model discipline performed by the same model, not an independent
+external verifier — so the Citations Index is a re-derived draft that a human
+should spot-check before it is used as compliance or audit evidence.
 
 If the cited line range doesn't contain the claimed code, the artifact is
 QC_FAILED with reason `CITATION_DRIFT: claimed <code> at <file:line>,

@@ -18,14 +18,16 @@ You do NOT silently skip. Silent skips break Phase 6 auditability.
 (Skip-Validity) against the module's risk register to confirm the skip is
 defensible.
 
-## Rule U2 — 100% Citation Discipline
+## Rule U2 — Citation Discipline
 
 Every `file:line` reference you emit must be:
-- Re-verified by opening the file at emission time (not from memory)
+- Re-derived by opening the file at emission time (not from memory)
 - Listed in the module Citations Index
-- Subject to Quality Council Judge 2's 100% verification pass
+- Subject to Quality Council Judge 2's re-derivation pass
 
-No sampling. No "looks plausible."
+No deliberate sampling; no "looks plausible." Re-derivation is a single-model
+discipline, not external certification — the Citations Index is a reviewed
+draft for human spot-check, not a guarantee of zero error.
 
 ## Rule U3 — No Output Abbreviation
 

@@ -32,11 +32,20 @@ branches.
 module-layer-function combination.
 
 ### Rule 3 — Status Tagging
+You use only the protocol-defined statuses. The canonical, authoritative list
+(7 core + extended) lives in `08-protocols/ARTIFACT_STATUS.md`; reference it
+rather than copying the set here. The ones A04 emits most often:
+
 - `READY` — code exists, function readable, test executable as written
-- `INFERRED` — depends on register entry that A02 marked INFERRED
+- `READY_EXPOSES_BUG` — test is correct; current code will fail it
+- `INFERRED` — depends on a register entry A02 marked INFERRED
 - `BLOCKED_BY_MISSING_CODE` — references a function or dep not in repo
+- `UNTESTABLE_AS_WRITTEN` — needs refactor before it can be unit-tested
 - `DUPLICATE_OF_<id>` — covered already in earlier module (Coverage Ledger)
 - `DEFERRED_TO_<x>` — out of scope (e.g., generated code)
+
+Other agents reference "the A04 status set"; that reference means
+"the canonical set in ARTIFACT_STATUS.md."
 
 ### Rule 4 — Refuse Framework Tests
 You refuse to write tests that exercise framework behavior (e.g., "test that
@@ -61,3 +70,4 @@ Express parses JSON"). Tests must exercise *your code*.
 - ❌ Tests that depend on test execution order
 - ❌ Tests that mock everything (becomes a tautology)
 - ❌ Snapshot tests for logic (only for stable outputs)
+- ❌ Inventing a STATUS tag not defined in ARTIFACT_STATUS.md

@@ -1,6 +1,7 @@
 # ID Schemes — All Identifier Formats
 
-Every artifact in the kit uses a structured ID for traceability. Eight schemes total.
+Every artifact in the kit uses a structured ID for traceability.
+**Eleven schemes total.**
 
 ## Generated Artifact IDs
 
@@ -14,6 +15,12 @@ Every artifact in the kit uses a structured ID for traceability. Eight schemes t
 | Support Playbook | `SP-<MODULE>-<ISSUE>-<NNN>` | [SUP] | `SP-M_AUTH-LOGIN_ISSUES-001` |
 | Communication Template | `CT-<MODULE>-<SCENARIO>-<NNN>` | [SUP] | `CT-M_AUTH-LOGIN_OUTAGE-001` |
 | Compliance Mapping | `CM-<FRAMEWORK>-<CONTROL>-<NNN>` | [COMP] | `CM-SOC2-CC6.1-001` |
+| Risk Register Entry | `RR-<MODULE>-<NNN>` | cross-cutting | `RR-M_USERS-001` |
+| Root Cause | `RC-<MODULE>-<NNN>` | cross-cutting | `RC-M_AUTH-001` |
+| Test Fixture | `FX-<MODULE>-<SCENARIO>-<NNN>` | [ENG] | `FX-M_ORDERS-USER_WITH_SKUS-001` |
+
+> RR (A17 risk), RC (A17 root cause), and FX (test fixtures, see
+> `08-protocols/TEST_FIXTURES.md`) are part of the canonical registry.
 
 ## Register IDs (set in Phase 2)
 
@@ -34,13 +41,12 @@ Every artifact in the kit uses a structured ID for traceability. Eight schemes t
 
 ## Module IDs (set in Phase 1)
 
-Format: `M_<DOMAIN_NAME>` or `M0X-<DOMAIN_NAME>`
+Two forms, choose by platform size:
+- **`M_<DOMAIN>`** — readable form; use when there are fewer than 20 modules.
+  Examples: `M_AUTH`, `M_BILLING`, `M_PAYMENTS`, `M_USERS`.
+- **`M01`, `M02`, …** — numeric form; use for very large platforms (≥20 modules).
 
-Examples: `M_AUTH`, `M_BILLING`, `M_PAYMENTS`, `M_USERS`, `M_NOTIFICATIONS`,
-`M_REPORTING`, `M_SEARCH`, `M_ADMIN`.
-
-Use the more readable `M_<DOMAIN>` form when there are <20 modules; fall back
-to `M01`, `M02` for very large platforms.
+Use exactly one of these two forms; do not mix them within a run.
 
 ## Layer Tags
 
@@ -52,6 +58,6 @@ to `M01`, `M02` for very large platforms.
 
 - All `<NNN>` slots are 3 digits, zero-padded: 001 through 999.
 - Scope is per-module per-type. `TC-M_AUTH-CONTROLLER-LOGIN-001` and
-  `TC-M_BILLING-CONTROLLER-INVOICE-001` are both valid; the numbering doesn't
+  `TC-M_BILLING-CONTROLLER-INVOICE-001` are both valid; numbering does not
   share across modules.
 - Register IDs (BR, WF, etc.) are platform-wide, not per-module.

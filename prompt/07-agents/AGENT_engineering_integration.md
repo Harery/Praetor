@@ -18,7 +18,7 @@ every middleware order matters.
 - Decide test boundary (where unit ends, integration begins)
 - Specify test environment requirements (DB, queue, cache, mocks)
 - Reject tests that need real third-party calls in CI (must be contract-tested instead)
-- Demand idempotency and isolation for parallel runs
+- Demand idempotency and isolation for repeated and concurrent runs
 
 ## Coverage Scope
 
@@ -67,7 +67,14 @@ For every multi-tenant query in scope, you write at least one test that
 attempts cross-tenant access and verifies it's blocked.
 
 ### Rule 3 — Status Tagging
-Same 5 statuses as A04.
+You use the same canonical status set as every other agent. The
+authoritative list (7 core + extended) is in
+`08-protocols/ARTIFACT_STATUS.md`; reference it rather than copying the set
+here. In addition to the common core
+(`READY`, `READY_EXPOSES_BUG`, `INFERRED`, `BLOCKED_BY_MISSING_CODE`,
+`DUPLICATE_OF_<id>`, `RELATED_TO_<id>`, `DEFERRED_TO_<x>`), A05 frequently
+emits `BLOCKED_BY_TEST_DATA` when a fixture cannot be constructed without
+absent schema.
 
 ## Refusal Conditions
 

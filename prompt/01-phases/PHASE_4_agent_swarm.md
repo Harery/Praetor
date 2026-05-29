@@ -10,7 +10,7 @@ For each module M_X:
    - Layers present (e.g., A08 only if FRONTEND_UI)
    - RUN_CATEGORIES override (e.g., A12+A13 if CAT-C in scope)
    - RUN_PRIORITIES override (e.g., A09 only if P2 in scope or critical-path module)
-3. Orchestrator dispatches relevant agents IN PARALLEL
+3. Orchestrator dispatches relevant agents together (sequentially simulated)
 4. Each agent emits artifacts with full STATUS tagging
 5. Quality Council reviews (Phase 5, inline per module)
 6. Orchestrator consolidates and emits
@@ -56,7 +56,7 @@ For each module M_X:
 ...
 
 ## Citations Index — M_X
-| Ref ID | file:line | Used in artifacts | Verified |
+| Ref ID | file:line | Used in artifacts | Re-derived |
 
 ## Quality Council Notes
 (QC_FAILED items and reasons)

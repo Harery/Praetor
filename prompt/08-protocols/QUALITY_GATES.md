@@ -9,8 +9,11 @@ Gate 1 — Discovery Gate (Phase 3)
   Fails to: rework Phase 1/2 with corrections
 
 Gate 2 — Quality Council Review (Phase 5, per artifact)
-  Who reviews: 3-judge panel (Coverage / Correctness / Clarity)
-  Pass criteria: all 3 judges assent
+  Who reviews: 4-judge panel (Coverage / Correctness / Clarity / Skip-Validity)
+  Pass criteria: all APPLICABLE judges assent.
+                 Judges 1–3 are always applicable.
+                 Judge 4 (Skip-Validity) is applicable only when the artifact
+                 carries STATUS: NO_WORK_FOUND.
   Fails to: agent rework once; then emit with QC_FAILED tag
 
 Gate 3 — Wrap-Up Acceptance (Phase 6)
@@ -23,17 +26,21 @@ Gate 3 — Wrap-Up Acceptance (Phase 6)
 
 | Audience | Coverage check | Correctness check | Clarity check |
 |---|---|---|---|
-| [ENG] | All branches covered | Citations real | Test executable as-written |
+| [ENG] | All branches covered | Citations re-derived & accurate | Test executable as-written |
 | [BIZ] | All BRs translated | Verification matches BR | BA can read without help |
 | [OPS] | All failure modes have RB | Commands work | 3am-grade |
 | [SUP] | All ERR translated | No dead ends | Tier-1 agent can execute |
 | [COMP] | All controls mapped | Evidence cited | Audit-defensible |
 
+> Skip-Validity (Judge 4) is not an audience-specific check — it applies to any
+> artifact, in any audience, that is emitted as `NO_WORK_FOUND`. It verifies the
+> skip against the module's risk register before the skip is allowed to pass.
+
 ## QC_FAILED Tag Format
 
 ```
 STATUS: QC_FAILED
-Failed judge: <1, 2, or 3>
+Failed judge: <1, 2, 3, or 4>
 Reason: <one-line specific failure>
 Recommendation: <what to do>
 ```
@@ -44,4 +51,13 @@ STATUS: QC_FAILED
 Failed judge: 3 (Clarity)
 Reason: Step 4 uses "gRPC stub" — undefined for [SUP] audience.
 Recommendation: Rewrite as "internal API call (engineering can clarify)".
+```
+
+Skip-Validity example:
+```
+STATUS: QC_FAILED
+Failed judge: 4 (Skip-Validity)
+Reason: SKIP_UNDEFENDED — agent emitted NO_WORK_FOUND for [SUP], but ERR-014
+        (402 card declined) in this module is user-facing and ticket-driving.
+Recommendation: Produce a triage entry for ERR-014.
 ```

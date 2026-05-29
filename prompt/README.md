@@ -13,24 +13,34 @@ Support, Compliance). Zero hand-holding required between teams.
 
 ## What Praetor Does
 
-Reads your repository, then dispatches 18 autonomous expert agents (each
+Reads your repository, then dispatches 18 expert agent personas (each
 with a 12-20 year persona, defined scope, and unilateral authority in
 their domain) to produce:
 
 | Audience | Receives |
 |---|---|
-| `[ENG]` Engineering & QA | Test cases (unit + integration + security + perf + a11y + chaos), executable scripts (k6, Playwright, fast-check) |
+| `[ENG]` Engineering & QA | Test cases (unit + integration + security + perf + a11y + chaos), executable scripts (k6, Playwright, fast-check), secret-scan / secret-lint CI stage |
 | `[BIZ]` Business | Plain-language verification matrices, UAT scripts |
 | `[OPS]` Operations / SRE | 3am-grade runbooks, alert specs in detected monitoring syntax (Datadog/Prometheus/etc.) |
 | `[SUP]` Support / CX | Triage decision trees, error translations, customer comm templates |
 | `[COMP]` Compliance & Security | Control mappings (SOC2/GDPR/HIPAA/PCI/WCAG), PII flows, audit evidence |
 | Cross-cutting | Consolidated risk register with severity, owner, dev-day estimate |
 
+> **How the agents run:** Praetor is a single model adopting many expert
+> personas in one context — sequentially simulated, not literally parallel.
+> The discipline (scopes, handoffs, dedup, independent QC) is real; the
+> concurrency is a structuring device.
+
 Every artifact carries a STATUS tag, an Agent attribution, linked register
-IDs, and a file:line citation that's verified 100% by a 4-judge Quality
-Council.
+IDs, and a file:line citation that is re-derived at emit by a 4-judge
+Quality Council (a reviewed draft requiring human spot-check — not external
+certification).
 
 ## Quick Start
+
+> **New to Praetor?** Read `GETTING_STARTED.md` for a first-time, step-by-step
+> walkthrough written for non-experienced users. The steps below are the short version.
+
 
 1. Copy the contents of `00-orchestrator/MASTER_PROMPT.md`
 2. Paste into Claude
@@ -50,7 +60,8 @@ Council.
      RUN_PRIORITIES = [P0]
    then continue
    ```
-6. Per-module outputs follow. Reply `continue` for the next module.
+6. Per-module outputs follow. Reply `continue` for the next module, or
+   `halt` to stop with a resumable snapshot you can paste back later.
 7. Phase 6 wrap-up emits automatically with the executive summary.
 
 For non-technical audiences, see `99-reference/GLOSSARY.md`.
@@ -59,9 +70,11 @@ For operator commands, see `99-reference/CHEATSHEET.md`.
 ## Package Structure
 
 ```
-praetor/
+prompt/
 ├── README.md                                 ← this file
-├── VERSION.md                                ← release history
+├── VERSION.md                                ← version and properties
+├── SKILL.md                                  ← Claude Code skill manifest (entry metadata)
+├── GETTING_STARTED.md                        ← first-time, step-by-step guide
 │
 ├── 00-orchestrator/
 │   ├── MASTER_PROMPT.md                      ← THE PROMPT (paste this)
@@ -90,7 +103,8 @@ praetor/
 │   ├── MANDATE_business.md
 │   ├── MANDATE_operations.md
 │   ├── MANDATE_support.md
-│   └── MANDATE_compliance.md
+│   ├── MANDATE_compliance.md
+│   └── SECRET_SCAN_MANDATE.md                ← secret-key scan + secret-lint CI
 │
 ├── 05-execution/
 │   ├── TEAM_ASSIGNMENTS.md
@@ -105,7 +119,7 @@ praetor/
 │   ├── TEMPLATE_support_playbook.md
 │   └── TEMPLATE_compliance_control.md
 │
-├── 07-agents/                                ← 18 autonomous expert agents + QC
+├── 07-agents/                                ← 18 expert agent personas + QC
 │   ├── AGENT_orchestrator.md                 (A00)
 │   ├── AGENT_discovery.md                    (A01)
 │   ├── AGENT_domain_mapping.md               (A02)
@@ -133,19 +147,24 @@ praetor/
 │   ├── CITATIONS.md
 │   ├── CONDITIONAL_CONTINUE.md
 │   ├── COVERAGE_LEDGER.md                    ← layer-aware
-│   ├── ARTIFACT_STATUS.md                    ← 7 status values
+│   ├── ARTIFACT_STATUS.md                    ← canonical status set (7 core + extended)
 │   ├── HANDOFF_PROTOCOL.md
 │   ├── QUALITY_GATES.md
+│   ├── RESUMABLE_STATE.md                    ← halt → paste-back snapshot
 │   ├── ROOT_CAUSE_GROUPING.md
 │   ├── TEST_FIXTURES.md                      ← seed SQL + teardown
 │   └── UNIVERSAL_AGENT_DISCIPLINE.md         ← U1-U6 rules every agent obeys
 │
-└── 99-reference/
-    ├── CHEATSHEET.md
-    ├── FAILURE_RULES.md
-    ├── GLOSSARY.md                           ← plain-language jargon guide
-    ├── ID_SCHEMES.md
-    └── V1_TO_V2_MIGRATION.md
+├── 99-reference/
+│   ├── BY_THE_NUMBERS.md                     ← canonical counts (single source of truth)
+│   ├── CHEATSHEET.md
+│   ├── FAILURE_RULES.md
+│   ├── GLOSSARY.md                           ← plain-language jargon guide
+│   ├── ID_SCHEMES.md                         ← 11 ID schemes
+│   └── V1_TO_V2_MIGRATION.md
+│
+└── tools/
+    └── check_consistency.sh                  ← self-consistency check
 ```
 
 ## At a Glance
@@ -155,24 +174,29 @@ praetor/
 | Phases | 7 |
 | Audience categories | 5 |
 | Register types | 12 |
-| Autonomous agents | 18 |
+| Agent personas | 18 |
 | Quality Council judges | 4 |
-| Inter-agent protocols | 12 |
-| Artifact STATUS values | 7 |
-| Total files | 67 |
+| Inter-agent protocols | 13 |
+| Artifact STATUS values | 7 core + extended |
+| ID schemes | 11 |
+
+> Total file counts are not hardcoded — run `tools/check_consistency.sh` for
+> the live total and a self-consistency check.
 
 ## Core Properties
 
-- **Multi-agent orchestration** — 18 specialists working in parallel, each with declared persona, authority, and refusal conditions
-- **Quality Council review** — 4 judges (Coverage / Correctness / Clarity / Skip-Validity) review every artifact before emission
-- **100% citation verification** — every file:line claim is independently re-opened and verified at emit time
+- **Multi-agent orchestration** — 18 specialist personas, sequentially simulated, each with declared persona, authority, and refusal conditions
+- **Quality Council review** — 4 judges (Coverage / Correctness / Clarity / Skip-Validity); all *applicable* judges must assent
+- **Re-derived citations** — every file:line claim is re-opened at emit; treat as a reviewed draft, spot-check before use as audit evidence
 - **Layer-aware deduplication** — Coverage Ledger uses `DUPLICATE_OF` for same-layer matches and `RELATED_TO` for cross-layer scenarios
-- **Tooling adaptation** — detects your stack (Datadog/Sentry/Prometheus/etc.) and emits artifacts in the matching syntax
+- **Tooling adaptation** — detects your stack (Datadog/Sentry/Prometheus/etc.) by name/config and emits artifacts in the matching syntax (never reads secret values)
 - **Tool-agnostic** — if nothing detected, emits generic format with adoption recommendations
-- **Conditional gating** — Phase 3 MUST CONFIRM block; partial answers supported; structured override commands
+- **Secret hygiene** — runnable secret-scan / secret-lint CI stage from A06
+- **Conditional gating** — Phase 3 MUST CONFIRM block; partial answers; structured overrides; resumable `halt`
 - **Root cause grouping** — multiple symptom tests share an RC-ID so bug counts don't inflate
 - **Regression prevention** — Phase 6 ties every CRITICAL/HIGH fix to a CI gate + alert + runbook
 - **Test fixtures included** — every test ships with seed SQL and teardown
+- **Self-consistency check** — `tools/check_consistency.sh` keeps the kit's own headline facts aligned across files
 
 ## What Praetor Does Not Do
 
@@ -181,6 +205,7 @@ praetor/
 - ❌ Send customer communications
 - ❌ File tickets automatically
 - ❌ Replace human review
+- ❌ Externally certify its citations (it re-derives; you spot-check)
 
 It produces the specifications. Your team executes them.
 
