@@ -74,10 +74,15 @@ Every artifact carries:
 ```
 praetor/
 ├── README.md                                 ← this file
-├── VERSION.md                                ← version history & changelog
+├── .gitignore                                ← git ignore rules
 │
 ├── prompt/                                   ← THE SYSTEM PROMPT
-│   ├── 00-orchestrator/
+│   ├── README.md                             ← prompt documentation
+│   ├── GETTING_STARTED.md                    ← first-time user guide
+│   ├── SKILL.md                              ← Claude Code skill manifest
+│   ├── VERSION.md                            ← version history & changelog
+│   │
+│   ├── 00-orchestrator/                      ← orchestration layer
 │   │   ├── MASTER_PROMPT.md                  ← PASTE THIS INTO CLAUDE
 │   │   └── AGENT_ROSTER.md                   ← all 18 agents at a glance
 │   │
@@ -97,20 +102,22 @@ praetor/
 │   │   ├── CAT_D_support.md
 │   │   └── CAT_E_compliance.md
 │   │
-│   ├── 03-registers/REGISTERS.md             ← 12 register types
+│   ├── 03-registers/                         ← register definitions
+│   │   └── REGISTERS.md                      ← 12 register types (BR, ROLE, WF, etc.)
 │   │
 │   ├── 04-mandates/                          ← per-audience charters
 │   │   ├── MANDATE_engineering.md
 │   │   ├── MANDATE_business.md
 │   │   ├── MANDATE_operations.md
 │   │   ├── MANDATE_support.md
-│   │   └── MANDATE_compliance.md
+│   │   ├── MANDATE_compliance.md
+│   │   └── SECRET_SCAN_MANDATE.md
 │   │
-│   ├── 05-execution/                         ← run configuration
-│   │   ├── TEAM_ASSIGNMENTS.md
+│   ├── 05-execution/                         ← run configuration & modes
+│   │   ├── TEAM_ASSIGNMENTS.md               ← role-to-agent mapping
 │   │   ├── RUN_MODES.md                      ← override examples
 │   │   ├── PRIORITY_RUBRIC.md                ← P0/P1/P2 auto-balancing
-│   │   └── TIMELINE_ESTIMATES.md
+│   │   └── TIMELINE_ESTIMATES.md             ← effort estimates per phase
 │   │
 │   ├── 06-templates/                         ← artifact templates
 │   │   ├── TEMPLATE_test_case.md
@@ -119,17 +126,17 @@ praetor/
 │   │   ├── TEMPLATE_support_playbook.md
 │   │   └── TEMPLATE_compliance_control.md
 │   │
-│   ├── 07-agents/                            ← 18 agent personalities
-│   │   ├── AGENT_orchestrator.md             (A00) — the conductor
+│   ├── 07-agents/                            ← 18 agent personalities + QC
+│   │   ├── AGENT_orchestrator.md             (A00) — conductor & sequencer
 │   │   ├── AGENT_discovery.md                (A01) — software archaeologist
 │   │   ├── AGENT_domain_mapping.md           (A02) — DDD lead
 │   │   ├── AGENT_tooling_discovery.md        (A03) — DevOps architect
-│   │   ├── AGENT_engineering_unit.md         (A04) — test engineer
-│   │   ├── AGENT_engineering_integration.md  (A05) — integration lead
-│   │   ├── AGENT_security.md                 (A06) — OWASP expert
+│   │   ├── AGENT_engineering_unit.md         (A04) — unit test engineer
+│   │   ├── AGENT_engineering_integration.md  (A05) — integration test lead
+│   │   ├── AGENT_security.md                 (A06) — OWASP expert + secret scan
 │   │   ├── AGENT_performance.md              (A07) — perf architect
 │   │   ├── AGENT_accessibility.md            (A08) — WCAG specialist
-│   │   ├── AGENT_chaos.md                    (A09) — chaos lead
+│   │   ├── AGENT_chaos.md                    (A09) — chaos engineering lead
 │   │   ├── AGENT_business_analyst.md         (A10) — senior BA
 │   │   ├── AGENT_uat.md                      (A11) — QA manager
 │   │   ├── AGENT_runbook.md                  (A12) — staff SRE
@@ -137,35 +144,37 @@ praetor/
 │   │   ├── AGENT_support_triage.md           (A14) — support architect
 │   │   ├── AGENT_customer_comms.md           (A15) — CX writer
 │   │   ├── AGENT_compliance.md               (A16) — compliance director
-│   │   ├── AGENT_risk.md                     (A17) — CRO-style
+│   │   ├── AGENT_risk.md                     (A17) — chief risk officer-style
 │   │   └── AGENT_quality_council.md          (QC) — 4 judges
 │   │
-│   ├── 08-protocols/                         ← inter-agent contracts
-│   │   ├── AGENT_PROTOCOL.md
-│   │   ├── AUDIT_TRAIL.md
-│   │   ├── CHUNKING_PROTOCOL.md
+│   ├── 08-protocols/                         ← inter-agent contracts & discipline
+│   │   ├── AGENT_PROTOCOL.md                 ← handoff & authority rules
+│   │   ├── AUDIT_TRAIL.md                    ← who did what, when, why
+│   │   ├── CHUNKING_PROTOCOL.md              ← large-codebase strategies
 │   │   ├── CITATIONS.md                      ← 100% verification rules
-│   │   ├── CONDITIONAL_CONTINUE.md           ← user reply format
+│   │   ├── CONDITIONAL_CONTINUE.md           ← user reply format at Phase 3
 │   │   ├── COVERAGE_LEDGER.md                ← dedup & cross-layer tracking
-│   │   ├── ARTIFACT_STATUS.md                ← 7 status values
-│   │   ├── HANDOFF_PROTOCOL.md
-│   │   ├── QUALITY_GATES.md
-│   │   ├── ROOT_CAUSE_GROUPING.md
-│   │   ├── TEST_FIXTURES.md                  ← seed SQL + teardown
-│   │   └── UNIVERSAL_AGENT_DISCIPLINE.md     ← U1-U6 rules
+│   │   ├── ARTIFACT_STATUS.md                ← 7 core status values
+│   │   ├── HANDOFF_PROTOCOL.md               ← phase-to-phase coordination
+│   │   ├── QUALITY_GATES.md                  ← what passes QC review
+│   │   ├── RESUMABLE_STATE.md                ← halt → paste-back snapshot
+│   │   ├── ROOT_CAUSE_GROUPING.md            ← duplicate/related clustering
+│   │   ├── TEST_FIXTURES.md                  ← seed SQL + teardown patterns
+│   │   └── UNIVERSAL_AGENT_DISCIPLINE.md     ← U1–U6 rules all agents obey
 │   │
-│   └── 99-reference/
+│   └── 99-reference/                         ← operator & auditor guides
+│       ├── BY_THE_NUMBERS.md                 ← counts, phases, agents
 │       ├── CHEATSHEET.md                     ← quick command reference
 │       ├── FAILURE_RULES.md                  ← error recovery patterns
-│       ├── GLOSSARY.md                       ← plain-language guide
-│       ├── ID_SCHEMES.md                     ← naming conventions
-│       └── V1_TO_V2_MIGRATION.md
+│       ├── GLOSSARY.md                       ← plain-language definitions
+│       ├── ID_SCHEMES.md                     ← naming & tagging conventions
+│       └── V1_TO_V2_MIGRATION.md             ← legacy migration notes
 │
 ├── Skill/
-│   └── praetor.skill                         ← Claude Code integration
+│   └── praetor.skill                         ← Claude Code skill manifest (entry point)
 │
-└── .claude/
-    └── settings.local.json                   ← local configuration
+└── tools/
+    └── check_consistency.sh                  ← validate file counts & links
 
 ```
 
@@ -208,6 +217,12 @@ praetor/
   - CI gate (prevent regression)
   - Alert spec (detect return)
   - Runbook (respond fast)
+
+### Resumable State
+- **Halt + resume** — `halt` emits a paste-back snapshot to continue later without re-running discovery
+
+### Self-Consistency Guard
+- **Consistency checks** — `tools/check_consistency.sh` validates file counts and internal references
 
 ---
 
@@ -280,40 +295,43 @@ Override `RUN_PHASES`, `RUN_CATEGORIES`, `RUN_PRIORITIES`, and `RUN_MODULES` to 
 | Register types | 12 |
 | Autonomous agents | 18 |
 | Quality Council judges | 4 |
-| Inter-agent protocols | 12 |
-| Artifact STATUS values | 7 |
-| Total documentation files | 67+ |
+| Inter-agent protocols | 13 |
+| Artifact STATUS values | 7 core + extended |
+| ID schemes | 11 |
+| Documentation files | 68+ |
+
+Run `tools/check_consistency.sh` to validate current file counts.
 
 ---
 
 ## Documentation Guide
 
 ### For First-Time Users
-1. Start with **`GLOSSARY.md`** — plain-language definitions of all jargon
-2. Read **`AGENT_ROSTER.md`** — meet all 18 agents
-3. Paste **`MASTER_PROMPT.md`** into Claude
+1. Start with **`prompt/99-reference/GLOSSARY.md`** — plain-language definitions of all jargon
+2. Read **`prompt/00-orchestrator/AGENT_ROSTER.md`** — meet all 18 agents
+3. Paste **`prompt/00-orchestrator/MASTER_PROMPT.md`** into Claude
 
 ### For Operators
-- **`CHEATSHEET.md`** — quick command reference for overrides and modes
-- **`CONDITIONAL_CONTINUE.md`** — how to reply at Phase 3 gate
+- **`prompt/99-reference/CHEATSHEET.md`** — quick command reference for overrides and modes
+- **`prompt/08-protocols/CONDITIONAL_CONTINUE.md`** — how to reply at Phase 3 gate
 
 ### For Implementers
-- **`AGENT_PROTOCOL.md`** — inter-agent communication rules
-- **`UNIVERSAL_AGENT_DISCIPLINE.md`** — U1-U6 rules every agent obeys
-- **`QUALITY_GATES.md`** — what passes Quality Council review
+- **`prompt/08-protocols/AGENT_PROTOCOL.md`** — inter-agent communication rules
+- **`prompt/08-protocols/UNIVERSAL_AGENT_DISCIPLINE.md`** — U1-U6 rules every agent obeys
+- **`prompt/08-protocols/QUALITY_GATES.md`** — what passes Quality Council review
 
 ### For Auditors & Compliance
-- **`AUDIT_TRAIL.md`** — how to verify artifact provenance
-- **`CITATIONS.md`** — 100% verification protocol
-- **`COVERAGE_LEDGER.md`** — deduplication & cross-layer tracking
+- **`prompt/08-protocols/AUDIT_TRAIL.md`** — how to verify artifact provenance
+- **`prompt/08-protocols/CITATIONS.md`** — 100% verification protocol
+- **`prompt/08-protocols/COVERAGE_LEDGER.md`** — deduplication & cross-layer tracking
 
 ---
 
 ## Version
 
-**Current Version:** 2.3 (operational quality release)
+**Current Version:** 2.5 (production quality release)
 
-See **`VERSION.md`** for release history, new features, and breaking changes.
+See [prompt/VERSION.md](prompt/VERSION.md) for release history, new features, and breaking changes.
 
 ---
 
