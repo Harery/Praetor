@@ -1,10 +1,16 @@
 # Praetor
 
+![Praetor Social Preview](assets/social-preview.svg)
+
 > **P**roduction **R**eadiness, **A**udit, **E**vidence, **T**esting, **O**perations, & **R**eview
 
 A single-prompt, multi-agent system that turns any codebase into a production readiness and audit package with full file-line traceability.
 
 Built for security, compliance, governance, and release readiness.
+
+## [Praetor](https://en.wikipedia.org/wiki/Praetor)
+
+Praetor, also pretor, was the title granted by the government of ancient Rome to a man acting in one of two official capacities: the commander of an army, and as an elected magistratus, assigned to discharge various duties.
 
 ## What is Praetor?
 
