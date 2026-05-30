@@ -2,7 +2,9 @@
 
 > **P**roduction **R**eadiness, **A**udit, **E**vidence, **T**esting, **O**perations, & **R**eview
 
-A single-prompt, multi-agent system that transforms any codebase into a complete production readiness package with full file-line traceability.
+A single-prompt, multi-agent system that turns any codebase into a production readiness and audit package with full file-line traceability.
+
+Built for security, compliance, governance, and release readiness.
 
 ## What is Praetor?
 
@@ -16,14 +18,22 @@ Praetor is an AI-powered orchestration system that reads your repository and dis
 | **[BIZ]** Business | Plain-language verification matrices and UAT scripts |
 | **[OPS]** Operations / SRE | 3am-grade runbooks and alert specs in your monitoring syntax (Datadog, Prometheus, etc.) |
 | **[SUP]** Support / CX | Triage decision trees, error translations, and customer communication templates |
-| **[COMP]** Compliance & Security | Control mappings (SOC2, GDPR, HIPAA, PCI, WCAG), PII flows, and audit evidence |
-| **Cross-cutting** | Consolidated risk register with severity, owner, and dev-day estimates |
+| **[COMP]** Compliance & Security | Control mappings (SOC2, GDPR, HIPAA, PCI, WCAG), PII flows, access controls, and audit evidence |
+| **Cross-cutting** | Release-gate checklist and consolidated risk register with severity, owner, and dev-day estimates |
 
 Every artifact carries:
 - **STATUS tag** — `READY`, `INFERRED`, `BLOCKED_BY_MISSING_CODE`, etc.
 - **Agent attribution** — which expert produced it
 - **Register links** — connected to risk, role, workflow registers
 - **File:line citations** — 100% verified by a 4-judge Quality Council
+
+## Why Praetor vs alternatives
+
+| Approach | What you get | Gaps for security/compliance |
+|---|---|---|
+| Manual audit checklist | Useful reminders | No traceability, no release gate artifacts |
+| Single-agent review | One-pass findings | Gaps across disciplines, weaker QC |
+| Praetor | Multi-discipline artifacts + QC + citations | Built-in gates, registers, and audit evidence |
 
 ---
 
@@ -69,12 +79,31 @@ Every artifact carries:
 
 ---
 
+## Flow
+
+```mermaid
+flowchart LR
+   A[Paste MASTER_PROMPT] --> B[Phase 0-2 Discovery]
+   B --> C[Phase 3 MUST CONFIRM]
+   C --> D[Phase 4 Agent Swarm]
+   D --> E[Phase 5 Quality Council]
+   E --> F[Phase 6 Wrap-up]
+```
+
 ## Project Structure
 
 ```
 praetor/
 ├── README.md                                 ← this file
 ├── .gitignore                                ← git ignore rules
+├── CONTRIBUTING.md                           ← contribution guidelines
+├── CODE_OF_CONDUCT.md                        ← community standards
+├── SECURITY.md                               ← vulnerability reporting
+├── .github/
+│   ├── ISSUE_TEMPLATE/
+│   │   ├── bug_report.md
+│   │   └── feature_request.md
+│   └── PULL_REQUEST_TEMPLATE.md
 │
 ├── prompt/                                   ← THE SYSTEM PROMPT
 │   ├── README.md                             ← prompt documentation
@@ -326,6 +355,16 @@ Run `tools/check_consistency.sh` to validate current file counts.
 - **`prompt/08-protocols/COVERAGE_LEDGER.md`** — deduplication & cross-layer tracking
 
 ---
+
+## Community
+
+- Contributing: `CONTRIBUTING.md`
+- Code of Conduct: `CODE_OF_CONDUCT.md`
+- Security reporting: `SECURITY.md`
+
+## Social Preview
+
+Use `assets/social-preview.svg` as the source for the repository social preview image.
 
 ## Version
 
