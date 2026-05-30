@@ -294,6 +294,6 @@ Praetor is distributed under the **MIT License**. Use it, modify it, and distrib
 
 <br/>
 
-Made with intent by [**@moharery**](https://github.com/moharery)
+Made with intent by [**@Harery**](https://github.com/Harery)
 
 </div>
