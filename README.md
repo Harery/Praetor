@@ -16,7 +16,7 @@
 
 <br/>
 
-[`Quick Start` ·](#-quick-start) [`Features` ·](#-features) [`Architecture` ·](#-how-it-works) [`Agents` ·](#the-18-expert-agents) [`Contributing` ·`](#-contributing) [`License`](#-license)
+[`Quick Start`](#-quick-start) · [`Features`](#-features) · [`Architecture`](#-how-it-works) · [`Agents`](#the-18-expert-agents) · [`Contributing`](#-contributing) · [`License`](#-license)
 
 </div>
 
