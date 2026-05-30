@@ -1,0 +1,55 @@
+{
+  "name": "praetor-audit-kit",
+  "version": "2.5.0",
+  "description": "Autonomous production readiness and audit system — 18 expert AI agents, 4-judge quality council, 100% file-line traceability for security, compliance, and release gates",
+  "keywords": [
+    "production-readiness",
+    "code-audit",
+    "multi-agent",
+    "ai-code-review",
+    "compliance-automation",
+    "soc2",
+    "gdpr",
+    "hipaa",
+    "security-audit",
+    "test-generation",
+    "runbook-automation",
+    "sre",
+    "devops",
+    "prompt-engineering",
+    "llm-orchestration",
+    "claude-code",
+    "zero-hallucination",
+    "automated-audit",
+    "enterprise-audit",
+    "risk-register"
+  ],
+  "author": "Harery <https://github.com/Harery>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harery/Praetor.git",
+    "directory": "prompt"
+  },
+  "bugs": {
+    "url": "https://github.com/Harery/Praetor/issues"
+  },
+  "homepage": "https://github.com/Harery/Praetor#readme",
+  "files": [
+    "prompt/",
+    "CHANGELOG.md",
+    "llms.txt",
+    "LICENSE"
+  ],
+  "bin": {
+    "praetor": "bin/praetor.js"
+  },
+  "main": "prompt/00-orchestrator/MASTER_PROMPT.md",
+  "scripts": {
+    "postinstall": "node bin/praetor.js --welcome",
+    "start": "node bin/praetor.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
