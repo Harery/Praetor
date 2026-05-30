@@ -7,6 +7,9 @@
 # Exit on any error
 set -e
 
+# Force Git to use the user's home SSH configuration file
+export GIT_SSH_COMMAND="ssh -F /Users/moharery/.ssh/config"
+
 # Configuration
 WIKI_REPO_URL="ssh://git@github.com-harery/Harery/Praetor.wiki.git"
 TEMP_DIR=".wiki-temp-upload"
