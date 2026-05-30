@@ -28,6 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Social Preview** — cyber-roman branded SVG for GitHub social cards
 - **`llms.txt`** — AI agent discoverability index per [llmstxt.org](https://llmstxt.org) standard
 - **GitHub Topics** — 20 curated tags for search discoverability
+- **`praetor-audit-kit`** npm package — install via `npx praetor-audit-kit` with CLI welcome, prompt output, and path lookup
+- **GitHub Release v2.5** — tagged release with downloadable prompt kit zip and Claude Code skill package
 
 ### Changed
 - README rewritten with 2026 SEO optimization, modern visual hierarchy, scannable feature grid, collapsible sections, and inline navigation

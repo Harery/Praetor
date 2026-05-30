@@ -12,7 +12,7 @@ risk register — each tied to a specific file and line so you can trust it.
 
 ## What you need before you start
 
-- Access to Claude (the assistant you are reading this in).
+- Access to a long-context LLM (Claude, GPT-5, Gemini, or similar).
 - Your source code, in one of these forms:
   - a public GitHub URL, or
   - files you can upload, or
@@ -24,7 +24,10 @@ risk register — each tied to a specific file and line so you can trust it.
 
 ### Step 1 — Load the system
 Open `00-orchestrator/MASTER_PROMPT.md`. Copy everything from the line of
-`═══` characters onward. Paste it into a new conversation with Claude.
+`═══` characters onward. Paste it into a new conversation with your LLM.
+
+> **Tip:** You can also install Praetor via npm:
+> `npx praetor-audit-kit`
 
 ### Step 2 — Point it at your code
 On the next line after the pasted prompt, add one line:

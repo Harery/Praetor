@@ -45,7 +45,7 @@ No assumptions. No hallucinations. Just mathematically precise, file-line cited 
 | 🔑 **Secret Hygiene** | Built-in secret-key scanning with a runnable secret-lint CI stage |
 | ⏸️ **Resumable Sessions** | `halt` emits a compact snapshot — resume tomorrow without re-running discovery |
 | 🚦 **Release Gate Hooks** | Ready-to-run shell gates tying every CRITICAL/HIGH fix to CI pipelines, alerts, and runbooks |
-| 🚀 **Zero Installation** | Runs inside any long-context LLM — no downloads, no API keys, no setup |
+| 🚀 **Multiple Install Options** | Run via `npx praetor-audit-kit`, GitHub Release, Claude Code skill, or direct paste — no runtime dependencies |
 
 ---
 

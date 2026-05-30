@@ -36,14 +36,22 @@ IDs, and a file:line citation that is re-derived at emit by a 4-judge
 Quality Council (a reviewed draft requiring human spot-check — not external
 certification).
 
+## Installation
+
+| Method | Command |
+|:---|:---|
+| **npm** | `npx praetor-audit-kit` |
+| **GitHub Release** | Download [`praetor-prompt-kit-v2.5.zip`](https://github.com/Harery/Praetor/releases/tag/v2.5) |
+| **Claude Code** | `claude skill install Skill/praetor.skill` |
+| **Direct** | Copy `00-orchestrator/MASTER_PROMPT.md` into your LLM context |
+
 ## Quick Start
 
 > **New to Praetor?** Read `GETTING_STARTED.md` for a first-time, step-by-step
 > walkthrough written for non-experienced users. The steps below are the short version.
 
-
 1. Copy the contents of `00-orchestrator/MASTER_PROMPT.md`
-2. Paste into Claude
+2. Paste into your LLM (Claude, GPT-5, Gemini, or any long-context model)
 3. Append:
    ```
    Source: <github URL | local path | uploaded files>
@@ -222,9 +230,11 @@ It produces the specifications. Your team executes them.
 
 ## License & Attribution
 
-The Praetor system is a prompt artifact. Use it, modify it, share it with
-your teams. Attribution appreciated but not required.
+The Praetor system is a prompt artifact distributed under the **MIT License**.
+Use it, modify it, and share it with your teams. Attribution appreciated but not required.
 
 ---
 
 **One prompt. Eighteen experts. Six disciplines. Full traceability.**
+
+> See [CHANGELOG.md](../CHANGELOG.md) for release history. See [llms.txt](../llms.txt) for AI agent documentation index.
