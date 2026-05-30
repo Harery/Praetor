@@ -7,12 +7,15 @@
 # Exit on any error
 set -e
 
+# Resolve the absolute path to the directory containing this script
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
 # Force Git to use the user's home SSH configuration file
 export GIT_SSH_COMMAND="ssh -F /Users/moharery/.ssh/config"
 
 # Configuration
 WIKI_REPO_URL="ssh://git@github.com-harery/Harery/Praetor.wiki.git"
-TEMP_DIR=".wiki-temp-upload"
+TEMP_DIR="$SCRIPT_DIR/.wiki-temp-upload"
 
 echo "==========================================="
 echo "   PRAETOR WIKI UPLOADER"
@@ -28,7 +31,8 @@ echo "📥 Cloning remote wiki repository..."
 git clone "$WIKI_REPO_URL" "$TEMP_DIR"
 
 echo "📤 Copying wiki pages..."
-cp wiki/*.md "$TEMP_DIR/"
+# Copy all markdown files in the script's directory to the temp clone
+cp "$SCRIPT_DIR"/*.md "$TEMP_DIR/"
 
 cd "$TEMP_DIR"
 
