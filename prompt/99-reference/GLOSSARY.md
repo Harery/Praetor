@@ -30,8 +30,9 @@ architectural layer. Both tests are kept because they cover distinct
 concerns. (E.g., backend test confirms 404 returned; UI test confirms
 the user sees an error message.)
 
-**DEFERRED_TO_<module>** — Intentionally out of scope for this run. Not
-forgotten; just scheduled for later.
+**DEFERRED_TO_<target>** — Intentionally out of scope for this run. Not
+forgotten; just scheduled for later. The target may be a phase, module, or
+named milestone/owner (e.g., DEFERRED_TO_LAUNCH).
 
 **NO_WORK_FOUND** — Agent analyzed the scope and found nothing applicable.
 Different from skipping — this is an explicit, audited "I checked and
@@ -42,6 +43,29 @@ why. Often means it needs rework before adoption.
 
 **AUDIT_GAP** — A compliance control is required but evidence is missing
 or insufficient. Auditors will want this addressed.
+
+### Common extended statuses (full set in `08-protocols/ARTIFACT_STATUS.md`)
+
+**BLOCKED_BY_TEST_DATA** — The test is fine, but the starting data state it
+needs can't be created yet (often because a database table doesn't exist).
+
+**BLOCKED_PENDING_RUNBOOK** — The alert is sound, but the on-call procedure
+it should link to hasn't been written yet. Alerts never ship without one.
+
+**BLOCKED_NEEDS_INSTRUMENTATION** — The failure is real but invisible: no
+metric or log exists to detect it. Observability work comes first.
+
+**BLOCKED_NO_UI_PATH** — The rule exists only in code; there's no screen or
+button a person could use to verify it. Engineering verifies instead.
+
+**MANUAL_VERIFICATION_REQUIRED** — Automation can't check this (e.g., how a
+screen reader announces a form); a human walkthrough is needed.
+
+**INFERRED_FAILURE_MODE** — A failure we predict from reading the code but
+have never seen happen. The runbook is precautionary.
+
+**UNTESTABLE_AS_WRITTEN** — The code can't be tested in isolation until it's
+restructured. The finding is about the code's shape, not the test.
 
 ## Priority Terms
 
@@ -80,6 +104,11 @@ mitigation, and effort estimate.
 
 **RC — Root Cause** — A single underlying bug that multiple tests may
 target (e.g., "missing labels" might generate 2-3 separate tests).
+
+**FX — Test Fixture** — A ready-to-run seed script (SQL or equivalent) that
+creates the data state a test needs before it can run. Fixtures are shared
+across tests where possible; the Phase 6 Fixture Report counts the distinct
+fixtures — the actual setup work the team must build.
 
 ## Register Terms
 
@@ -130,16 +159,41 @@ Example: Stripe, SendGrid.
 
 ## Cycle Terms
 
-**Phase 0–6** — The 7 phases the prompt runs through. Phase 3 is the
+**Phase 0–6** — The 7 phases a Praetor run moves through. Phase 3 is the
 gate where you (the human) reply with answers; Phase 6 is the wrap-up.
 
 **Coverage Ledger** — A running list of every artifact emitted, used to
 prevent duplication across modules.
 
+**Audit Trail** — The first thing Praetor shows you: a short log of what it
+read, what it skipped, and why. It precedes the Discovery Report in Phase 3.
+
+**Discovery Report** — The Phase 3 summary of everything Praetor learned
+about your system (modules, rules, roles, workflows). It ends with the
+MUST CONFIRM block and waits for your reply before any artifacts are
+generated.
+
 **MUST CONFIRM block** — A section in the Discovery Report listing
 inferred items that need confirmation before generation proceeds.
 
-**Agent A01–A17** — The 18 specialist agents. Each has a defined scope
+**Gate replies** — The short commands you type at the Phase 3 gate (and
+later): `continue` (proceed), `halt` (stop and snapshot), `correct:` (fix
+an inferred item), `continue with:` (proceed with amendments),
+`override:` (narrow the run scope, e.g. to specific modules or priorities),
+`continue module` (resume a chunked module's output). A plain *question* at
+the gate is not a command — it's answered in place and the gate is re-shown,
+with no state lost. Defined in the Conditional Continue protocol.
+
+**Resumable Snapshot** — A compact plain-text block Praetor emits on
+`halt`. Copy it and paste it back in a later session to resume the run
+exactly where it stopped, without re-running discovery.
+
+**Citations Index** — A table at the end of every module listing each
+`file:line` reference used, re-derived by the Quality Council before
+emission. It is a reviewed draft — spot-check it before using it as
+audit evidence.
+
+**Agent A01–A17** — The 17 specialist agents (18 personas counting the A00 Orchestrator). Each has a defined scope
 and authority. You don't talk to them individually; the Orchestrator
 dispatches them.
 
@@ -154,4 +208,4 @@ Clarity, Skip-Validity) that reviews every artifact before emission.
 - **SRE**: [OPS] runbooks + alerts + Phase 6 tooling recommendations
 - **Support**: [SUP] triage trees + comm templates
 - **Compliance**: [COMP] control mappings + AUDIT_GAP items
-- **Leadership**: Phase 6 wrap-up only — Recommended Immediate Actions section
+- **Leadership**: Phase 6 wrap-up only — Priority-Banded Gap Report + Risk Register Master View

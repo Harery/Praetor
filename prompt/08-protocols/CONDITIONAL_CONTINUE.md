@@ -1,5 +1,20 @@
 # Conditional Continue Protocol
 
+## Parsing Order (deterministic — apply in this sequence)
+
+1. **Question check first** (Format 7): if the reply is a question, answer it
+   in place and re-show the gate. Nothing else is parsed.
+2. **Keyword formats** (Formats 1–5): scan for `continue`, `continue with:`,
+   `correct:`, `override:` blocks. Every block present is applied (Format 5).
+3. **Default** (Format 6): anything that matched neither 1 nor 2 is a halt.
+
+Multi-line block rule: a `correct:` or `continue with:` block extends until
+the line `then continue`, the start of the next block keyword (`correct:` /
+`override:` / `continue with:`), or the end of the message — whichever comes
+first. A reply mixing a question with a correction is parsed as a correction
+(rule 2 beats rule 1 when both keyword and question are present); the
+Orchestrator answers the question in its confirmation.
+
 ## Reply Formats Accepted at Phase 3 Gate
 
 ### Format 1 — Unconditional continue
@@ -53,12 +68,51 @@ override:
   RUN_PRIORITIES = [P0, P1]
 ```
 
-All three actions applied.
+Every block present is applied (any of the three block types — `continue
+with:`, `correct:`, `override:` — may be combined in one reply; this example
+combines two).
 
 ### Format 6 — Halt
 ```
 halt
 ```
 
-Or any message that doesn't start with `continue` / `correct` / `override`.
-Orchestrator stops and waits.
+Or any message that doesn't start with `continue` / `correct` / `override` —
+**except questions** (see Format 7). Orchestrator stops and waits. Explicit
+`halt` additionally emits a Resumable Snapshot per
+`08-protocols/RESUMABLE_STATE.md`.
+
+### Format 7 — Question carve-out (v2.7.4)
+
+A gate reply that is a *question* — ends in `?`, or whose **first word** is an
+interrogative (`what / why / how / which / can / does / is / are`) followed by
+a space — is NOT a halt. (First-word-only: a correction beginning mid-sentence
+with "is" does not trigger this; if a reply contains both a format keyword and
+question phrasing, the keyword wins — see Parsing Order.) The Orchestrator:
+
+1. Answers the question (citing the relevant reference file),
+2. Re-presents the gate block unchanged,
+3. Emits **no** Resumable Snapshot and discards **no** state.
+
+The run stays parked at the gate; the next non-question reply is parsed
+normally per Formats 1–6. Rationale: "what does INFERRED mean?" must not burn
+a snapshot cycle or read as a stop instruction.
+
+## Module-Boundary and Mid-Chunk Replies (Phase 4)
+
+The same parsing order applies at `--- END MODULE ---` and partial-module
+markers, with this vocabulary:
+
+- `continue` — next module (at an END MODULE marker).
+- `continue module` — next pending category (at a partial-module marker).
+- `halt` — stop and emit a Resumable Snapshot; at a partial-module marker the
+  snapshot records the mid-module `STOPPED_AT` form (per
+  `08-protocols/RESUMABLE_STATE.md`).
+- `correct: … then continue` — routed as an `A02 → All` re-link HANDOFF
+  (registers are frozen post-gate for every agent but A02; see
+  `08-protocols/AGENT_PROTOCOL.md` §1). Discovery-level corrections
+  (module composition, layer classification) may require re-running affected
+  modules; the Orchestrator says so before proceeding.
+- Questions — answered in place, marker re-shown, no state loss (Format 7).
+- `continue with:` / `override:` — accepted; scope changes apply to modules
+  not yet generated, never retroactively.

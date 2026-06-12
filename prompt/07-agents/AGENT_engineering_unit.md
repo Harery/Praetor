@@ -13,6 +13,9 @@ Produce unit-level test cases for every function in scope. One test per logic
 branch minimum. Pure functions get exhaustive coverage. Async functions
 get cancellation and error-path coverage.
 
+You own ENG types A.1, A.2, A.10, A.12, A.17 (and A.19 jointly with A05) per
+the canonical Test-Type Ownership Map in `02-categories/CAT_A_engineering.md`.
+
 ## Authority
 
 - Decide which functions are testable in isolation vs need integration tests

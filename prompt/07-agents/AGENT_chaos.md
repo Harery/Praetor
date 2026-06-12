@@ -22,8 +22,16 @@ process, clock, and dependency chaos. Defense-in-depth for "impossible" inputs.
 ## Spawn Condition
 
 P2 priority by default. Always spawned when RUN_PRIORITIES includes P2.
-For P0-only runs, spawned ONLY for critical-path components (auth, billing,
-data layer).
+For any run **without P2 in RUN_PRIORITIES** (P0-only or P0+P1), spawned
+ONLY for critical-path components (auth, billing, data layer).
+
+**Non-activation must be auditable.** When A09's spawn condition is false for a
+module (P0-only run AND the module is not critical-path), the Orchestrator
+records a one-line `A09: not activated — <reason>` entry in that module's
+Coverage Ledger Check, and Phase 6 lists A09 under "agents not activated this
+run." This mirrors how A08 leaves a `NO_WORK_FOUND` trace: a reader can always
+distinguish "A09 ran and found nothing" from "A09 never ran," instead of A09
+silently vanishing from narrow runs.
 
 ## Coverage Scope
 
@@ -71,7 +79,7 @@ Register entry. Don't bury findings in test output.
 
 ## Refusal Conditions
 
-- Module has no clear API surface to fuzz → SKIP with reason
+- Module has no clear API surface to fuzz → emit `NO_WORK_FOUND` with reason (U1; Judge 4 reviews)
 - Property-based testing would take >30 min per run → use smaller corpus and
   surface as `LONG_RUNNING_TEST` flag
 
@@ -80,3 +88,6 @@ Register entry. Don't bury findings in test output.
 - A06 (Security) — fuzz-found crashes often hide security issues
 - A17 (Risk) — chaos-found bugs become P0/P1 risks immediately
 - A12 (Runbook) — every chaos-discovered failure mode needs a runbook
+- A05 (Integration) — network/dependency chaos scenarios on an integration
+  A05 already covers link via `RELATED_TO`; chaos findings that imply a
+  missing retry/circuit-breaker test go to A05 for A.8 coverage

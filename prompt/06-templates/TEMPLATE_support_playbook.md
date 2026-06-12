@@ -6,6 +6,8 @@
 SP-M_AUTH-LOGIN_ISSUES-001
 Audience: [SUP]
 Priority: P0
+Status: READY
+Agent: A14
 Linked IDs: WF-001 (login), ERR-101 (invalid creds), ERR-102 (account locked)
 
 Customer says: "I can't log into my account"
@@ -23,7 +25,7 @@ Customer says: "I can't log into my account"
 │
 ├─ Q3: Is MFA enabled on the account?
 │  ├─ Yes, lost access to MFA → ESCALATE to engineering (verification flow)
-│  └─ No → ESCALATE engineering (unusual — RB-AUTH-001)
+│  └─ No → ESCALATE engineering (unusual — RB-M_AUTH-LOGIN_FAILURE-001)
 │
 └─ Q4: Have you tried a different browser / cleared cache?
    ├─ Yes, still broken → ESCALATE engineering with repro steps (D.7)
@@ -33,15 +35,27 @@ Customer says: "I can't log into my account"
 ## Error Translation (D.3)
 
 ```
-| ERR ID  | Customer-facing translation                          | Most common cause       | Self-serve fix                    | When to escalate         |
-| ERR-101 | "Email or password incorrect"                        | Mistyped password       | Password reset link               | After 3 reset attempts   |
-| ERR-102 | "Account locked due to too many failed attempts"     | Brute-force protection  | Wait 15 min OR password reset     | If still locked after 30 min |
+SP-M_AUTH-ERROR_TRANSLATIONS-001
+Audience: [SUP]
+Priority: P0
+Status: READY
+Agent: A14
+Linked IDs: ERR-101, ERR-102
+
+| Error code | Plain meaning                                        | Most common cause       | Self-serve fix                    | When to escalate         |
+| ERR-101    | "Email or password incorrect"                        | Mistyped password       | Password reset link               | After 3 reset attempts   |
+| ERR-102    | "Account locked due to too many failed attempts"     | Brute-force protection  | Wait 15 min OR password reset     | If still locked after 30 min |
 ```
 
 ## Communication Template (D.4)
 
 ```
 CT-M_AUTH-LOGIN_OUTAGE-001 — ACKNOWLEDGE
+Audience: [SUP]
+Priority: P0
+Status: READY
+Agent: A15
+Linked IDs: WF-001 (login), ERR-101, UX-002 (status-page update)
 
 "Hi [Customer Name], thanks for reaching out — we're aware of issues affecting
 login right now and our engineering team is investigating. We'll update you

@@ -57,3 +57,5 @@ Output in detected tool's syntax (see A03). Default to PromQL if no tool detecte
 - A12 (Runbook) — every alert needs a runbook before going live
 - A07 (Performance) — perf-based alerts use perf budgets as thresholds
 - A17 (Risk) — alerts that can't be defined become observability risks
+- (Inbound, from A03 Tooling) — the detected monitoring tool whose query
+  syntax your alerts emit (Rule 4)

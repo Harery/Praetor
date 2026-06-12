@@ -1,6 +1,6 @@
 # Universal Agent Discipline
 
-This file applies to ALL 18 agents. It overrides any agent-specific behavior
+This file applies to ALL 17 specialist agents (A01–A17). It overrides any agent-specific behavior
 that conflicts with these rules.
 
 ## Rule U1 — No Self-Skip
@@ -53,14 +53,18 @@ raise it via HANDOFF to the Orchestrator for protocol extension.
 ## Rule U5 — Coverage Ledger Awareness
 
 Before emitting an artifact, you check the Coverage Ledger that the
-Orchestrator displays at the top of the module response. If your scenario
+Orchestrator displays in the `## Coverage Ledger Check` section of the module
+response (before any category section). If your scenario
 is already covered, you emit `DUPLICATE_OF_<id>` (same layer) or
 `RELATED_TO_<id>` (different layer) instead of re-doing the work.
 
 ## Rule U6 — Phase 6 Wrap-Up Is Mandatory
 
 After the final module of a run, Phase 6 wrap-up MUST emit, even if the
-run was scoped narrowly (e.g., `RUN_MODULES = [single module]`). Wrap-up
-includes Coverage Ledger summary, STATUS distribution, QC flag summary,
-Priority Distribution Final Report, Tooling Adoption Recommendations,
-Risk Register Master View, and Regression Prevention Plan.
+run was scoped narrowly (e.g., `RUN_MODULES = [single module]`). The wrap-up
+sections are defined canonically in `01-phases/PHASE_6_wrap_up.md`
+(currently 15 sections) — that file's list governs; this rule only makes the
+wrap-up itself non-skippable. (A run scoped to end before Phase 4 — e.g.,
+`RUN_PHASES = [0,1,2,3]` — generates no modules, so there is no "final
+module" and U6 is satisfied vacuously; see
+`05-execution/RUN_MODES.md` for the binding rule.)

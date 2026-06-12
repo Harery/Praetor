@@ -1,0 +1,3 @@
+{ "name": "flawed-app", "version": "1.0.0",
+  "scripts": { "test": "vitest" },
+  "dependencies": { "express": "^4.18.0", "jsonwebtoken": "^9.0.0", "pg": "^8.11.0" } }

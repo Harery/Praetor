@@ -12,7 +12,9 @@ in the module response. The flow:
 2. Quality Council reviews each artifact along its applicable axes
    (Judges 1–3 always; Judge 4 only for `NO_WORK_FOUND` artifacts)
 3. Failures get a single rework chance (silent)
-4. Final emission tags artifacts with READY or QC_FAILED
+4. Final emission preserves each artifact's own STATUS (READY, READY_EXPOSES_BUG,
+   INFERRED, BLOCKED_*, …). QC review changes nothing on a pass; only artifacts
+   that fail after their single rework carry `QC_FAILED` (with judge + reason)
 
 ## Four Judges
 
@@ -36,4 +38,4 @@ not hidden. This is intentional: it shows the user what didn't pass review.
 QC Note: Judge 3 (Clarity): "Step 4 mentions 'gRPC stub' undefined for [SUP] audience"
 ```
 
-See `08-protocols/QUALITY_GATES.md` and `07-agents/AGENT_quality_council.md`.
+See `08-protocols\/QUALITY_GATES.md` and `07-agents\/AGENT_quality_council.md`.

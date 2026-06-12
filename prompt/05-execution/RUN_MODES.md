@@ -1,22 +1,44 @@
 # Run Modes — How to Invoke Partial or Targeted Runs
 
-The master prompt accepts a `RUN CONFIGURATION` block at the end of your
-message. Default = FULL (all phases × all categories × all priorities × all modules).
+Praetor accepts a `RUN CONFIGURATION` block at the end of your message
+(skill-based invocation — no separate prompt file to paste). Default = FULL
+(all phases × all categories × all priorities × all modules).
 
 ## Override Syntax
 
-Append this block at the very end of your message to Claude, after the master
-prompt and your source reference:
+Append this block at the very end of your message, after your
+source reference:
 
 ```
 RUN CONFIGURATION
-  RUN_PHASES      = [0,1,2,3,4,5]
+  RUN_PHASES      = [0,1,2,3,4,5,6]
   RUN_CATEGORIES  = [A,B,C,D,E]
   RUN_PRIORITIES  = [P0,P1,P2]
   RUN_MODULES     = [all]
 ```
 
 Omit any line to use its default. Omit the whole block to run FULL.
+
+**Binding rule — mandatory phases:** Phases 5 (Quality Council) and 6
+(wrap-up) cannot be excluded once Phase 4 runs. Any `RUN_PHASES` that
+includes 4 implicitly includes 5 and 6 (the Orchestrator says so and
+proceeds). A `RUN_PHASES` ending at 3 or earlier is valid — a discovery-only
+run generates no modules, so Phase 5/6 have nothing to review and U6 is
+satisfied vacuously.
+
+**Cross-category references on partial runs:** when `RUN_CATEGORIES` excludes
+a category, artifacts that would link to its IDs (e.g., a BV matrix citing
+TC-IDs when CAT-A is excluded) carry `DEFERRED_TO_<category>` in place of the
+missing reference. The Coverage Ledger tracks these deferred links so a later
+run of the excluded category resolves them instead of regenerating.
+
+**Model-capacity guidance:** the run configuration is also the lever for the
+model tier executing the skill. Large/reasoning-tier models handle FULL runs;
+on faster or smaller-context tiers ("turbo"/"mini" classes), prefer narrower
+configurations — `RUN_PRIORITIES = [P0]` or single-category runs — chunk
+earlier (see `08-protocols\/CHUNKING_PROTOCOL.md`), and lean on
+`halt` + Resumable Snapshot to split work across sessions. Scope discipline,
+not output abbreviation (U3), is how a smaller context completes a run.
 
 ---
 
@@ -29,7 +51,7 @@ Omit any line to use its default. Omit the whole block to run FULL.
 RUN_PHASES = [0,1,2,3]
 ```
 
-Output: Discovery Report only. Claude halts at the gate.
+Output: Discovery Report only. The run ends at the gate.
 Use this **the first time** you run the kit on any repo.
 
 ### Recipe 2 — P0 Readiness Floor (all audiences)
@@ -158,24 +180,31 @@ All categories, all priorities, one module.
 
 ## Combining Recipes Across Sessions
 
-Claude's context resets between sessions. If you ran Recipe 1 (Discovery only)
-in session 1 and want to run Recipe 2 (P0 readiness) in session 2, you must
-**re-supply the source** (repo URL or files). Claude will re-run discovery
-silently but should land on the same module inventory if the repo hasn't changed.
+The model's context resets between sessions. If you ran Recipe 1 (Discovery
+only) in session 1 and want to run Recipe 2 (P0 readiness) in session 2, you
+must **re-supply the source** (repo URL or files). Praetor will re-run
+discovery silently but should land on the same module inventory if the repo
+hasn't changed.
 
 For very large repos, save the Discovery Report from Recipe 1 and paste it as
-context in session 2 alongside the source, so Claude can skip rediscovery.
+context in session 2 alongside the source, so Praetor can skip rediscovery.
+
+Better still: reply `halt` (at the gate or at any module boundary) and
+Praetor emits a **Resumable Snapshot** — a structured paste-back block that
+restores discovery, registers, gate answers, and the Coverage Ledger in one
+shot. See `08-protocols\/RESUMABLE_STATE.md`. Wall-clock planning for
+each recipe lives in `05-execution\/TIMELINE_ESTIMATES.md`.
 
 ---
 
-## How to Tell Claude You're in Override Mode
+## How to Signal Override Mode
 
 The first line of your message should make the run mode explicit:
 
 ```
 Mode: PARTIAL — RUN_CATEGORIES = [B,C,D], RUN_PRIORITIES = [P0]
 
-[paste master prompt here]
+Audit my code with Praetor.
 
 Source: https://github.com/your-org/your-repo
 ```
@@ -185,7 +214,7 @@ Or for full runs, just:
 ```
 Mode: FULL
 
-[paste master prompt here]
+Audit my code with Praetor.
 
 Source: /mnt/user-data/uploads/your-repo.zip
 ```

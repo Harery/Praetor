@@ -96,7 +96,10 @@ polish, internal tools, dev affordances, optional features.
 
 ```
 Is failure likely to cause...
-├── Revenue loss > $X / day?        → P0
+├── Material revenue loss?          → P0   (default materiality: >1% of MRR
+│                                           per day; if the org has its own
+│                                           threshold, A02 surfaces it as an
+│                                           Open Question at the gate)
 ├── Customer data exposure?         → P0
 ├── Compliance violation?           → P0
 ├── Sev1/Sev2 incident?             → P0
@@ -114,17 +117,35 @@ Otherwise:                          → P2
 
 ---
 
+## Module Criticality vs Artifact Priority (they are different axes)
+
+A01 assigns a **module** criticality (P0/P1/P2); A02 and the test agents assign
+each **artifact** its own priority. These do not have to match, and one does
+not override the other:
+
+- A P0 module (e.g., the login frontend, P0 by L-02 layer inheritance) still
+  contains individual P1/P2 artifacts — a `useEffect` cleanup test in that
+  module is P1, a locale-formatting test is P2. The module being P0 means it is
+  *in scope first and reviewed hardest*, not that every test in it is P0.
+- Conversely a P2 module can still hold one P0 artifact (e.g., a security test).
+
+Rule: module criticality drives **scheduling and scope order**; artifact
+priority drives **which artifacts must pass before release**. When you cite a
+priority, be explicit which axis you mean. The frontend login module is P0 (it
+serves a P0 flow) even though most of its individual UI tests are P1/P2.
+
 ## Avoiding Priority Inflation
 
 The most common mistake is calling everything P0. Use this discipline:
 
 - If P0 covers more than **30%** of items in a register, you're inflating.
   Re-classify the marginal P0s to P1.
-- If P2 covers fewer than **20%** of items, you're either missing P2-level
+- If P2 covers fewer than **30%** of items, you're either missing P2-level
   items or over-classifying minor things as P1.
-- Healthy distribution: roughly **20% P0 / 40% P1 / 40% P2** across the platform.
+- Healthy distribution: the v2 target bands — **15–30% P0 / 30–50% P1 /
+  30–50% P2** (enforced by A02; see the v2 ADDITION below).
 
-Claude should target this distribution in Phase 2 and flag deviations in Phase 3.
+A02 targets this distribution in Phase 2 and flags deviations in Phase 3.
 
 ---
 

@@ -3,6 +3,8 @@
 ```
 | UAT ID                | UAT-M_BILLING-WF012-001                          |
 | Audience              | [BIZ]                                            |
+| Status                | READY                                            |
+| Agent                 | A11                                              |
 | Priority              | P0                                               |
 | Linked IDs            | WF-012 (monthly billing cycle), BR-007 (rounding) |
 | Scenario              | Monthly invoice generation for an active subscription |

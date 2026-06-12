@@ -54,6 +54,33 @@ Use exactly one of these two forms; do not mix them within a run.
 `MIDDLEWARE` | `CONTROLLER` | `SERVICE` | `DOMAIN` | `REPOSITORY` |
 `INTEGRATION` | `INFRASTRUCTURE` | `SCHEDULER` | `CLI` | `SHARED_UTIL`
 
+> **Composite file classifications (A01 Audit Trail only):** during discovery,
+> A01 MAY classify a single *file* as spanning two adjacent layers using `+`
+> (e.g., `SERVICE+DOMAIN`) when the code genuinely mixes both. This composite
+> form is legal only in the Audit Trail's per-file Layer column. Every
+> *artifact's* Layer column, Coverage Ledger entry, and `TC-` ID slot always
+> carries exactly one canonical tag from the list above (or a Discipline Tag,
+> below) — dedup matching never sees a composite.
+
+### Discipline Tags (TC third slot, cross-cutting tests only)
+
+For test cases owned by a cross-cutting discipline (security, accessibility,
+cross-layer integration, performance, i18n, chaos), the `<LAYER>` slot of a
+`TC-` ID MAY instead carry one of these **Discipline Tags**:
+
+`SEC` | `A11Y` | `INT` | `PERF` | `I18N` | `CHAOS`
+
+Examples: `TC-M_ORDERS-SEC-IDOR-001`, `TC-M_FRONTEND-A11Y-LABEL-001`,
+`TC-M_FRONTEND-INT-TENANT-001`.
+
+Two rules keep this unambiguous:
+1. The artifact's **Layer column remains mandatory** and always carries a
+   canonical Layer Tag from the list above (per
+   `08-protocols/COVERAGE_LEDGER.md` — DUPLICATE_OF/RELATED_TO
+   matching uses the Layer column, never the ID slot).
+2. Use exactly one vocabulary per ID — a Layer Tag or a Discipline Tag,
+   never an ad-hoc token.
+
 ## Numbering
 
 - All `<NNN>` slots are 3 digits, zero-padded: 001 through 999.

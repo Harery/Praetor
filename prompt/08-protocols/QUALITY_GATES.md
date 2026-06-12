@@ -4,7 +4,8 @@
 
 ```
 Gate 1 — Discovery Gate (Phase 3)
-  Who reviews: Coordinator + audience leads
+  Who reviews: the user (in team settings: the human Coordinator + audience
+               leads per 05-execution/TEAM_ASSIGNMENTS.md)
   Pass criteria: Discovery Report accepted (user replies `continue`)
   Fails to: rework Phase 1/2 with corrections
 
@@ -17,7 +18,7 @@ Gate 2 — Quality Council Review (Phase 5, per artifact)
   Fails to: agent rework once; then emit with QC_FAILED tag
 
 Gate 3 — Wrap-Up Acceptance (Phase 6)
-  Who reviews: leadership + all audience leads
+  Who reviews: the user (in team settings: leadership + all audience leads)
   Pass criteria: Master Traceability Matrix accepted
   Fails to: re-run targeted modules or audiences
 ```
@@ -37,6 +38,15 @@ Gate 3 — Wrap-Up Acceptance (Phase 6)
 > skip against the module's risk register before the skip is allowed to pass.
 
 ## QC_FAILED Tag Format
+
+Two forms, same fields, chosen by context:
+
+- **Standalone block** (below) — used when a QC failure is emitted as its own
+  item (e.g., in the Quality Council Notes section).
+- **Inline one-liner** — used inside artifact tables and module responses,
+  compressed to `QC Note: Judge <n> (<axis>): "<reason>"` per
+  `01-phases/PHASE_5_quality_council.md` and the Quality Council
+  charter Rule 3. The judge and reason are identical in both forms.
 
 ```
 STATUS: QC_FAILED

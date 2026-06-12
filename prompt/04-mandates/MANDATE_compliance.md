@@ -19,7 +19,9 @@ evidence on demand.
 1. Validate the Compliance Markers and Data Retention/Privacy registers at the Phase 3 gate.
 2. Confirm or correct the framework scope before Phase 4 generation.
 3. File audit evidence for each P0 control mapping into the GRC system.
-4. Maintain the security risk register with current severities.
+4. Maintain the security risk register with current severities — consuming
+   the entries A17 generates (A17 owns generation; the compliance team owns
+   adoption, filing, and keeping severities current in the GRC system).
 5. Sign off PII data flow maps for completeness.
 
 ## Boundaries (Out of Scope)

@@ -15,15 +15,12 @@ For each module M_X:
 5. Quality Council reviews (Phase 5, inline per module)
 6. Orchestrator consolidates and emits
 
-## Agent Activation Matrix
+## Agent Activation
 
-| Category | Always | Conditional |
-|---|---|---|
-| CAT-A | A04, A05, A06, A07, A09 | A08 if FRONTEND_UI present |
-| CAT-B | A10, A11 | — |
-| CAT-C | A12, A13 | (A07 for SLO-linked alerts) |
-| CAT-D | A14, A15 | — |
-| CAT-E | A16, A17 | (A06 for technical evidence) |
+**Activation is decided by the single source of truth:** the Agent Activation
+Matrix in `00-orchestrator\/AGENT_ROSTER.md` (including its conditional
+footnotes for A08, A09, and the A06/A07 evidence-feeder roles). No copy of
+the matrix is maintained here — read the roster before dispatching.
 
 ## Per-Module Response Structure
 
@@ -34,11 +31,13 @@ For each module M_X:
 - Path, layers, linked registers
 
 ## Coverage Ledger Check
-(Orchestrator notes any artifacts marked DUPLICATE_OF_<id>)
+(Orchestrator emits the block defined in `08-protocols\/COVERAGE_LEDGER.md`:
+modules covered so far + scenarios pre-instructed as DUPLICATE_OF_<id> or RELATED_TO_<id>)
 
 ## CATEGORY A — Engineering & QA [ENG]
 ### A.P0
 | TC ID | Audience | Priority | Status | Agent | Layer | Component | Linked IDs | Description | Pre-conditions & Scope | Steps | Expected Result | Type |
+(add an optional `Root Cause` column when any artifact in the table carries an RC-ID — see ROOT_CAUSE_GROUPING)
 
 ### A.P1
 ### A.P2
@@ -55,6 +54,11 @@ For each module M_X:
 ## CATEGORY E — Compliance [COMP]
 ...
 
+## Fixtures — M_X
+(Per `08-protocols\/TEST_FIXTURES.md`: every test with a data
+pre-condition emits its `FX-` seed fixture here, deduplicated via the
+Coverage Ledger. Omit the section only if no test in the module needs data state.)
+
 ## Citations Index — M_X
 | Ref ID | file:line | Used in artifacts | Re-derived |
 
@@ -64,4 +68,4 @@ For each module M_X:
 --- END MODULE M_X (n of N) — reply 'continue' for next module ---
 ```
 
-If approaching token budget, see `08-protocols/CHUNKING_PROTOCOL.md`.
+If approaching token budget, see `08-protocols\/CHUNKING_PROTOCOL.md`.

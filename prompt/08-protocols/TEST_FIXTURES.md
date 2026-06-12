@@ -1,13 +1,19 @@
-# Test Fixtures Protocol 
+# Test Fixtures Protocol
 
+## The Problem This Solves
+
+Generated tests often declare data pre-conditions in prose
 ("Test user alice@tenant_a.com exists") but don't provide seed scripts to
-create them. Adds adoption friction.
+create them. Adds adoption friction: the team must reverse-engineer the
+required state before any test can run.
 
 ## The Requirement
 
-When any agent (A04, A05, A06, A09, A11) emits a test that depends on
+When any agent (A04, A05, A06, A07, A09, A11) emits a test that depends on
 specific data state, the agent MUST also emit a corresponding **seed
-fixture** that creates the required state.
+fixture** that creates the required state. (A07's load scripts count: a
+load test that assumes seeded accounts or catalog rows names its fixture
+like any other test.)
 
 ## Format
 
@@ -63,6 +69,25 @@ Where SCENARIO_NAME describes the data state created. Examples:
 Multiple tests can share one fixture. The Coverage Ledger tracks which
 tests use each fixture so deduplication works at the data level too.
 
+## Blocked-Fixture Linkage (test status follows its fixture)
+
+When a test's required fixture is itself blocked (e.g., the fixture is
+`BLOCKED_BY_MISSING_SCHEMA` because the table doesn't exist yet), the test
+does NOT invent a second, independent blocker. The test carries
+`BLOCKED_BY_TEST_DATA` and its `Fixture:` line references the blocked fixture
+ID, so a reader sees ONE root cause (missing schema) expressed as a
+fixture-level blocker plus a test-level dependency — not two unrelated
+problems. Rule:
+
+- Fixture references absent schema → fixture = `BLOCKED_BY_MISSING_SCHEMA`.
+- Any test whose only blocker is that fixture → test = `BLOCKED_BY_TEST_DATA`,
+  with `BLOCKED_BY: FX-<id>` noted so the linkage is explicit.
+- When the schema arrives, unblocking the fixture unblocks every linked test
+  in one move; the Coverage Ledger already lists which tests use the fixture.
+
+This keeps the test/fixture pair cohesive instead of surfacing as two separate
+blocked items a reader has to mentally join.
+
 ## Fixture STATUS Tags
 
 - `READY` — SQL is valid and idempotent (re-runnable without errors)
@@ -112,7 +137,9 @@ This eliminates ambiguity in test pre-conditions.
 
 ## Phase 6 Wrap-Up Addition
 
-The wrap-up now reports:
-- Total fixtures emitted: N
-- Fixtures shared across multiple tests: M
-- Unique fixture count: N - M (the actual setup work required)
+The wrap-up now reports three numbers (note: fixtures are deduplicated at
+emit via the Coverage Ledger, so the count of fixtures emitted IS the unique
+count — there is no subtraction):
+- Fixture references across tests: R (every `Fixture:` line on a test; R ≥ N)
+- Distinct fixtures emitted: N (the actual setup work the team must build)
+- Fixtures shared by 2+ tests: M (reuse visible in the Ledger's usage lists)

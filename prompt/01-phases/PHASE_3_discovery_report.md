@@ -26,6 +26,13 @@ Accepted replies:
   • correct: ... then continue              — fix discovery before proceed
   • override: RUN_X = [...] then continue   — narrow scope
   • halt                                    — stop and wait
+  • <any question>                          — answered in place; gate re-shown,
+                                              no snapshot, no state loss
 ```
 
-See `08-protocols/CONDITIONAL_CONTINUE.md`.
+Reply blocks may be combined in one message (e.g., `continue with:` answers
+plus an `override:` scope) — every block present is applied, per
+CONDITIONAL_CONTINUE Format 5.
+
+See `08-protocols\/CONDITIONAL_CONTINUE.md` (including its parsing
+order — questions first, then keyword blocks, halt as default).

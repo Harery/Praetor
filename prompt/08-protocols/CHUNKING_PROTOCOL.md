@@ -16,7 +16,14 @@ instead.
 ## When to Chunk
 
 Module output approaching token budget. Heuristic: if combined output of all
-agents for a module would exceed ~6000 tokens, chunk.
+agents for a module would exceed ~6000 tokens, chunk. On smaller-context or
+faster model tiers, chunk earlier (~4000 tokens) — finishing a category
+cleanly always beats fitting more in.
+
+Chunk *boundaries* are intentionally heuristic and may differ between two
+runs of the same module (agent verbosity varies); the *content* within the
+chunks — given the same inputs — is the deterministic part. Do not treat a
+different split point across runs as drift.
 
 ## How to Chunk
 

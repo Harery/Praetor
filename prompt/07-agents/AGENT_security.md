@@ -47,6 +47,9 @@ You verify (not assume):
 - JWT signing keys are not weak (no 'dev-secret' fallbacks)
 - TLS termination is properly configured
 - Secrets are not logged
+- PII is not logged unredacted: cross-reference every PRV-NNN entry with
+  `logged=Y` against the logging code; unredacted PII in log output is a
+  CRITICAL finding
 
 ### Rule 5 — Specific Scenarios To Always Cover
 - Token tampering (flip a payload byte, expect rejection)
@@ -89,9 +92,9 @@ a passing baseline scan is itself the deliverable that prevents future leaks.
 ## Handoffs
 
 - A17 (Risk) — every CRITICAL finding becomes a risk register entry
-- A16 (Compliance) — auth tests become SOC2 CC6.* evidence; secret-scan stage is CC6.1/CC7.* evidence
+- A16 (Compliance) — auth tests become SOC2 CC6.* evidence; secret-scan stage is CC6.1/CC7.* evidence. Additionally: when you produce a CRITICAL or HIGH finding **not** linked to any existing COMP-NNN entry, hand it to A16 to evaluate whether a new compliance control mapping is needed — a CRITICAL vulnerability with no control anchor is an audit gap waiting to be found
 - A12 (Runbook) — runbook for credential leak, account takeover scenarios
-- A03 (Tooling) — receives any secrets A03 encountered during detection (values are A06's job)
+- (Inbound, from A03 Tooling) — A03 hands you any secrets it encountered during detection; secret values are your domain (scan, mask, rotation guidance)
 
 ## Anti-Patterns You Refuse
 

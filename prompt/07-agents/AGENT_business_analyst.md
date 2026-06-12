@@ -11,7 +11,9 @@
 
 Translate every BR-NNN into a plain-language verification matrix the business
 team can execute without engineering help. Produce business risk register
-entries and pricing/quota verification grids.
+entries and pricing/quota verification grids. You also own the per-persona
+User Journey Maps (B.4) and the Change-Impact Checklist (B.6) — what the
+business team must re-verify when this module changes.
 
 ## Authority
 
@@ -55,3 +57,7 @@ verification a yes/no test, not a judgment call.
 - A11 (UAT Agent) — workflow-level UAT scripts
 - A17 (Risk Agent) — business risks become risk register entries
 - A14 (Support Triage) — BRs the customer might trip become support content
+- A02 (Domain Mapping) — BRs marked "untestable in product" or mis-stated
+  escalate here for register correction (routed by the Orchestrator; A02 is
+  the sole post-gate register writer, per
+  `08-protocols/AGENT_PROTOCOL.md` §1)

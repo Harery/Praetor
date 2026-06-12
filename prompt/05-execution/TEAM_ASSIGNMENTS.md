@@ -12,7 +12,7 @@ The kit assumes a **typical mid-size SaaS platform** with ~10–20 modules,
 
 | Role | Headcount | Required Skills |
 |---|---|---|
-| **Coordinator / Program Owner** | 1 | Runs the prompt, distributes artifacts, tracks gaps. Can be the QA lead, engineering manager, or technical PM. |
+| **Coordinator / Program Owner** | 1 | Runs the Praetor skill, distributes artifacts, tracks gaps. Can be the QA lead, engineering manager, or technical PM. |
 | **Engineering Reviewer** | 1–3 | Validates `[ENG]` artifacts, executes generated tests, reports back gaps. Senior engineer per major service. |
 | **QA Engineer** | 1–2 | Converts `[ENG]` artifacts into automated suite, owns regression set. |
 | **Business Analyst / PM** | 1–2 | Validates `[BIZ]` registers (BR, WF, ROLE), runs UAT scripts, approves business rule semantics. |
@@ -34,26 +34,28 @@ contact who also covers ops/support sign-off temporarily).
 |---|---|---|---|
 | Coordinator | 1 | 5 min | 5 min |
 
-Coordinator provides Claude with the GitHub URL or local repo path. No team
+Coordinator provides Praetor with the GitHub URL or local repo path. No team
 involvement.
 
 ### Phase 1 — Technical Discovery
 | Owner | Headcount | Effort | Wall-clock |
 |---|---|---|---|
-| Claude (autonomous) | — | — | 2–10 min depending on repo size |
+| Praetor (autonomous) | — | — | 2–10 min depending on repo size |
 | Coordinator (monitoring) | 1 | passive | — |
 
 Silent phase. No human work.
 
-### Phase 2 — Business & Operational Domain Mapping
+### Phase 2 — Domain Mapping & Tooling Discovery
 | Owner | Headcount | Effort | Wall-clock |
 |---|---|---|---|
-| Claude (autonomous) | — | — | 3–15 min |
+| Praetor (autonomous) | — | — | 3–15 min |
 | Coordinator (monitoring) | 1 | passive | — |
 
 Silent phase. No human work, but quality depends on what docs exist in the
 repo. **If the repo is doc-poor, Phase 2 outputs will be heavily `INFERRED`
-and Phase 3 will surface this as an Open Question.**
+and Phase 3 will surface this as an Open Question.** A03 also detects org
+tooling (CI, monitoring, help-desk) here; its Tooling Profile in the Phase 3
+report drives the format of every [OPS]/[SUP] artifact downstream.
 
 ### Phase 3 — Discovery Report Review + Gate
 | Owner | Headcount | Effort | Wall-clock |
@@ -63,17 +65,17 @@ and Phase 3 will surface this as an Open Question.**
 | Engineering Reviewer (validates Module Inventory + layer detection) | 1 | 1 hr | same day |
 | Compliance Officer (validates 2.6, 2.11) | 1 | 30 min | same day |
 
-**Critical checkpoint.** Do not let Claude proceed to Phase 4 until at least
+**Critical checkpoint.** Do not let the run proceed to Phase 4 until at least
 the BA and Engineering Reviewer have signed off on the registers and inventory.
 Errors here propagate into every module downstream.
 
 **Gate decision:** Coordinator types `continue` (or provides corrections) in
-Claude. ~3–4 hours total cross-team effort, can finish in one half-day.
+the Praetor session. ~3–4 hours total cross-team effort, can finish in one half-day.
 
 ### Phase 4 — Per-Module Generation Loop
-This is where the heavy work happens. **Claude produces, humans validate and adopt.**
+This is where the heavy work happens. **Praetor produces, humans validate and adopt.**
 
-For each module, the generation is autonomous (5–20 min of Claude wall-clock).
+For each module, the generation is autonomous (5–20 min of model wall-clock).
 The human work is **post-generation adoption**.
 
 | Audience | Per-module human effort | Headcount |
@@ -87,7 +89,11 @@ The human work is **post-generation adoption**.
 **Per-module total wall-clock**: 1–3 business days if all five audiences work
 in parallel. Most expensive audience is `[ENG]` (test automation).
 
-### Phase 5 — Cross-Audience Wrap-Up
+> **Phase 5 (Quality Council)** has no separate human step here — it runs
+> inline with Phase 4, per artifact, before anything is emitted. That is why
+> the workflow jumps from Phase 4 to Phase 6.
+
+### Phase 6 — Cross-Audience Wrap-Up
 | Owner | Headcount | Effort | Wall-clock |
 |---|---|---|---|
 | Coordinator (synthesize wrap-up, schedule team reviews) | 1 | 4 hr | 1 day |
@@ -107,7 +113,7 @@ For: "We need to ship; what's the minimum we can't ignore?"
 |---|---|
 | Phase 0–3 (setup + gate) | 4 |
 | Phase 4 × 10 modules × P0 only | 80–160 (parallel across audiences) |
-| Phase 5 wrap-up | 12 |
+| Phase 6 wrap-up | 12 |
 | **Total cross-team effort** | **~100–180 person-hours** |
 | **Wall-clock with 5-person team** | **~3–5 business days** |
 
@@ -118,7 +124,7 @@ For: "We want a complete readiness baseline."
 |---|---|
 | Phase 0–3 | 4 |
 | Phase 4 × 15 modules × P0+P1+P2 | 300–600 |
-| Phase 5 wrap-up | 16 |
+| Phase 6 wrap-up | 16 |
 | **Total cross-team effort** | **~320–620 person-hours** |
 | **Wall-clock with 11-person team** | **~3–4 weeks** |
 
@@ -129,7 +135,7 @@ For: "Support team needs playbooks; everyone else later."
 |---|---|
 | Phase 0–3 | 4 |
 | Phase 4 × 15 modules × CAT-D only × P0+P1 | 30–60 |
-| Phase 5 wrap-up for `[SUP]` only | 4 |
+| Phase 6 wrap-up for `[SUP]` only | 4 |
 | **Total cross-team effort** | **~40–70 person-hours** |
 | **Wall-clock with 2 people (Coordinator + Support Lead)** | **~1–2 weeks** |
 
@@ -140,7 +146,7 @@ For: "Engineering is buried; help the other three teams urgently."
 |---|---|
 | Phase 0–3 | 4 |
 | Phase 4 × 10 modules × CAT-B,C,D × P0 only | 60–120 |
-| Phase 5 wrap-up for BIZ/OPS/SUP | 8 |
+| Phase 6 wrap-up for BIZ/OPS/SUP | 8 |
 | **Total cross-team effort** | **~75–135 person-hours** |
 | **Wall-clock with Coordinator + 1 BA + 1 SRE + 1 Support** | **~2–3 weeks** |
 
@@ -150,7 +156,7 @@ For: "Engineering is buried; help the other three teams urgently."
 
 | Activity | Coordinator | Eng | QA | BA | SRE | Support | Compliance |
 |---|---|---|---|---|---|---|---|
-| Run Claude prompt | **R/A** | C | C | C | C | C | C |
+| Run the Praetor skill | **R/A** | C | C | C | C | C | C |
 | Validate Discovery Report | A | R | C | R | C | I | R |
 | Approve `[ENG]` test cases | A | **R** | **R** | C | I | I | I |
 | Execute UAT scripts | A | C | C | **R** | I | C | I |
@@ -186,7 +192,7 @@ project into sub-projects and run the kit on each.
 
 1. **Coordinator runs the full prompt and then disappears.** The wrap-up only
    has value if the audience leads review it. Schedule the Phase 3 gate and
-   the Phase 5 review **before** kicking off Phase 4.
+   the Phase 6 wrap-up review **before** kicking off Phase 4.
 2. **Engineering tries to adopt all five categories alone.** They will skip
    `[BIZ]`, `[OPS]`, `[SUP]`, `[COMP]` because they don't own those domains.
    Distribute to the right teams.

@@ -1,8 +1,7 @@
 # By the Numbers
 
 > These counts are the single source of truth. Every other file matches them
-> or links here. The total file count is produced by the consistency script
-> (`tools/check_consistency.sh`) rather than written by hand.
+> or links here.
 
 | Aspect | Count |
 |---|---|
@@ -14,7 +13,12 @@
 | Inter-agent protocols | 13 |
 | Artifact STATUS values | 7 core + extended set (see `08-protocols/ARTIFACT_STATUS.md`) |
 | ID schemes | 11 (see `99-reference/ID_SCHEMES.md`) |
-| Total files | run `tools/check_consistency.sh` |
+| Total files | 80 (71 markdown: SKILL.md + 67 reference files + CHANGELOG.md + tests/sim/README.md + tests/sim/flawed-app/README.md; + LICENSE + NOTICE; + 2 harness scripts `tools/check_consistency.sh`, `tests/sim/check_secrets.sh`; + 5 non-markdown fixture files under `tests/sim/flawed-app/`) |
+
+> The count covers kit files only. Runtime directories created by tooling or
+> audit sessions (`.git/`, `.archive/`, `.remember/`, `.claude/`,
+> `.sisyphus/`) are excluded — `tools/check_consistency.sh` stage 9 asserts
+> this count against disk with the same exclusions.
 
 ## Canonical facts (copy verbatim where referenced)
 

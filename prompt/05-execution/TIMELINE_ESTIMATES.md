@@ -4,6 +4,11 @@ Concrete wall-clock timelines for the most common run patterns. All estimates
 assume a typical mid-size SaaS platform (10–20 modules, ~100k LOC, 3 services).
 Apply scaling multipliers from `TEAM_ASSIGNMENTS.md` for other sizes.
 
+> **Estimation basis:** these are planning heuristics derived from the
+> per-audience adoption rates in TEAM_ASSIGNMENTS.md, not measured benchmark
+> runs. Model wall-clock varies by model tier and provider. Calibrate after
+> your first run: record actuals per phase and scale the grids accordingly.
+
 ---
 
 ## Timeline 1 — P0-Only Readiness (Pre-Launch Crunch)
@@ -20,7 +25,7 @@ Day 1 ━━━━━━━━━━━━━━━━━━━━━━━━�
 
 Day 2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   All day   Phase 4 module generation (P0 only)
-            Claude produces ~5–8 modules
+            Praetor produces ~5–8 modules
             Audiences start parallel adoption
 
 Day 3 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -30,7 +35,7 @@ Day 3 ━━━━━━━━━━━━━━━━━━━━━━━━�
             Support loads triage trees + error translations
 
 Day 4 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Morning   Phase 5 cross-audience wrap-up
+  Morning   Phase 6 cross-audience wrap-up
   Afternoon Leadership review of traceability matrix
             P0 readiness sign-off
 ```
@@ -48,7 +53,7 @@ Week 1 — Discovery & Gate
   Mon       Phase 0–3 run
   Tue       Discovery Report distributed to all teams
   Wed       Per-audience register validation (BA, Eng, Compliance)
-  Thu       Gate review meeting; corrections fed back to Claude
+  Thu       Gate review meeting; corrections fed back to Praetor
   Fri       Phase 3 re-run if needed; gate signed off
 
 Week 2 — Module Generation (first half)
@@ -62,7 +67,7 @@ Week 3 — Module Generation (second half)
             Mid-week: Coordinator checkpoint to track gap closure
 
 Week 4 — Wrap-up & Adoption Push
-  Mon       Phase 5 wrap-up emitted
+  Mon       Phase 6 wrap-up emitted
   Tue       Per-audience review of gap report
   Wed       Leadership review of master traceability matrix
   Thu       Top-10 action plans (BIZ/OPS/SUP) approved
@@ -75,7 +80,9 @@ Week 4 — Wrap-up & Adoption Push
 
 **Team**: 4 people (Coordinator + 1 BA + 1 SRE + 1 Support).
 **Scope**: CAT-B, C, D only. P0 only. All modules.
-**Wall-clock**: ~2 weeks.
+**Wall-clock**: ~2–3 weeks (the grid below shows the 2-week happy path;
+INFERRED-heavy registers push toward 3 — same estimate as Scenario 4 in
+`TEAM_ASSIGNMENTS.md`).
 
 ```
 Week 1
@@ -92,7 +99,7 @@ Week 1
 Week 2
   Mon-Wed   Remaining modules generated
             Continued adoption
-  Thu       Phase 5 wrap-up (BIZ/OPS/SUP only)
+  Thu       Phase 6 wrap-up (BIZ/OPS/SUP only)
   Fri       Three teams sign off on their P0 readiness
             Engineering re-engaged with prioritized backlog of items requiring code changes
 ```
@@ -119,7 +126,7 @@ Day 2
             Compliance validates PCI control mapping
 
 Day 3
-  Morning   Phase 5 wrap-up for the module
+  Morning   Phase 6 wrap-up for the module
   Afternoon Module sign-off; risk register entries filed
 ```
 
@@ -135,12 +142,12 @@ Phase 0 (5min) → Phase 1+2 (silent, 5-20min) → Phase 3 review (3hrs cross-te
                                                           GATE
                                                               ↓
               ┌─────────────────────────────────────────────────────────┐
-              │  Phase 4 modules generated in sequence by Claude        │
+              │  Phase 4 modules generated in sequence by Praetor        │
               │  (5-20 min each, fully autonomous)                      │
               │  Adoption happens IN PARALLEL across audiences          │
               └─────────────────────────────────────────────────────────┘
                                                               ↓
-                                              Phase 5 wrap-up (4hrs + 1 day review)
+                                              Phase 6 wrap-up (4hrs + 1 day review)
 ```
 
 **Bottleneck #1**: Engineering adoption of `[ENG]` tests (automating them).
@@ -158,7 +165,7 @@ inferred rule before Phase 4 generation has authoritative anchors.
 
 ## Velocity Heuristics
 
-- **Claude wall-clock for one module's full generation**: 5–20 minutes.
+- **Model wall-clock for one module's full generation**: 5–20 minutes.
 - **Human adoption of one module's `[ENG]` artifacts**: 4–16 hours (1–2 engineers).
 - **Human adoption of one module's `[BIZ]` artifacts**: 2–4 hours (1 BA).
 - **Human adoption of one module's `[OPS]` artifacts**: 2–6 hours (1 SRE).
@@ -179,7 +186,7 @@ adoption (engineering first, then everyone else) is 5x slower.
    Distribute by audience or those artifacts die unread.
 3. **Running full priorities in a 1-week sprint.** P0+P1+P2 across 15 modules
    is a multi-week project. A 1-week sprint = P0 only.
-4. **Skipping Phase 5 wrap-up.** Teams need the master traceability matrix to
+4. **Skipping Phase 6 wrap-up.** Teams need the master traceability matrix to
    know where their gaps are. Without it, the per-module work is invisible at
    leadership level.
 5. **Running the kit once and never re-running.** Plan a quarterly re-run as

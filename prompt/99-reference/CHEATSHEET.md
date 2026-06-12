@@ -1,16 +1,18 @@
-# Operator's Cheat Sheet (v2.5)
+# Operator's Cheat Sheet (v2.8)
 
 ## Quick-Start
-1. Open Claude.
-2. Paste `00-orchestrator/MASTER_PROMPT.md`.
-3. Append: `Source: <github URL | local path | attached files>`.
+1. Open a session with your AI agent (the Praetor skill triggers on phrases like "audit my code",
+   "production readiness", "security review" — or name Praetor directly).
+2. Provide the source: `Source: <github URL | local path | attached files>`.
+3. Optionally append a RUN CONFIGURATION block (see recipes below).
 4. Wait for the Discovery Report (includes Audit Trail + MUST CONFIRM block).
 5. Reply per CONDITIONAL_CONTINUE protocol.
 6. After each module, reply `continue` or `continue module` (chunked).
 7. Wrap-up emits automatically after final module.
 
-## 18 Agents at a Glance
+## The Roster at a Glance (A00 + 17 specialists + Quality Council)
 ```
+A00 Orchestrator         — routes, sequences, quality-gates (the persona you talk to)
 A01 Discovery            — technical archaeologist
 A02 Domain Mapping       — builds 12 registers, enforces priority distribution
 A03 Tooling Discovery    — detects org tools, adapts output format
@@ -54,9 +56,11 @@ continue with: Q1=..., Q2=unknown, Q3=...
 correct: <list of corrections> then continue
 override: RUN_X = [...] then continue
 halt                         (emits a Resumable Snapshot you can paste back later)
+<any question>               (answered in place; gate re-shown — NOT a halt,
+                              no snapshot, no state loss)
 ```
 
-## Run-Mode Recipes (paste at end of master prompt)
+## Run-Mode Recipes (append a RUN CONFIGURATION block to your message)
 | Goal | Block |
 |---|---|
 | Discovery only | `RUN_PHASES = [0,1,2,3]` |

@@ -10,7 +10,7 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-DFBA73?style=flat)](https://github.com/moharery/praetor/blob/main/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-00f260?style=flat)](https://github.com/moharery/praetor/pulls)
-[![Version 2.5 Stable](https://img.shields.io/badge/v2.5-Stable-00f2fe?style=flat)](https://github.com/moharery/praetor/releases)
+[![Version 2.8 Stable](https://img.shields.io/badge/v2.8-Stable-00f2fe?style=flat)](https://github.com/moharery/praetor/releases)
 [![18 Expert Agents](https://img.shields.io/badge/18-Expert_Agents-a855f7?style=flat)](#the-18-expert-agents)
 [![Claude Code Compatible](https://img.shields.io/badge/Claude_Code-Compatible-6366f1?style=flat)](#-quick-start)
 

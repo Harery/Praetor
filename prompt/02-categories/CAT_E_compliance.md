@@ -1,10 +1,14 @@
 # Category E — Compliance & Security Artifacts `[COMP]`
 
-**Audience**: Compliance / Security. **Mandate**: `04-mandates/MANDATE_compliance.md`.
+**Audience**: Compliance / Security. **Mandate**: `04-mandates\/MANDATE_compliance.md`.
 **Adoption time per module**: 1–2 hours by 1 Compliance Officer.
 **Writing standard**: Auditor-facing, with traceable evidence.
 
 ## The 4 Compliance Artifacts
+
+> **Agent ownership** (who *generates* each artifact): A16 owns E.1, E.2, E.3;
+> A17 owns E.4. A06 feeds technical evidence via handoff (A16 → A06) when a
+> control needs it; A16 remains the emitting owner.
 
 ### Group E.P0 — Must-have (3 artifacts)
 
@@ -44,4 +48,4 @@
 
 ## See Also
 
-- `06-templates/TEMPLATE_compliance_control.md`
+- `06-templates\/TEMPLATE_compliance_control.md`

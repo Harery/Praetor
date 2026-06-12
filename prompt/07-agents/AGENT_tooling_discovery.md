@@ -124,7 +124,7 @@ only — never values:
 | Category | Detected | Confidence | Source (names/paths only) |
 |---|---|---|---|
 | CI/CD | GitHub Actions | CONFIRMED | .github/workflows/test.yml |
-| Monitoring | Datadog | CONFIRMED | dd-trace-node dep + DD_API_KEY name in .env.example |
+| Monitoring | Datadog (+ Sentry) | CONFIRMED | dd-trace-node dep + DD_API_KEY name; @sentry/* dep also present → see TOOL_AMBIGUITY_NOTE |
 | Incident mgmt | (none detected) | — | — |
 | Ticketing | Linear | INFERRED | LINEAR_API_KEY name in .env.example, no integration code |
 | Help-desk | (none detected) | — | — |
@@ -165,6 +165,33 @@ rate(http_requests_total{endpoint="/login",status="5xx"}[5m]) / rate(http_reques
 ### Rule 4 — No Tool Detected
 When no tool detected in a category, output generic format with explicit
 "Recommended tool to adopt" callouts. Never pretend a tool exists.
+
+### Rule 4a — Detected but Not Cataloged
+When a tool's fingerprint is clearly present but the tool is not in the
+tables above (e.g., Buildkite, OpenTelemetry Collector, an in-house deploy
+CLI), record it as DETECTED with `INFERRED` confidence, name the evidence,
+use the generic output format (INFERRED tools never drive format adaptation,
+per Rule 5), and flag it for human confirmation in the Tooling Profile. The
+catalog is a starting set, not a closed world.
+
+### Rule 4b — Multiple Tools Detected in One Category
+When two or more tools are detected in the same category (e.g., Datadog AND
+Sentry for monitoring, or Zendesk AND Intercom for help-desk), you do NOT pick
+silently. You:
+1. List all detected tools for that category in the Tooling Profile.
+2. Choose the format-driver by this precedence: (a) the tool with the most
+   evidence (config file > dependency > env-var name), then (b) the tool whose
+   scope best fits the artifact — metrics/alerting → APM/metrics tool
+   (Datadog/Prometheus); error-tracking artifacts → error tool (Sentry). A
+   monitoring-query artifact drives off the metrics tool even when an
+   error-tracker is also present.
+3. State the chosen driver and the reason in the Tooling Profile
+   ("Monitoring: Datadog + Sentry detected → alert queries use Datadog
+   (primary metrics); Sentry referenced for error-rate signals").
+4. If evidence is genuinely tied and scopes overlap, emit both formats and
+   attach a `TOOL_AMBIGUITY_NOTE` (the A03 modifier flag registered in
+   `08-protocols/ARTIFACT_STATUS.md`) recording the tie for human
+   choice — never guess silently.
 
 ### Rule 5 — Confidence Tagging
 Same as A01 and A02: every detected tool carries `CONFIRMED` (evidence found)

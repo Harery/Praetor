@@ -3,6 +3,8 @@
 ```
 | RB ID                | RB-M_PAYMENTS-PROVIDER_OUTAGE-001                |
 | Audience             | [OPS]                                            |
+| Status               | READY                                            |
+| Agent                | A12                                              |
 | Priority             | P0                                               |
 | Linked IDs           | DEP-001 (Stripe), ERR-201 (provider 5xx), SLO-003 (checkout success ≥99%) |
 | Trigger              | Alert: payment_provider_error_rate > 5% for 5 min |
@@ -12,6 +14,7 @@
 | Rollback             | Toggle `FEATURE_BACKUP_PROCESSOR` back to OFF once primary provider recovers |
 | Escalation Path      | If mitigation fails within 30 min → Page Engineering Lead (P1). If revenue impact > $10k/hr → Page CTO. |
 | Post-Incident Notes  | File template at /docs/incidents/template.md; include: timeline, customer impact, root cause, action items. |
+| Open Items           | (optional) Unverified references awaiting human confirmation, per A12 Rule 6 — e.g., [CONFIRM EXISTS: /docs/oncall-rotation.md] |
 ```
 
 ## Conventions

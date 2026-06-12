@@ -9,7 +9,7 @@ A Citations Index emitted at the END of every module response, listing every
 
 ```
 ## Citations Index — M_<MODULE>
-| Ref ID | file:line | Used in | Re-derived |
+| Ref ID | file:line | Used in artifacts | Re-derived |
 |---|---|---|---|
 | C-001 | src/auth/controller.ts:23-58 | TC-M_AUTH-CONTROLLER-LOGIN-001..013, BV-..., CM-... | ✓ |
 | C-002 | src/auth/controller.ts:14-15  | BR-005 source, TC-...-004 | ✓ |
@@ -17,8 +17,11 @@ A Citations Index emitted at the END of every module response, listing every
 ```
 
 The `Re-derived` column = ✓ if the agent re-opened the file during this pass
-and confirmed the cited content matches the claim. ✗ if it was carried over
-from another artifact without re-opening.
+and confirmed the cited content matches the claim. ✗ means the re-derivation
+was **attempted but could not be completed** (e.g., the cited file is no
+longer accessible in context, or the chunk containing it was rotated out) —
+never that re-derivation was skipped by choice. Every ✗ row is flagged for
+human verification before use.
 
 ## Why
 
@@ -42,7 +45,8 @@ discipline, **not an independent external verifier**. Therefore:
 ## Discipline
 
 - Every `file:line` claim in a module's artifacts MUST appear in the Citations Index
-- A claim can be `Re-derived = ✗` (carried from an earlier source) but must still appear
+- A claim may carry `Re-derived = ✗` only when re-derivation was attempted and
+  could not be completed; it must still appear in the Index, flagged for human check
 - The Citations Index MUST be complete; abbreviation or "sampled" is FORBIDDEN
 - Judge 2 (Correctness) attempts re-derivation of every citation in the module.
   No deliberate sampling.

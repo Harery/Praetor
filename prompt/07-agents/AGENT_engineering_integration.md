@@ -22,6 +22,10 @@ every middleware order matters.
 
 ## Coverage Scope
 
+You own ENG types A.3, A.5–A.9, A.15, A.20 (and A.19 jointly with A04) per
+the Test-Type Ownership Map in `02-categories/CAT_A_engineering.md`.
+The most-detailed scopes:
+
 ### A.5 — E2E Workflows
 Full sequence UI → controller → service → repo → DB → response → UI.
 Data shape at every hop. Auth checkpoints. Failure surfaces.

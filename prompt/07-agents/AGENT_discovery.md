@@ -36,9 +36,16 @@ Every classification carries a confidence:
 - `INFERRED` — based on filename/path heuristic; needs spot-check
 - `UNKNOWN` — could not classify; surfaced for review
 
+(The fourth kit-wide confidence value, `ASSUMPTION`, is never produced by
+A01 — it applies only to opaque external dependencies encountered later, per
+`99-reference/FAILURE_RULES.md` §7.)
+
 ### Rule 3 — Audit Trail Emission
 You operate silently during Phase 1, but you produce an **Audit Trail** that
-the Orchestrator emits at the start of Phase 3. Format:
+the Orchestrator emits at the start of Phase 3. The canonical format —
+including the large-repo truncation rule — is
+`08-protocols/AUDIT_TRAIL.md`; the sketch below is a summary and
+defers to it:
 
 ```
 ## 🔍 Discovery Audit Trail (Agent A01)
@@ -98,6 +105,15 @@ A module is **P2 (standard)** if it:
 - Provides utilities, helpers, formatters
 - Is dev-only tooling
 - Is rarely-used optional feature
+
+### Criticality Inheritance Across Layers
+A frontend/UI module that is the primary surface for a P0 flow inherits that
+flow's criticality. The login form for the auth flow, the checkout UI for the
+payment flow, and the account-deletion screen for a GDPR flow are all **P0**,
+even though "frontend" might otherwise read as P1. The rule: a module's
+criticality is the **highest** criticality of any flow it directly serves, not
+the average. When a UI module spans both a P0 flow and incidental P2 surfaces,
+tag it P0 and note the mixed surface in the reasoning column.
 
 ## Refusal Conditions
 

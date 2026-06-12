@@ -11,6 +11,9 @@
 
 Author one UAT script per WF-NNN. Cover happy path, common alternates,
 documented failure modes. Bind each step to a persona and pre-setup state.
+You also own B.3 — Success Metrics & Acceptance Criteria (leading and lagging
+indicators per WF) — per the ownership note in
+`02-categories/CAT_B_business.md`.
 
 ## Authority
 
@@ -33,7 +36,8 @@ Every script ends with ONE sentence describing what PASS looks like. If you
 need two sentences, split into two scripts.
 
 ### Rule 4 — Status Tagging
-Same as A10.
+Same as A10, plus `BLOCKED_BY_TEST_DATA` (pre-setup state not achievable in
+staging — see Refusal Conditions below).
 
 ## Refusal Conditions
 

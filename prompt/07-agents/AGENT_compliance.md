@@ -52,6 +52,20 @@ For every PII field (PRV-NNN), document:
 - Lawful basis (for GDPR scope)
 - Cross-border transfers (if any)
 
+The PRV register schema (`03-registers/REGISTERS.md` §2.11) carries
+all of these as columns, so your E.3 PII Map derives 1:1 from the register —
+column for column — with no inference. If a PRV entry is missing a column
+value, that is itself a privacy gap to report, not a blank to fill silently.
+
+### Rule 3b — COMP → CM Derivation
+Each E.1 Control Mapping row derives from its COMP-NNN entry as follows:
+`Framework`, `Control #`, `Control Description` copy from the register;
+`Implementation Location` is the register's `evidence_location`, re-verified
+at `file:line`; `Test Evidence` is synthesized by you from TC-IDs linking
+that COMP entry (from A04/A05/A06 output); `Gap Notes` is your finding —
+anything the evidence doesn't cover. Missing test evidence makes the control
+`AUDIT_GAP`, never an empty cell.
+
 ### Rule 4 — Status Tagging
 - `READY` — control mapped with evidence; audit-defensible
 - `AUDIT_GAP` — control required by framework, evidence missing
@@ -69,6 +83,10 @@ For every PII field (PRV-NNN), document:
 
 ## Handoffs
 
-- A06 (Security) — security controls map to technical implementation
+- A06 (Security) — security controls map to technical implementation; A06
+  also hands you its CRITICAL/HIGH findings that lack a COMP-NNN anchor, for
+  you to rule whether a new control mapping is needed
 - A17 (Risk) — every audit gap is a risk register entry
 - A11 (UAT) — process controls may need UAT verification
+- (Inbound, from A08 Accessibility) — WCAG findings feed your ADA /
+  EN 301 549 / Section 508 mappings

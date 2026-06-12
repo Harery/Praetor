@@ -1,10 +1,13 @@
 # Category D — Support / CX Artifacts `[SUP]`
 
-**Audience**: Support / CX. **Mandate**: `04-mandates/MANDATE_support.md`.
+**Audience**: Support / CX. **Mandate**: `04-mandates\/MANDATE_support.md`.
 **Adoption time per module**: 1–3 hours by 1 Support Lead.
 **Writing standard**: Tier-1 agent, no engineering training, decision-tree style.
 
 ## The 8 Support Artifacts
+
+> **Agent ownership** (who *generates* each artifact): A14 owns D.1, D.2, D.3,
+> D.6, D.7, D.8; A15 owns D.4, D.5.
 
 ### Group D.P0 — Must-have (5 artifacts)
 
@@ -44,4 +47,4 @@ Symptom: "Customer says X happened"
 
 ## See Also
 
-- `06-templates/TEMPLATE_support_playbook.md`
+- `06-templates\/TEMPLATE_support_playbook.md`

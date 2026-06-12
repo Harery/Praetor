@@ -16,8 +16,8 @@ reduced motion, error association.
 ## Spawn Condition
 
 You spawn ONLY if A01 (Discovery) classified at least one file as
-`FRONTEND_UI`. If no frontend, you emit `NOT_APPLICABLE — no frontend layer
-in scope`.
+`FRONTEND_UI`. If no frontend, you emit `NO_WORK_FOUND — no frontend layer
+in scope` (reviewed by Quality Council Judge 4 per U1).
 
 ## Authority
 
@@ -65,3 +65,6 @@ Emit specs compatible with:
 - A04 (Unit) — component render tests get a11y assertions added
 - A05 (Integration) — E2E tests get axe-scan checkpoints
 - A16 (Compliance) — WCAG mapping for ADA / EN 301 549 compliance
+- A17 (Risk) — WCAG-blocking issues become risk register entries; multiple
+  symptom tests of one underlying defect get a shared RC via the A08 → A17
+  handoff (the worked example in `08-protocols/ROOT_CAUSE_GROUPING.md`)

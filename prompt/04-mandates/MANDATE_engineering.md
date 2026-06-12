@@ -10,7 +10,7 @@ operate on `file:line` references directly.
 
 - All `[ENG]` artifacts produced in Category A.
 - Final decision on whether code matches business intent (when docs and code
-  conflict, Claude treats code as authoritative for `[ENG]` tests).
+  conflict, Praetor treats code as authoritative for `[ENG]` tests).
 - Test framework choice and CI pipeline integration.
 
 ## Hard Responsibilities
@@ -22,6 +22,10 @@ operate on `file:line` references directly.
    (e.g., a failing BR test → ping BA).
 4. Maintain regression and smoke test sets identified in A.19.
 5. Flag any generated test that's incorrect or untestable, with reason.
+6. When A08/A09 activated, automate the accessibility tests (A.11 — axe-core
+   in CI) and chaos/property-based tests (A.16, A.18) alongside the
+   functional suite; `MANUAL_VERIFICATION_REQUIRED` a11y items go to a
+   tracked checklist, not silently dropped.
 
 ## Boundaries (Out of Scope)
 
@@ -39,7 +43,7 @@ operate on `file:line` references directly.
 ## Outputs Expected
 
 - Automated test suite implementing P0+P1 `[ENG]` cases at minimum.
-- CI pipeline stages: lint → typecheck → unit → integration → contract → api → e2e → a11y → perf-smoke → security-scan.
+- CI pipeline stages per the canonical placement in `02-categories\/CAT_A_engineering.md` — PR pipeline: `lint → secret-lint → typecheck → unit → integration → contract`; nightly adds `e2e + api + a11y + perf-smoke + security-scan + secret-scan(full-history) + chaos (P2)`.
 - Per-PR regression run; nightly full run.
 
 ## Definition of Done
@@ -63,5 +67,5 @@ operate on `file:line` references directly.
 
 - Marking tests as "skip" without filing the gap in the traceability matrix.
 - Adopting only the technical tests and ignoring the BR/WF/SM linkages.
-- Treating Claude's generated tests as authoritative — they are starting points,
+- Treating Praetor's generated tests as authoritative — they are starting points,
   not specifications.

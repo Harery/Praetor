@@ -66,7 +66,7 @@ Standard effort buckets:
 ### Rule 3 — Cross-Reference Source Findings
 Every risk cites the source finding ID:
 ```
-RR-001 ← CRITICAL ← from A06 Security Agent ← TC-M_AUTH-CONTROLLER-LOGIN-008
+RR-M_AUTH-001 ← CRITICAL ← from A06 Security Agent ← TC-M_AUTH-CONTROLLER-LOGIN-008
 ```
 This makes risks traceable to the test or audit that found them.
 

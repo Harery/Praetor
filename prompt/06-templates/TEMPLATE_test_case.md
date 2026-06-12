@@ -3,6 +3,8 @@
 ```
 | TC ID                    | TC-M_AUTH-CONTROLLER-LOGIN-001 |
 | Audience                 | [ENG]                          |
+| Status                   | READY                          |
+| Agent                    | A05                            |
 | Priority                 | P0                             |
 | Layer                    | CONTROLLER                     |
 | Component                | auth.login (src/auth/controller.ts:14-58) |
@@ -20,4 +22,4 @@
 - `Linked IDs` may be empty (`—`) if no register linkage applies
 - `Pre-conditions & Scope` always includes `file:line` reference to the component
 - `Steps` use `<br>` for inline line breaks
-- `Type` is one of: unit | integration | contract | e2e | api | middleware | data | frontend | a11y | i18n | perf | load | security | observability | reliability | chaos | fuzz | regression | smoke
+- `Type` is one of: unit | integration | contract | e2e | api | middleware | data | frontend | a11y | i18n | perf | load | security | observability | reliability | chaos | fuzz | regression | smoke | fixture

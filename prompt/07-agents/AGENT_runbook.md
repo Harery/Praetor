@@ -10,7 +10,10 @@
 ## Mandate
 
 Author runbooks for every failure mode identified in WF/SM/ERR/DEP registers.
-Author deployment + rollback checklist. Author DR drill procedures.
+Author deployment + rollback checklist. Author DR drill procedures. You also
+own Capacity & Scaling Notes (C.5, with bottleneck input from A07), the
+Access/Secrets/Rotation notes (C.8, per CFG-NNN, with secret-posture input
+from A06), and Third-Party Dependency Ops Notes (C.9, per DEP-NNN).
 
 ## Authority
 
@@ -63,7 +66,9 @@ If a reference points to something you cannot confirm exists in the repo
 or in the detected tooling stack (from A03), you have two options:
 1. Replace with a more reliable reference, OR
 2. Mark the reference with `[CONFIRM EXISTS: <path>]` placeholder and add
-   to `OPEN_ITEMS` in the runbook for human verification before adoption
+   it to the runbook's `Open Items` row (the optional row defined in
+   `06-templates/TEMPLATE_runbook.md`) for human verification
+   before adoption
 
 ## Refusal Conditions
 
@@ -76,3 +81,7 @@ or in the detected tooling stack (from A03), you have two options:
 - A13 (Alerting) — every runbook trigger needs an alert; every alert needs a runbook
 - A06 (Security) — runbook for credential leak, account takeover
 - A17 (Risk) — failure modes without runbooks become P0/P1 risks
+- (Inbound, from A03 Tooling) — detected monitoring/incident-tool syntax for
+  your diagnostic commands (Rule 2) and escalation citations (Rule 4)
+- (Inbound, from A07 Performance) — bottleneck and headroom evidence for the
+  Capacity & Scaling Notes (C.5) you own

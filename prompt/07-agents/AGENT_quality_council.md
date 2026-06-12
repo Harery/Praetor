@@ -85,6 +85,12 @@ QC Note: Judge 3 (Clarity): "Step 3 uses 'gRPC stub' — undefined for support a
 After QC flags an item, the responsible agent may re-work and re-submit
 ONCE. If still failing, emit with QC_FAILED and final reason.
 
+The single rework chance is **total, not per-judge**: the resubmission is
+evaluated by the same judge-applicability rules as the original pass, and if
+it fixes the flagged judge's concern but introduces a new failure on a
+different judge's axis, the artifact still emits with QC_FAILED — the rework
+is consumed.
+
 ## Quality Bar
 
 The Council itself passes review when:

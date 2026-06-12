@@ -1,7 +1,11 @@
 # Agent Protocol — How Agents Communicate
 
 Agents do not directly call each other. They communicate via:
-1. **Shared Registers** — read-only after Phase 2 (only A02 writes)
+1. **Shared Registers** — read-only after Phase 2 for every agent EXCEPT A02.
+   A02 retains sole write authority and may amend registers post-gate in two
+   cases: (a) a `correct:` / `continue with:` reply at the Phase 3 gate, and
+   (b) a Phase-4 `A02 → All` re-link HANDOFF (e.g., backfilling a `UX-NNN`
+   entry a cross-layer test relies on — see A02 Rule 6). No other agent writes.
 2. **Coverage Ledger** — append-only across the run
 3. **Handoff Messages** — declared in each agent's charter
 4. **Orchestrator routing** — the Orchestrator marshals dispatch
@@ -15,6 +19,21 @@ HANDOFF     Agent → Agent (via Orchestrator)
 BLOCK       Agent → Orchestrator (cannot proceed; reason given)
 ESCALATE    Agent → Quality Council (need review pre-emit)
 REWORK      Quality Council → Agent (failure tag + reason)
+```
+
+HANDOFF's full format lives in `08-protocols/HANDOFF_PROTOCOL.md`.
+BLOCK and ESCALATE use these minimal formats (the others are one-liners):
+
+```
+BLOCK
+From: <Agent ID>
+Blocked work: <artifact ID or scope description>
+Reason: <one line — what is missing and the status tag that applies>
+
+ESCALATE
+From: <Agent ID>
+Artifact: <ID>
+Question for QC: <one line — what needs ruling before emit>
 ```
 
 ## Handoff Examples
@@ -31,7 +50,8 @@ A04 → A07: function is in hot path; needs perf coverage
 ## No-Direct-Call Rule
 
 Agents NEVER reference another agent's output by re-reading source. They read:
-- Registers (A02's output, frozen after Phase 3)
+- Registers (A02's output; read-only for every agent except A02 — see §1
+  above for A02's two post-gate amendment cases)
 - Coverage Ledger (Orchestrator-maintained, append-only)
 - Handoff messages routed by Orchestrator
 

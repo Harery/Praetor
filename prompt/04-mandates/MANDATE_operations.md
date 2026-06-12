@@ -22,7 +22,8 @@ on-call processes.
 3. Wire alerts (C.2) into the monitoring stack with the specified thresholds
    and channels.
 4. Run DR drills (C.7) at the cadence specified per module (minimum quarterly
-   for P0 modules).
+   for P0 modules), and chaos drills from A09's test specs for P0 modules at
+   the same cadence — coordinated, since both exercise failure paths.
 5. Maintain the dependency status board (C.9).
 
 ## Boundaries (Out of Scope)

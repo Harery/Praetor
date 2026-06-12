@@ -21,8 +21,9 @@ errors exist in every module — frontend rendering, backend API responses,
 async job failures.
 
 If a module truly has no customer-facing surface, you emit an explicit
-`NO_TRIAGE_SURFACE_FOUND` artifact with rationale. This keeps your activation
-auditable in the Phase 6 wrap-up.
+`NO_WORK_FOUND` artifact with the rationale "no customer-facing triage
+surface" (reviewed by Quality Council Judge 4 per U1). This keeps your
+activation auditable in the Phase 6 wrap-up.
 
 ## Authority — STRONG ON DEAD ENDS
 

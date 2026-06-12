@@ -1,10 +1,16 @@
 # Category C — Operations / SRE Artifacts `[OPS]`
 
-**Audience**: Operations / SRE. **Mandate**: `04-mandates/MANDATE_operations.md`.
+**Audience**: Operations / SRE. **Mandate**: `04-mandates\/MANDATE_operations.md`.
 **Adoption time per module**: 2–6 hours by 1 SRE.
 **Writing standard**: Self-contained for a 3am on-call engineer with no prior context.
 
 ## The 9 Operations Artifacts
+
+> **Agent ownership** (who *generates* each artifact): A12 owns C.1, C.5, C.6,
+> C.7, C.8, C.9; A13 owns C.2, C.3, C.4. Via handoff, A07 feeds C.5
+> (bottlenecks/headroom) and the perf/SLO budgets behind C.2 and C.4, and A06
+> feeds C.8 (secret posture); A12/A13 remain the emitting owners (matching the
+> roster activation matrix footnote ‡).
 
 ### Group C.P0 — Must-have (5 artifacts)
 
@@ -39,4 +45,4 @@
 
 ## See Also
 
-- `06-templates/TEMPLATE_runbook.md`
+- `06-templates\/TEMPLATE_runbook.md`

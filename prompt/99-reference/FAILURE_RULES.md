@@ -1,7 +1,7 @@
 # Failure & Ambiguity Rules
 
 When the kit encounters unclear, missing, or contradictory input, these rules
-govern Claude's behavior.
+govern the model's behavior.
 
 ## 1. Source Resolution Failure (Phase 0)
 
@@ -20,6 +20,7 @@ govern Claude's behavior.
 | Manifest present but framework unrecognizable | Mark as `UNKNOWN`, surface in Open Questions |
 | Polyglot, no dominant language (no language ≥60%) | List each language's modules separately |
 | > 2000 source files post-exclusion | Emit partial Discovery Report; request narrowed scope |
+| > 20 modules decomposed | Warn at the gate: full-platform Phase 4 spans many sessions; recommend `RUN_MODULES` scoping or priority-banded runs (P0 first) |
 | Test framework absent | Propose canonical default for the stack; flag for confirmation |
 
 ## 3. Domain Mapping Failures (Phase 2)
@@ -37,9 +38,9 @@ govern Claude's behavior.
 | Condition | Action |
 |---|---|
 | Function cannot be tested in isolation (opaque deps) | Generate contract test; document assumption |
-| Module too large for one response | Split into sub-modules; coordinate via Coordinator |
+| Module too large for one response | Invoke CHUNKING_PROTOCOL first; if still too large, split into sub-modules (Orchestrator coordinates) |
 | Generated test depends on infra not present | Document infra requirement in Pre-conditions; flag |
-| Category genuinely doesn't apply | State "Not applicable — <reason>"; do not skip silently |
+| Category genuinely doesn't apply | Each activated agent emits `NO_WORK_FOUND` with reason (U1; Judge 4 reviews); never skip silently |
 
 ## 5. Never Do These Things
 
@@ -69,3 +70,8 @@ UNKNOWN     — could not determine; flagged for human input
 
 Every register entry and every generated artifact may carry one of these tags.
 The wrap-up matrix counts confidence levels per audience.
+
+This is the *confidence* vocabulary; the *artifact status* vocabulary
+(including `INFERRED`'s second role as a status) is defined in
+`08-protocols/ARTIFACT_STATUS.md` — see its Counting rule for how
+the two relate.

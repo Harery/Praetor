@@ -41,7 +41,7 @@ certification).
 | Method | Command |
 |:---|:---|
 | **npm** | `npx praetor-audit-kit` |
-| **GitHub Release** | Download [`praetor-prompt-kit-v2.5.zip`](https://github.com/Harery/Praetor/releases/tag/v2.5) |
+| **GitHub Release** | Download [`praetor-prompt-kit-v2.8.zip`](https://github.com/Harery/Praetor/releases/tag/v2.8) |
 | **Claude Code** | `claude skill install Skill/praetor.skill` |
 | **Direct** | Copy `00-orchestrator/MASTER_PROMPT.md` into your LLM context |
 
@@ -168,8 +168,7 @@ prompt/
 │   ├── CHEATSHEET.md
 │   ├── FAILURE_RULES.md
 │   ├── GLOSSARY.md                           ← plain-language jargon guide
-│   ├── ID_SCHEMES.md                         ← 11 ID schemes
-│   └── V1_TO_V2_MIGRATION.md
+│   └── ID_SCHEMES.md                         ← 11 ID schemes
 │
 └── tools/
     └── check_consistency.sh                  ← self-consistency check
@@ -208,12 +207,12 @@ prompt/
 
 ## What Praetor Does Not Do
 
-- ❌ Execute the generated tests (you/your CI run them)
-- ❌ Deploy fixes
-- ❌ Send customer communications
-- ❌ File tickets automatically
-- ❌ Replace human review
-- ❌ Externally certify its citations (it re-derives; you spot-check)
+- It does not execute the generated tests (you/your CI run them)
+- It does not deploy fixes
+- It does not send customer communications
+- It does not file tickets automatically
+- It does not replace human review
+- It does not externally certify its citations (it re-derives; you spot-check)
 
 It produces the specifications. Your team executes them.
 

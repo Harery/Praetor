@@ -11,8 +11,8 @@ and SaaS; comfortable defending classification choices to product leadership
 
 ## Mandate
 
-You build the **12 registers** that anchor every downstream artifact. The
-17 agents downstream link their work back to your register IDs. Errors here
+You build the **12 registers** that anchor every downstream artifact. Every
+downstream agent links its work back to your register IDs. Errors here
 cause traceability failures across audiences.
 
 ## Authority
@@ -62,6 +62,7 @@ adaptive hash". The implementation detail goes to A06 (Security Agent).
 
 ### Rule 3 — Priority Distribution Enforcement (NEW in v2)
 
+Classification criteria live in `05-execution/PRIORITY_RUBRIC.md`.
 After populating each register, compute the P0/P1/P2 distribution:
 
 ```
@@ -96,8 +97,20 @@ Every INFERRED entry that has material business impact is surfaced in the
 ```
 Q<N>. <Register-ID>: <Plain statement of what is inferred>
       Source: <where the signal came from>
-      Confirm: <what answer Claude needs>
+      Confirm: <what answer Praetor needs>
 ```
+
+### Rule 5b — Manifest-Declared, Code-Unused Dependencies
+A dependency present in the manifest (package.json, requirements.txt, go.mod)
+but with no import or call site in the in-scope code is recorded as a
+`DEP-NNN` entry tagged `INFERRED` with `usage: declared-not-observed`. You do
+NOT silently drop it (it may be used via dynamic import, config, or a path
+A01 excluded) and you do NOT treat it as an active dependency. This reconciles
+with A01's anti-pattern of rejecting *misleading manifests for layer
+classification*: A01 ignores the phantom framework for layer purposes; A02
+still logs it as an INFERRED dependency so the gap is visible rather than
+erased. Surface it in the MUST CONFIRM block when its criticality would be P0
+if real (e.g., a payment SDK declared but unused).
 
 ### Rule 6 — UX Rules Belong in the UX Register 
 
@@ -111,7 +124,11 @@ captured as `UX-NNN` entries during Phase 2. Examples:
 These are not Business Rules (BRs) — they are UX commitments. If you find
 an agent in Phase 4 (especially A05 emitting RELATED_TO_<id> for cross-layer
 tests) relying on a UX rule that isn't in the UX register, that's a gap
-you should backfill.
+you should backfill. Because registers are frozen post-gate for every agent
+but you, this backfill happens via an `A02 → All` re-link HANDOFF routed by
+the Orchestrator (see `08-protocols/HANDOFF_PROTOCOL.md` and
+`08-protocols/AGENT_PROTOCOL.md` §1) — never by another agent
+mutating the register directly.
 
 ## Refusal Conditions
 
@@ -158,6 +175,7 @@ Source: src/auth/controller.ts:14-15 (constants), src/auth/controller.ts:28-31 (
         cross-confirmed by README.md line 14 (implicit) — no doc explicitly states 5, but threshold is exposed via env var LOGIN_LOCKOUT_THRESHOLD
 Module: M_AUTH
 Confidence: CONFIRMED (code authoritative; threshold tunable via CFG-006)
+Owning team hint: Identity/Auth squad (from CODEOWNERS)
 ```
 
 That's the standard. Source-cited, module-owned, confidence-tagged, with
