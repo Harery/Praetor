@@ -8,9 +8,12 @@
 
 <br/>
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-DFBA73?style=flat)](https://github.com/moharery/praetor/blob/main/LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-00f260?style=flat)](https://github.com/moharery/praetor/pulls)
-[![Version 2.8 Stable](https://img.shields.io/badge/v2.8-Stable-00f2fe?style=flat)](https://github.com/moharery/praetor/releases)
+[![License: MIT](https://img.shields.io/badge/license-MIT-DFBA73?style=flat)](https://github.com/Harery/Praetor/blob/main/LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-00f260?style=flat)](https://github.com/Harery/Praetor/pulls)
+[![Version 2.8 Stable](https://img.shields.io/badge/v2.8-Stable-00f2fe?style=flat)](https://github.com/Harery/Praetor/releases)
+[![GitHub Stars](https://img.shields.io/github/stars/Harery/Praetor?style=social)](https://github.com/Harery/Praetor/stargazers)
+[![npm](https://img.shields.io/npm/v/praetor-audit-kit?style=flat)](https://www.npmjs.com/package/praetor-audit-kit)
+[![GitHub Discussions](https://img.shields.io/badge/Discussions-Join-9cf?style=flat)](https://github.com/Harery/Praetor/discussions)
 [![18 Expert Agents](https://img.shields.io/badge/18-Expert_Agents-a855f7?style=flat)](#the-18-expert-agents)
 [![Claude Code Compatible](https://img.shields.io/badge/Claude_Code-Compatible-6366f1?style=flat)](#-quick-start)
 
@@ -275,10 +278,10 @@ We welcome contributions from **SREs, compliance officers, security auditors, pr
 | Resource | Description |
 |:---|:---|
 | 📖 [**CONTRIBUTING.md**](CONTRIBUTING.md) | Contribution guidelines, quality rules, and PR process |
-| 🐛 [**Issue Tracker**](https://github.com/moharery/praetor/issues) | Report bugs, request features, or propose new compliance mappings |
+| 🐛 [**Issue Tracker**](https://github.com/Harery/Praetor/issues) | Report bugs, request features, or propose new compliance mappings |
 | 📜 [**CODE_OF_CONDUCT.md**](CODE_OF_CONDUCT.md) | Community standards and expected behavior |
 | 🔒 [**SECURITY.md**](SECURITY.md) | Vulnerability reporting and disclosure policy |
-| 📚 [**Wiki**](https://github.com/moharery/praetor/wiki) | Extended documentation, architecture deep-dives, and operator guides |
+| 📚 [**Wiki**](https://github.com/Harery/Praetor/wiki) | Extended documentation, architecture deep-dives, and operator guides |
 
 ---
 

@@ -1,21 +1,52 @@
 # Code of Conduct
 
-We are committed to a respectful, inclusive, and harassment-free community.
+## Our Pledge
 
-## Expected behavior
-- Be considerate and professional.
-- Focus on the work and the impact.
-- Assume good intent and seek clarity.
+We as members, contributors, and leaders pledge to make participation in our
+community a harassment-free experience for everyone, regardless of age, body
+size, visible or invisible disability, ethnicity, sex characteristics, gender
+identity and expression, level of experience, education, socio-economic status,
+nationality, personal appearance, race, caste, color, religion, or sexual
+identity and orientation.
 
-## Unacceptable behavior
-- Harassment, discrimination, or personal attacks.
-- Publishing private information without consent.
-- Disruptive or abusive conduct.
+We pledge to act and interact in ways that contribute to an open, welcoming,
+diverse, inclusive, and healthy community.
 
-## Reporting
-If you experience or witness violations, open an issue with a brief summary.
-Maintainers will respond and take appropriate action.
+## Our Standards
 
-## Scope
-This applies to issues, pull requests, discussions, and any project-related
-communications.
+Examples of behavior that contributes to a positive environment:
+
+- Demonstrating empathy and kindness toward other people
+- Being respectful of differing opinions, viewpoints, and experiences
+- Giving and gracefully accepting constructive feedback
+- Accepting responsibility and apologizing to those affected by our mistakes
+- Focusing on what is best not just for us as individuals, but for the overall community
+
+Examples of unacceptable behavior:
+
+- The use of sexualized language or imagery, and sexual attention or advances
+- Trolling, insulting or derogatory comments, and personal or political attacks
+- Public or private harassment
+- Publishing others' private information without explicit permission
+- Other conduct which could reasonably be considered inappropriate
+
+## Enforcement Responsibilities
+
+Community leaders are responsible for clarifying and enforcing our standards of
+acceptable behavior and will take appropriate and fair corrective action in
+response to any behavior that is deemed inappropriate, threatening, offensive,
+or harmful.
+
+## Enforcement
+
+Instances of abusive, harassing, or otherwise unacceptable behavior may be
+reported by opening a GitHub issue with a brief summary or by contacting the
+maintainer directly. All complaints will be reviewed and investigated promptly
+and fairly.
+
+## Attribution
+
+This Code of Conduct is adapted from the [Contributor Covenant][homepage],
+version 2.1.
+
+[homepage]: https://www.contributor-covenant.org/version/2/1/code_of_conduct/

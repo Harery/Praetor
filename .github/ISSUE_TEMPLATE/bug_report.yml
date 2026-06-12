@@ -1,0 +1,52 @@
+name: Bug Report
+description: Report a problem with a Praetor prompt or audit output
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug. Please fill out every section so we can reproduce the issue.
+  - type: input
+    id: model
+    attributes:
+      label: Model used
+      description: Which LLM model / provider were you using?
+      placeholder: e.g. Claude 3.5 Sonnet, GPT-4o, Gemini 1.5 Pro
+    validations:
+      required: true
+  - type: input
+    id: prompt-file
+    attributes:
+      label: Prompt file
+      description: Which Praetor prompt file were you running?
+      placeholder: e.g. prompt/00-orchestrator/MASTER_PROMPT.md
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected output
+      description: What did you expect the agent to produce?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual output
+      description: What did the agent actually produce? Paste the relevant excerpt.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: How can we reproduce this? Include any context you fed the model.
+    validations:
+      required: true
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Any other details — screenshots, logs, environment info, etc.
+    validations:
+      required: false

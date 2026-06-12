@@ -1,0 +1,49 @@
+name: Feature Request
+description: Suggest a new prompt, agent, or capability for Praetor
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the enhancement you would like to see in Praetor.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What gap or limitation does this address?
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe the prompt, agent, or behaviour you would like added.
+    validations:
+      required: true
+  - type: dropdown
+    id: audience
+    attributes:
+      label: Primary audience
+      description: Which stakeholder group benefits most?
+      options:
+        - ENG (Engineering / DevOps)
+        - BIZ (Business / Product)
+        - OPS (Operations / SRE)
+        - SUP (Security / Compliance)
+        - COMP (Competitive / Research)
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any workarounds or alternative approaches you have tried.
+    validations:
+      required: false
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Mockups, references, links, or any other supporting material.
+    validations:
+      required: false
