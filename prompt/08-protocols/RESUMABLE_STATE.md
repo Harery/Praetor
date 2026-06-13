@@ -33,7 +33,7 @@ the Praetor skill and supplying the source) to resume. It is intentionally
 compact — register *summaries* and IDs, not full register bodies.
 
 ```
-=== PRAETOR RESUMABLE SNAPSHOT v2.8.5 ===
+=== PRAETOR RESUMABLE SNAPSHOT v2.8.6 ===
 SOURCE: <github URL | path>   SNAPSHOT_TOKEN: <sha | upload-date | content-fingerprint>
 RUN_CONFIG: RUN_PHASES=[...] RUN_CATEGORIES=[...] RUN_PRIORITIES=[...] RUN_MODULES=[...]
 STOPPED_AT: <phase 3 gate | end of module M_X (n of N) | mid-module M_X (categories A,B done; C,D,E pending)>

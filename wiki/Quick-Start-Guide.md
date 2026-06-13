@@ -25,8 +25,8 @@ This downloads the prompt kit and displays the quick start guide. Then:
 
 ## Option B: GitHub Release
 
-1. Go to [Releases](https://github.com/Harery/Praetor/releases/tag/v2.8.5)
-2. Download `praetor-prompt-kit-v2.8.5.zip`
+1. Go to [Releases](https://github.com/Harery/Praetor/releases/tag/v2.8.6)
+2. Download `praetor-prompt-kit-v2.8.6.zip`
 3. Extract and open `prompt/00-orchestrator/MASTER_PROMPT.md`
 4. Copy from the `═══` line, paste into your LLM with your source URL
 5. Reply `continue` when prompted
