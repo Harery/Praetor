@@ -3,28 +3,30 @@
 const fs = require("fs");
 const path = require("path");
 
-const PROMPT_DIR = path.join(__dirname, "..", "prompt");
+const PKG_ROOT = path.join(__dirname, "..");
+const PROMPT_DIR = path.join(PKG_ROOT, "prompt");
 const MASTER_PROMPT = path.join(PROMPT_DIR, "00-orchestrator", "MASTER_PROMPT.md");
-const SEPARATOR = "═══";
+const SKILL_FILE = path.join(PROMPT_DIR, "SKILL.md");
 
 const args = process.argv.slice(2);
 
 function showWelcome() {
   console.log("");
   console.log("  ╔══════════════════════════════════════════════════════════════╗");
-  console.log("  ║  PRAETOR v2.8.2 — Production Readiness & Audit System         ║");
+  console.log("  ║  PRAETOR v2.8.2 — Production Readiness & Audit System      ║");
   console.log("  ║  18 Expert Agents · 4-Judge QC · 100% File-Line Traceability ║");
   console.log("  ╚══════════════════════════════════════════════════════════════╝");
   console.log("");
   console.log("  Quick Start:");
-  console.log("    1. Open: node_modules/praetor-audit-kit/prompt/00-orchestrator/MASTER_PROMPT.md");
+  console.log("    1. Open: " + MASTER_PROMPT);
   console.log("    2. Copy everything from the ═══ separator line");
-  console.log("    3. Paste into Claude, GPT-5, or any long-context LLM");
+  console.log("    3. Paste into Claude, ChatGPT, or any long-context LLM");
   console.log("    4. Append: Source Codebase: https://github.com/your-org/your-repo");
   console.log("    5. Reply: continue");
+  console.log("    (Tip: npx praetor-audit-kit --prompt prints the prompt directly.)");
   console.log("");
-  console.log("  Claude Code: claude skill install node_modules/praetor-audit-kit/Skill/praetor.skill");
-  console.log("  Docs:        https://github.com/Harery/Praetor");
+  console.log("  Claude Code:  claude skill install " + SKILL_FILE);
+  console.log("  Docs:         https://github.com/Harery/Praetor");
   console.log("");
 }
 
@@ -35,12 +37,14 @@ function showPrompt() {
   }
 
   const content = fs.readFileSync(MASTER_PROMPT, "utf-8");
-  const sepIndex = content.indexOf(SEPARATOR);
+  // Match the actual separator line (══════════...) not the inline backtick reference
+  const sepRegex = /\n═══{10,}/;
+  const match = content.match(sepRegex);
 
-  if (sepIndex === -1) {
+  if (!match) {
     console.log(content);
   } else {
-    console.log(content.slice(sepIndex));
+    console.log(content.slice(match.index + 1));
   }
 }
 
@@ -52,7 +56,7 @@ if (args.includes("--welcome") || args.includes("-w")) {
   showWelcome();
 } else if (args.includes("--prompt") || args.includes("-p")) {
   showPrompt();
-} else if (args.includes("--path") || args.includes("--l")) {
+} else if (args.includes("--path") || args.includes("-l")) {
   showPath();
 } else if (args.includes("--help") || args.includes("-h")) {
   console.log("");
@@ -62,9 +66,9 @@ if (args.includes("--welcome") || args.includes("-w")) {
   console.log("");
   console.log("  Options:");
   console.log("    -w, --welcome   Show welcome message and quick start guide");
-  console.log("    -p, --prompt     Output the master prompt (paste into LLM)");
-  console.log("    -l, --path       Show path to MASTER_PROMPT.md");
-  console.log("    -h, --help       Show this help message");
+  console.log("    -p, --prompt    Output the master prompt (paste into LLM)");
+  console.log("    -l, --path      Show path to MASTER_PROMPT.md");
+  console.log("    -h, --help      Show this help message");
   console.log("");
   console.log("  Examples:");
   console.log("    npx praetor-audit-kit");

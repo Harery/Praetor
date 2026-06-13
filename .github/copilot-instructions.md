@@ -1,6 +1,6 @@
 # Praetor — Copilot Instructions
 
-Welcome to **Praetor** (`@harery/praetor-audit-kit`), an autonomous production-readiness
+Welcome to **Praetor** (`praetor-audit-kit`), an autonomous production-readiness
 and multi-agent audit system delivered as a **prompt kit**.
 
 ## What this project is
