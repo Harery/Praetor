@@ -1,25 +1,26 @@
 <div align="center">
 
-<img src="assets/social-preview.svg" alt="Praetor — Autonomous Production Readiness & Audit System" width="100%">
+<img src="assets/logo-horizontal.svg" alt="PRAETOR — Autonomous Production Readiness & Audit System" width="100%">
 
 <br/>
+<br/>
 
-**The autonomous production readiness & audit system for modern engineering teams.**
+### **One prompt into your LLM. 18 autonomous experts audit your entire codebase. Zero hallucinations.**
 
 <br/>
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-DFBA73?style=flat)](https://github.com/Harery/Praetor/blob/main/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-00f260?style=flat)](https://github.com/Harery/Praetor/pulls)
 [![Version 2.8 Stable](https://img.shields.io/badge/v2.8-Stable-00f2fe?style=flat)](https://github.com/Harery/Praetor/releases)
-[![GitHub Stars](https://img.shields.io/github/stars/Harery/Praetor?style=social)](https://github.com/Harery/Praetor/stargazers)
 [![npm](https://img.shields.io/npm/v/praetor-audit-kit?style=flat)](https://www.npmjs.com/package/praetor-audit-kit)
+[![GitHub Stars](https://img.shields.io/github/stars/Harery/Praetor?style=social)](https://github.com/Harery/Praetor/stargazers)
 [![GitHub Discussions](https://img.shields.io/badge/Discussions-Join-9cf?style=flat)](https://github.com/Harery/Praetor/discussions)
-[![18 Expert Agents](https://img.shields.io/badge/18-Expert_Agents-a855f7?style=flat)](#the-18-expert-agents)
+[![18 Expert Agents](https://img.shields.io/badge/18-Expert_Agents-a855f7?style=flat)](#-the-18-expert-agents)
 [![Claude Code Compatible](https://img.shields.io/badge/Claude_Code-Compatible-6366f1?style=flat)](#-quick-start)
 
 <br/>
 
-[`Quick Start`](#-quick-start) · [`Features`](#-features) · [`Architecture`](#-how-it-works) · [`Agents`](#the-18-expert-agents) · [`Contributing`](#-contributing) · [`License`](#-license)
+[`Quick Start`](#-quick-start) · [`Features`](#-features) · [`Architecture`](#-how-it-works) · [`Agents`](#%EF%B8%8F-the-18-expert-agents) · [`Contributing`](#-contributing) · [`License`](#-license)
 
 </div>
 
@@ -27,41 +28,42 @@
 
 ## What is Praetor?
 
-**Praetor** (Production Readiness, Audit, Evidence, Testing, Operations & Review) is a single-prompt, multi-agent orchestration framework that transforms any codebase into a comprehensive **production readiness audit package**. By dispatching **18 autonomous domain experts** overseen by a **4-Judge Quality Council**, Praetor performs multi-disciplinary audits across security, compliance, performance, accessibility, and operations — with **100% source-code traceability**.
+**Praetor** (Production Readiness, Audit, Evidence, Testing, Operations & Review) is a single-prompt, multi-agent orchestration framework that transforms any codebase into a comprehensive **production readiness audit package**. You paste one master prompt into your LLM — Claude, GPT-5, or Gemini — and **18 autonomous domain experts** fan out across your entire codebase, analyzing security, compliance, performance, accessibility, and operations. A **4-Judge Quality Council** independently verifies every citation before a single word reaches you. The result: test cases, runbooks, compliance evidence, risk registers, and support playbooks — every finding tied to a verified `file:line` citation, packaged for six distinct audiences.
 
 No assumptions. No hallucinations. Just mathematically precise, file-line cited evidence packages for engineering, compliance, operations, and business stakeholders.
 
+> [!NOTE]
 > **TL;DR** — You paste one prompt into your LLM. Praetor reads your codebase and returns test cases, runbooks, compliance evidence, risk registers, and support playbooks — every finding tied to a real `file:line` citation, verified by an independent quality council.
 
 ---
 
 ## ✨ Features
 
-| Feature | Description |
-|:---|:---|
-| 🐝 **18 Specialized Agents** | Hierarchical swarm of autonomous experts — each with 12–20 years of simulated domain expertise (OWASP Security, WCAG Accessibility, SRE Chaos, SOC2 Compliance, and more) |
-| 📍 **100% File-Line Traceability** | Every finding carries a verified `file:line` citation, re-derived by the Quality Council before emission — hallucinated references are rejected |
-| ⚖️ **4-Judge Quality Council** | Independent review for Coverage, Citations, Clarity, and Skip-Validity — no unverified finding escapes |
-| 📊 **Multi-Audience Deliverables** | Automatic output streams formatted for Engineering, Business, Operations, Support, and Compliance stakeholders |
-| 🔧 **Tooling-Adaptive Output** | Detects your stack (Datadog, Prometheus, Sentry, etc.) and emits artifacts in matching syntax — generic format with adoption recommendations when nothing is detected |
-| 🔒 **Compliance Mappings** | SOC2, GDPR, HIPAA, PCI, WCAG control mappings, PII flow tracking, and audit evidence packs ready for reviewer consumption |
-| 🔑 **Secret Hygiene** | Built-in secret-key scanning with a runnable secret-lint CI stage |
-| ⏸️ **Resumable Sessions** | `halt` emits a compact snapshot — resume tomorrow without re-running discovery |
-| 🚦 **Release Gate Hooks** | Ready-to-run shell gates tying every CRITICAL/HIGH fix to CI pipelines, alerts, and runbooks |
-| 🚀 **Multiple Install Options** | Run via `npx praetor-audit-kit`, GitHub Release, Claude Code skill, or direct paste — no runtime dependencies |
+| | Feature | Description |
+|:---:|:---|:---|
+| 🐝 | **18 Specialized Agents** | Hierarchical swarm of autonomous experts — each with 12–20 years of simulated domain expertise (OWASP Security, WCAG Accessibility, SRE Chaos, SOC2 Compliance, and more) |
+| 📍 | **100% File-Line Traceability** | Every finding carries a verified `file:line` citation, re-derived by the Quality Council before emission — hallucinated references are rejected |
+| ⚖️ | **4-Judge Quality Council** | Independent review for Coverage, Citations, Clarity, and Skip-Validity — no unverified finding escapes |
+| 📊 | **Multi-Audience Deliverables** | Automatic output streams formatted for Engineering, Business, Operations, Support, Compliance, and Cross-Cutting stakeholders |
+| 🔧 | **Tooling-Adaptive Output** | Detects your stack (Datadog, Prometheus, Sentry, etc.) and emits artifacts in matching syntax — generic format with adoption recommendations when nothing is detected |
+| 🔒 | **Compliance Mappings** | SOC2, GDPR, HIPAA, PCI, WCAG control mappings, PII flow tracking, and audit evidence packs ready for reviewer consumption |
+| 🔑 | **Secret Hygiene** | Built-in secret-key scanning with a runnable secret-lint CI stage |
+| ⏸️ | **Resumable Sessions** | `halt` emits a compact snapshot — resume tomorrow without re-running discovery |
+| 🚦 | **Release Gate Hooks** | Ready-to-run shell gates tying every CRITICAL/HIGH fix to CI pipelines, alerts, and runbooks |
+| 🚀 | **Multiple Install Options** | Run via `npx praetor-audit-kit`, GitHub Release, Claude Code skill, or direct paste — no runtime dependencies |
 
 ---
 
 ## 🚀 Quick Start
 
 > [!IMPORTANT]
-> Praetor runs inside long-context LLM environments (Claude, GPT-5, Gemini, etc.). No software downloads or API key configurations are required to get started.
+> Praetor runs inside long-context LLM environments (Claude, GPT-5, Gemini, etc.). **No software downloads or API key configurations are required to get started.**
 
-### Step 1 — Copy the Master Prompt
+### 1 — Copy the Master Prompt
 
 Open [`prompt/00-orchestrator/MASTER_PROMPT.md`](prompt/00-orchestrator/MASTER_PROMPT.md) and copy everything starting from the `═══` separator line.
 
-### Step 2 — Paste into Your LLM
+### 2 — Paste into Your LLM
 
 Paste the prompt into a new conversation, then append your target codebase:
 
@@ -69,7 +71,7 @@ Paste the prompt into a new conversation, then append your target codebase:
 Source Codebase: https://github.com/your-organization/your-repository.git
 ```
 
-### Step 3 — Confirm & Execute
+### 3 — Confirm & Execute
 
 Once **Phases 0–2** complete (~30 seconds), review the Discovery Report and respond:
 
@@ -199,7 +201,7 @@ flowchart LR
 </details>
 
 <details>
-<summary><strong>The Quality Layer</strong></summary>
+<summary><strong>The Quality Layer — 4-Judge Quality Council</strong></summary>
 
 | ID | Role | Scope |
 |:---|:---|:---|
@@ -232,6 +234,7 @@ All generated artifacts pass through the Quality Council before emission. Any fi
 - ❌ Replace human review or external audit certification
 - ❌ Externally certify its citations (citations are re-derived by the model — spot-check before using as audit evidence)
 
+> [!TIP]
 > **Praetor produces the specifications. Your team executes them.**
 
 ---
@@ -292,6 +295,11 @@ Praetor is distributed under the **MIT License**. Use it, modify it, and distrib
 ---
 
 <div align="center">
+
+<img src="assets/logo-stacked.svg" alt="Praetor" width="140">
+
+<br/>
+<br/>
 
 **One prompt. Eighteen experts. Six disciplines. Full traceability.**
 

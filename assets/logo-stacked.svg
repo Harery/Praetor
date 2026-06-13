@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 780" width="600" height="780">
+  <defs>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe566"/>
+      <stop offset="50%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#b8860b"/>
+    </linearGradient>
+    <radialGradient id="divine-eye" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="30%" stop-color="#fffacd"/>
+      <stop offset="70%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#ff8c00" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="eye-halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd700" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#ff8c00" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ff4500" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="ink-glow" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="eye-glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="text-glow" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- ===== HELMET (centered) ===== -->
+  <g transform="translate(300, 270)" filter="url(#shadow)">
+    <!-- Dome -->
+    <path d="M-75,-130 C-78,-170 -55,-195 0,-200 C55,-195 78,-170 75,-130 C80,-75 70,-15 58,30 C46,60 26,85 0,95 C-26,85 -46,60 -58,30 C-70,-15 -80,-75 -75,-130 Z"
+      fill="#0b1120" stroke="url(#gold)" stroke-width="5"/>
+    <path d="M-55,-125 C-58,-155 -38,-175 0,-178 C38,-175 58,-155 55,-125 C58,-80 52,-35 44,10 L-44,10 C-52,-35 -58,-80 -55,-125 Z"
+      fill="#111d35"/>
+
+    <!-- Brow -->
+    <path d="M-78,-108 Q-42,-130 0,-132 Q42,-130 78,-108" fill="none" stroke="url(#gold)" stroke-width="7" stroke-linecap="round" filter="url(#ink-glow)"/>
+    <path d="M0,-140 L8,-132 L0,-124 L-8,-132 Z" fill="url(#gold)" filter="url(#ink-glow)"/>
+
+    <!-- Left Laurel -->
+    <g fill="url(#gold)" stroke="#b8860b" stroke-width="1" filter="url(#ink-glow)">
+      <path d="M-80,-95 C-102,-108 -112,-92 -100,-80 Z"/>
+      <path d="M-86,-64 C-110,-74 -116,-56 -103,-44 Z"/>
+      <path d="M-84,-34 C-108,-42 -112,-22 -98,-12 Z"/>
+      <path d="M-78,-6 C-98,-12 -104,8 -88,16 Z"/>
+      <path d="M-68,20 C-86,22 -92,40 -76,44 Z"/>
+    </g>
+    <!-- Right Laurel -->
+    <g fill="url(#gold)" stroke="#b8860b" stroke-width="1" filter="url(#ink-glow)">
+      <path d="M80,-95 C102,-108 112,-92 100,-80 Z"/>
+      <path d="M86,-64 C110,-74 116,-56 103,-44 Z"/>
+      <path d="M84,-34 C108,-42 112,-22 98,-12 Z"/>
+      <path d="M78,-6 C98,-12 104,8 88,16 Z"/>
+      <path d="M68,20 C86,22 92,40 76,44 Z"/>
+    </g>
+
+    <!-- Nose Guard -->
+    <path d="M-12,-108 L12,-108 L10,20 L0,42 L-10,20 Z" fill="#0d1528" stroke="url(#gold)" stroke-width="3.5"/>
+    <line x1="0" y1="-108" x2="0" y2="42" stroke="url(#gold)" stroke-width="1.5"/>
+
+    <!-- Cheeks -->
+    <path d="M-60,-65 L-75,38 L-42,72 L-34,14 Z" fill="#0a0f1e" stroke="url(#gold)" stroke-width="3.5"/>
+    <path d="M60,-65 L75,38 L42,72 L34,14 Z" fill="#0a0f1e" stroke="url(#gold)" stroke-width="3.5"/>
+
+    <!-- Wiring -->
+    <path d="M-56,-32 L-42,10" stroke="#00f2fe" stroke-width="3" stroke-linecap="round" filter="url(#ink-glow)"/>
+    <path d="M56,-32 L42,10" stroke="#00f2fe" stroke-width="3" stroke-linecap="round" filter="url(#ink-glow)"/>
+
+    <!-- Divine Eyes -->
+    <circle cx="-38" cy="-76" r="22" fill="url(#eye-halo)" filter="url(#eye-glow)"/>
+    <circle cx="38" cy="-76" r="22" fill="url(#eye-halo)" filter="url(#eye-glow)"/>
+    <path d="M-52,-76 L-38,-90 L-24,-76 L-38,-62 Z" fill="url(#divine-eye)" filter="url(#eye-glow)"/>
+    <path d="M24,-76 L38,-90 L52,-76 L38,-62 Z" fill="url(#divine-eye)" filter="url(#eye-glow)"/>
+    <circle cx="-38" cy="-76" r="6" fill="#fff" opacity="0.95"/>
+    <circle cx="38" cy="-76" r="6" fill="#fff" opacity="0.95"/>
+
+    <!-- Rays -->
+    <g stroke="#ffd700" stroke-width="1.5" opacity="0.4">
+      <line x1="-55" y1="-76" x2="-68" y2="-80"/>
+      <line x1="-55" y1="-76" x2="-66" y2="-68"/>
+      <line x1="-21" y1="-76" x2="-10" y2="-80"/>
+      <line x1="-21" y1="-76" x2="-10" y2="-68"/>
+      <line x1="55" y1="-76" x2="68" y2="-80"/>
+      <line x1="55" y1="-76" x2="66" y2="-68"/>
+      <line x1="21" y1="-76" x2="10" y2="-80"/>
+      <line x1="21" y1="-76" x2="10" y2="-68"/>
+    </g>
+
+    <!-- Chin -->
+    <path d="M-38,72 Q-18,100 0,106 Q18,100 38,72" fill="none" stroke="url(#gold)" stroke-width="3" opacity="0.7"/>
+  </g>
+
+  <!-- ===== TEXT ===== -->
+  <!-- Wreath curve -->
+  <path d="M190,500 C230,515 265,512 300,505 C335,512 370,515 410,500" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.35"/>
+
+  <!-- PRAETOR -->
+  <text x="300" y="555"
+    font-family="Cinzel Decorative, Cinzel, Georgia, 'Times New Roman', serif"
+    font-weight="900" font-size="70"
+    fill="url(#gold)" letter-spacing="12"
+    text-anchor="middle" filter="url(#text-glow)">
+    PRAETOR
+  </text>
+
+  <!-- Line -->
+  <line x1="130" y1="572" x2="470" y2="572" stroke="url(#gold)" stroke-width="1" opacity="0.25"/>
+
+  <!-- Tagline -->
+  <text x="300" y="605"
+    font-family="'Plus Jakarta Sans', system-ui, sans-serif"
+    font-weight="700" font-size="13"
+    fill="#8892b0" letter-spacing="4"
+    text-anchor="middle">
+    AUTONOMOUS PRODUCTION READINESS
+  </text>
+  <text x="300" y="628"
+    font-family="'Plus Jakarta Sans', system-ui, sans-serif"
+    font-weight="700" font-size="13"
+    fill="#8892b0" letter-spacing="4"
+    text-anchor="middle">
+    &amp; AUDIT SYSTEM
+  </text>
+
+  <!-- Micro -->
+  <text x="300" y="660"
+    font-family="'Fira Code', Monaco, Consolas, monospace"
+    font-weight="700" font-size="10"
+    fill="#d4af37" letter-spacing="2"
+    text-anchor="middle" opacity="0.7">
+    v2.8  ·  18 EXPERT AGENTS  ·  ZERO HALLUCINATION  ·  100% TRACEABILITY
+  </text>
+</svg>
