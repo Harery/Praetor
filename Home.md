@@ -1,8 +1,19 @@
 # Welcome to the Praetor Wiki
 
-**Praetor** is an autonomous multi-agent orchestration framework designed to audit codebases and generate production-readiness packages. 
+**Praetor** is an autonomous multi-agent orchestration framework designed to audit codebases and generate production-readiness packages.
 
 By utilizing **18 autonomous expert agents** under the strict review of a **4-Judge Quality Council**, Praetor scans repository sources to compile security, SRE runbooks, test specifications, business validation matrices, and compliance control maps (SOC2, GDPR, HIPAA)—all with **100% verified source-code citations (`file:line`)**.
+
+---
+
+## 📦 Installation
+
+| Method | Command / Link |
+|:---|:---|
+| **npm** | `npx praetor-audit-kit` |
+| **GitHub Release** | [Download v2.8.2](https://github.com/Harery/Praetor/releases/tag/v2.8.2) |
+| **Claude Code** | `claude skill install Skill/praetor.skill` |
+| **Direct** | Copy `prompt/00-orchestrator/MASTER_PROMPT.md` into your LLM context |
 
 ---
 
