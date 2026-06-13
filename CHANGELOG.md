@@ -9,6 +9,31 @@
 > `references/reference/CHANGELOG_ARCHIVE.md` — split out in v2.8.0 so the
 > working changelog stays small in any model's context window.
 
+## v2.8.5 — 10 Production Hardening Fixes + Interactive Scope Selector (2026-06-13)
+
+**P0 — Breakage fixes:**
+- **scopes.json manifest**: Extracted all 52 sub-scopes to `prompt/scripts/scopes.json` — single source of truth for scope-select.js, SKILL.md, and bin/praetor.js
+- **Agent-safe SKILL.md**: Plain-text scope list with numbered menu — no TUI dependency, agents present the list and ask the user to reply with a number/alias
+- **`--scope` CLI flag**: `npx praetor-audit-kit --scope biz` or `--scope 2-4` for non-interactive scope selection in CI/CD pipelines
+
+**P1 — Experience gaps:**
+- **Sub-scope drill-down**: Press `d` in TUI to drill into a scope's sub-scopes, or use `--drill eng 3` for JSON output
+- **`--uninstall` flag**: Removes Praetor from all installed agentic tools (Claude Code, OpenCode, Cursor)
+- **Terminal height detection**: Detail pane auto-paginates on small terminals (< 24 lines)
+- **Explicit agent mapping**: SKILL.md contains a full scope→agent→category table — agents cannot guess which agents to dispatch
+
+**P2 — Scale:**
+- **Version check**: `--check` now queries npm registry and warns if local is behind; `--update` flag for self-update
+- **`--no-tui` flag**: Force numbered-list-only mode for Windows, CI, or non-interactive terminals
+- **Scope aliases**: `--scope security`, `--scope biz`, `--scope eng` — everywhere (bin, scope-select.js, SKILL.md)
+
+**Interactive TUI scope selector:**
+- 8 main scopes, 52 sub-scopes
+- Arrow key navigation with live detail pane (angled-line theme, colored sub-scopes)
+- Number keys (1-8) for instant selection
+- Space for multi-select, `d` for drill-down into sub-scopes
+- Non-TTY fallback: returns JSON
+
 ## v2.8.4 — Packaging & Install Fix: --install Flag (2026-06-13)
 
 - **Breaking banner change**: replaced `claude skill install` (non-existent CLI command) with `npx praetor-audit-kit --install` which copies the full skill tree to `~/.claude/skills/praetor/`

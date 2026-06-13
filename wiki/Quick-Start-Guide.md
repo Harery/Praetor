@@ -25,19 +25,30 @@ This downloads the prompt kit and displays the quick start guide. Then:
 
 ## Option B: GitHub Release
 
-1. Go to [Releases](https://github.com/Harery/Praetor/releases/tag/v2.8.4)
-2. Download `praetor-prompt-kit-v2.8.4.zip`
+1. Go to [Releases](https://github.com/Harery/Praetor/releases/tag/v2.8.5)
+2. Download `praetor-prompt-kit-v2.8.5.zip`
 3. Extract and open `prompt/00-orchestrator/MASTER_PROMPT.md`
 4. Copy from the `═══` line, paste into your LLM with your source URL
 5. Reply `continue` when prompted
 
-## Option C: Claude Code Skill
+## Option C: Agentic Tool Install (Claude Code, OpenCode, Cursor)
 
 ```bash
-npx praetor-audit-kit --install
+npx praetor-audit-kit --install            # auto-detect & install to all
+npx praetor-audit-kit --install "OpenCode" # specific tool
 ```
 
 Then simply say: `audit my codebase for production readiness`
+
+**Other CLI commands:**
+
+```bash
+npx praetor-audit-kit --scope biz          # show Business scope details
+npx praetor-audit-kit --scope 2-4          # show range of scopes
+npx praetor-audit-kit --check              # pre-flight checks
+npx praetor-audit-kit --update             # update to latest from npm
+npx praetor-audit-kit --uninstall          # remove from all tools
+```
 
 ## Option D: Direct
 

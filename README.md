@@ -11,7 +11,7 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-DFBA73?style=flat)](https://github.com/Harery/Praetor/blob/main/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-00f260?style=flat)](https://github.com/Harery/Praetor/pulls)
-[![Version 2.8.4 Stable](https://img.shields.io/badge/v2.8.4-Stable-00f2fe?style=flat)](https://github.com/Harery/Praetor/releases)
+[![Version 2.8.5 Stable](https://img.shields.io/badge/v2.8.5-Stable-00f2fe?style=flat)](https://github.com/Harery/Praetor/releases)
 [![npm](https://img.shields.io/npm/v/praetor-audit-kit?style=flat)](https://www.npmjs.com/package/praetor-audit-kit)
 [![GitHub Stars](https://img.shields.io/github/stars/Harery/Praetor?style=social)](https://github.com/Harery/Praetor/stargazers)
 [![GitHub Discussions](https://img.shields.io/badge/Discussions-Join-9cf?style=flat)](https://github.com/Harery/Praetor/discussions)
@@ -50,7 +50,9 @@ No assumptions. No hallucinations. Just mathematically precise, file-line cited 
 | 🔑 | **Secret Hygiene** | Built-in secret-key scanning with a runnable secret-lint CI stage |
 | ⏸️ | **Resumable Sessions** | `halt` emits a compact snapshot — resume tomorrow without re-running discovery |
 | 🚦 | **Release Gate Hooks** | Ready-to-run shell gates tying every CRITICAL/HIGH fix to CI pipelines, alerts, and runbooks |
-| 🚀 | **Multiple Install Options** | Run via `npx praetor-audit-kit --install` (Claude Code), GitHub Release, or direct paste — no runtime dependencies |
+| 🚀 | **Multiple Install Options** | Run via `npx praetor-audit-kit --install` (Claude Code, OpenCode, Cursor), GitHub Release, or direct paste — no runtime dependencies |
+|| 🎯 | **Interactive Scope Selector** | 8 audit scopes with 52 sub-scopes — arrow-key TUI or `--scope biz` for CLI/CI |
+|| 🔄 | **Self-Update** | `npx praetor-audit-kit --update` checks npm and installs the latest version |
 
 ---
 
@@ -259,6 +261,9 @@ praetor/
 │   ├── 07-agents/                            ← 18 expert persona definitions + Quality Council
 │   ├── 08-protocols/                         ← 13 inter-agent protocols (citations, handoffs, gates)
 │   ├── 99-reference/                         ← Cheatsheets, glossary, ID schemes, migration guide
+│   ├── scripts/                              ← Scope selector + scope manifest
+│   │   ├── scope-select.js                   ← Interactive TUI scope picker
+│   │   └── scopes.json                       ← Scope definitions (single source of truth)
 │   ├── GETTING_STARTED.md                    ← First-time step-by-step walkthrough
 │   ├── VERSION.md                            ← Version history & design properties
 │   └── SKILL.md                              ← Claude Code skill manifest (entry metadata)
