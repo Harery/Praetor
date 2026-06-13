@@ -1,6 +1,6 @@
 # Praetor Version
 
-**Current: 2.8.2**
+**Current: 2.8.4**
 
 ## What Praetor Contains
 

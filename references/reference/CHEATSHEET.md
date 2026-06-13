@@ -3,7 +3,7 @@
      Project repository: https://github.com/Harery/Praetor
      Licensed under the MIT License; see LICENSE at the repository root. -->
 
-# Operator's Cheat Sheet (v2.8.2)
+# Operator's Cheat Sheet (v2.8.4)
 
 ## Quick-Start
 1. Open a session with your AI agent (the Praetor skill triggers on phrases like "audit my code",

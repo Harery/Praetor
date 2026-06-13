@@ -11,8 +11,8 @@ By utilizing **18 autonomous expert agents** under the strict review of a **4-Ju
 | Method | Command / Link |
 |:---|:---|
 | **npm** | `npx praetor-audit-kit` |
-| **GitHub Release** | [Download v2.8.2](https://github.com/Harery/Praetor/releases/tag/v2.8.2) |
-| **Claude Code** | `claude skill install Skill/praetor.skill` |
+| **GitHub Release** | [Download v2.8.4](https://github.com/Harery/Praetor/releases/tag/v2.8.4) |
+| **Claude Code** | `npx praetor-audit-kit --install` |
 | **Direct** | Copy `prompt/00-orchestrator/MASTER_PROMPT.md` into your LLM context |
 
 ---

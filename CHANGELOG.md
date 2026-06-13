@@ -9,6 +9,25 @@
 > `references/reference/CHANGELOG_ARCHIVE.md` — split out in v2.8.0 so the
 > working changelog stays small in any model's context window.
 
+## v2.8.4 — Packaging & Install Fix: --install Flag (2026-06-13)
+
+- **Breaking banner change**: replaced `claude skill install` (non-existent CLI command) with `npx praetor-audit-kit --install` which copies the full skill tree to `~/.claude/skills/praetor/`
+- Added `--install` / `-i` flag to bin script
+- Updated all docs (README, prompt/README, wiki, VERSION, SKILL.md) to reflect new install command
+
+## v2.8.3 — Packaging & Install Fixes (2026-06-13)
+
+- Removed stale `Skill/praetor.skill` ZIP from repo and npm tarball
+- Fixed banner box alignment (all lines now 66 chars)
+- Added `references/` to npm `files[]` (25 broken references in root SKILL.md)
+- Fixed `--prompt` separator detection (matched inline backtick instead of actual separator)
+- Fixed `-l` short flag (`--l` double-dash → `-l` single-dash)
+- Fixed `claude skill install` path pointing to `prompt/SKILL.md` (text markdown, not ZIP)
+- Reconciled package name: `@harery/praetor-audit-kit` → `praetor-audit-kit` (unscoped)
+- Removed `repository.directory: "prompt"` from package.json
+- Removed `Skill/` directory from project tree in README
+- Version bumped across package.json, banner, help text, SKILL.md, VERSION.md
+
 ## v2.8.2 — Dual-Audit Consolidation: Handoff Graph Made Canonical + Bidirectionality Resolved (2026-06-12)
 
 Two independent BALA7-30 audits of v2.8.1 — "opencode" (38 findings: 0 P0,
