@@ -18,78 +18,81 @@ You are not generating artifacts yourself. You **route, sequence, and quality-ga
 
 ## MANDATORY FIRST STEP — Scope Selection
 
-**Every time Praetor is triggered**, before any other work, present this interactive scope selector:
+**Every time Praetor is triggered**, before any other work, you MUST present the scope list to the user as plain text and ask them to choose. Do NOT attempt to run any script or TUI — you are an AI agent without a real terminal.
+
+Present EXACTLY this block to the user:
 
 ```
-  ╔════════════════════════════════════════════════════════════════╗
-  ║  PRAETOR — Select Audit Scope                                ║
-  ╚════════════════════════════════════════════════════════════════╝
+PRAETOR — Select Audit Scope
 
-  ↑↓ arrows · Enter select · Space multi-select · Esc cancel
+  1. Full Production Readiness Audit
+     All 5 categories · all 18 agents · all 7 phases
 
-  ○ 1. Full Production Readiness Audit
+  2. Engineering & QA [ENG]   (aliases: eng, qa)
+     Unit tests, integration, API, middleware, security, perf, a11y, edge cases
 
-  ○ 2. Engineering & QA [ENG]
+  3. Security & Compliance [SEC]   (aliases: sec, security)
+     OWASP Top 10, auth, secrets, threat model, compliance mapping
 
-   ▸ 3. Security & Compliance [SEC]
-       OWASP Top 10, auth, secrets, threat model, compliance mapping
+  4. Business & Product [BIZ]   (aliases: biz, business, product)
+     Business rules, workflow validation, UAT scenarios, domain mapping
 
-  ┌─┬────────────────────────────────────────────────────────────┐
-  │ Security & Compliance [SEC] — sub-scopes
-  ├─┼────────────────────────────────────────────────────────────┤
-  │ Authentication
-  │ Session mgmt · token lifecycle · MFA · OAuth/OIDC
-  ├─┼────────────────────────────────────────────────────────────┤
-  │ Authorization
-  │ RBAC · ABAC · IDOR · privilege escalation · cross-tenant
-  ├─┼────────────────────────────────────────────────────────────┤
-  │ Injection & XSS
-  │ SQL injection · NoSQL injection · XSS · command injection
-  ├─┼────────────────────────────────────────────────────────────┤
-  │ Secrets & Crypto
-  │ Hardcoded secrets · weak crypto · key management · secret scan
-  └─┴────────────────────────────────────────────────────────────┘
+  5. Operations & SRE [OPS]   (aliases: ops, sre)
+     Runbooks, alerting, monitoring, chaos engineering, disaster recovery
 
-  Agents: A06, A16 · Categories: ENG, COMP
+  6. Support & Customer Experience [SUP]   (aliases: sup, support, cx)
+     Triage trees, customer comms, known-issue DB, escalation paths
+
+  7. Risk & Compliance Only [RISK]   (aliases: risk, compliance)
+     Risk register, compliance mapping, audit evidence, secret scan
+
+  8. Quick Smoke Test [QUICK]   (aliases: quick, smoke, fast)
+     Discovery + critical path: security, perf, basic engineering
+
+Enter a number (1-8), alias (e.g. "sec"), or range (e.g. "2-4"):
 ```
 
-**How it works:**
-- Arrow keys (↑↓) move the cursor — the sub-scope detail pane updates live
-- Number keys (1–8) jump directly to a scope and select it
-- Space toggles multi-select (pick multiple scopes)
-- Enter confirms selection
-- Esc cancels
-- Default (Enter on 1) = Full Audit
+Wait for the user's reply. Accept:
+- A number: `4` or `1`
+- An alias: `biz`, `security`, `ops`, `eng`, `sup`, `risk`, `quick`
+- A range: `2-4` (selects Engineering, Security, Business)
+- A comma list: `3,5` (Security + Operations)
+- Default (empty reply): Full Audit (scope 1)
 
-**The 8 scopes and their sub-scopes:**
+Then ask if they want to narrow to specific sub-scopes:
 
-| # | Scope | Sub-scopes |
-|---|---|---|
-| 1 | Full Audit | All sub-scopes across all categories |
-| 2 | Engineering [ENG] | Functional, Business Rules, Workflows, API, Middleware, Data Layer, Security Tests, Performance, Accessibility, Edge Cases, Integration, E2E |
-| 3 | Security [SEC] | Authentication, Authorization, Injection/XSS, CSRF/SSRF, Secrets/Crypto, Supply Chain, Compliance Mapping, Audit Evidence |
-| 4 | Business [BIZ] | Domain Mapping, Business Rules, Workflow Validation, UAT Scenarios, Product Risk |
-| 5 | Operations [OPS] | Runbooks, Alerting, Observability, Chaos Engineering, Disaster Recovery, Infrastructure |
-| 6 | Support [SUP] | Triage Trees, Customer Comms, Known-Issue DB, Escalation Paths, Self-Service |
-| 7 | Risk [RISK] | Risk Register, Compliance Mapping, Audit Evidence, Secret Scan, PII Handling |
-| 8 | Quick [QUICK] | Discovery, Security Critical, Performance Quick, Engineering Basics |
+```
+Selected: Business & Product [BIZ]
+Sub-scopes:
+  1. Domain Mapping — Bounded contexts · aggregates · domain events
+  2. Business Rules — Invariants · calculations · decision tables
+  3. Workflow Validation — Happy path · exception flows · state transitions
+  4. UAT Scenarios — Acceptance criteria · user story coverage
+  5. Product Risk — Feature flags · launch gates · rollback criteria
 
-**Mapping scopes to agents and categories:**
-
-| Scope | Agents | Categories |
-|---|---|---|
-| Full Audit (1) | A00–A17 + QC | ENG, BIZ, OPS, SUP, COMP |
-| Engineering (2) | A01–A05, A06, A07, A08, A09 | ENG |
-| Security (3) | A06, A16 | ENG, COMP |
-| Business (4) | A02, A10, A11 | BIZ |
-| Operations (5) | A03, A09, A12, A13 | OPS |
-| Support (6) | A14, A15 | SUP |
-| Risk (7) | A06, A16, A17 | COMP |
-| Quick (8) | A01, A04, A06, A07 | ENG |
-
-Only dispatch agents listed in the selected scope. Skip all others. If multiple scopes are selected, union the agents and categories.
+Select sub-scopes (e.g. "1,3") or Enter for all:
+```
 
 **Do not proceed past this step until the user has made a selection.**
+
+### Scope → Agent → Category Mapping (CRITICAL — follow this exactly)
+
+Once the user selects a scope, you MUST only dispatch the agents listed for that scope. This is non-negotiable.
+
+| Scope | ID | Agents to dispatch | Categories | Agent charter files to load |
+|---|---|---|---|---|
+| Full Audit | `full` | A00–A17 + QC | ENG, BIZ, OPS, SUP, COMP | ALL agents in `07-agents/` |
+| Engineering | `engineering` | A01, A02, A03, A04, A05, A06, A07, A08, A09 | ENG | AGENT_A01 through AGENT_A09 |
+| Security | `security` | A06, A16 | ENG, COMP | AGENT_A06, AGENT_A16 |
+| Business | `business` | A02, A10, A11 | BIZ | AGENT_A02, AGENT_A10, AGENT_A11 |
+| Operations | `operations` | A03, A09, A12, A13 | OPS | AGENT_A03, AGENT_A09, AGENT_A12, AGENT_A13 |
+| Support | `support` | A14, A15 | SUP | AGENT_A14, AGENT_A15 |
+| Risk | `risk` | A06, A16, A17 | COMP | AGENT_A06, AGENT_A16, AGENT_A17 |
+| Quick | `quick` | A01, A04, A06, A07 | ENG | AGENT_A01, AGENT_A04, AGENT_A06, AGENT_A07 |
+
+**When multiple scopes are selected**: union the agents and categories. Do not dispatch any agent not in the union.
+
+**When sub-scopes are selected**: only run the selected sub-scope areas within each agent's charter. The agent still loads fully, but only produces output for the selected sub-scope topics.
 
 ## How to Use This Skill
 
@@ -118,7 +121,7 @@ On `halt`, emit a Resumable Snapshot per `08-protocols/RESUMABLE_STATE.md` so a 
 - **Agent charters (18 + Quality Council):** `07-agents/`
 - **Inter-agent protocols (13):** `08-protocols/`
 - **Quick reference, glossary, ID schemes, counts:** `99-reference/`
-- **Scope selector script:** `scripts/scope-select.js`
+- **Scope selector + manifest:** `scripts/scope-select.js`, `scripts/scopes.json`
 - **First-time users:** `GETTING_STARTED.md`
 - **Self-consistency check:** `tools/check_consistency.sh`
 
@@ -126,4 +129,4 @@ On `halt`, emit a Resumable Snapshot per `08-protocols/RESUMABLE_STATE.md` so a 
 
 It produces specifications; it does not execute tests, deploy fixes, send communications, or file tickets. Citations are re-derived, not externally certified — spot-check before using as audit evidence.
 
-**BEGIN by presenting the scope selector with the detail pane visible, then proceed through the phases.**
+**BEGIN by presenting the plain-text scope list, wait for user selection, then proceed through the phases.**

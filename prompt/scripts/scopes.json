@@ -1,0 +1,144 @@
+{
+  "version": "2.8.5",
+  "scopes": [
+    {
+      "id": "full",
+      "label": "Full Production Readiness Audit",
+      "aliases": ["full", "all", "1"],
+      "desc": "All 5 categories · all 18 agents · all 7 phases",
+      "agents": ["A00", "A01", "A02", "A03", "A04", "A05", "A06", "A07", "A08", "A09", "A10", "A11", "A12", "A13", "A14", "A15", "A16", "A17", "QC"],
+      "categories": ["ENG", "BIZ", "OPS", "SUP", "COMP"],
+      "sub": [
+        { "id": "engineering", "name": "Engineering & QA", "items": "20 test types · unit, integration, API, middleware, edge cases, perf, a11y" },
+        { "id": "security", "name": "Security", "items": "OWASP Top 10 · auth · secrets · injection · CSRF/SSRF · crypto" },
+        { "id": "business", "name": "Business & Product", "items": "Business rules · workflows · UAT · domain mapping" },
+        { "id": "operations", "name": "Operations & SRE", "items": "Runbooks · alerting · monitoring · chaos · DR" },
+        { "id": "support", "name": "Support & CX", "items": "Triage trees · customer comms · escalation paths" },
+        { "id": "compliance", "name": "Compliance", "items": "SOC2 · GDPR · HIPAA · PCI · WCAG · audit evidence" },
+        { "id": "risk", "name": "Risk Register", "items": "Risk scoring · severity mapping · secret scan" }
+      ]
+    },
+    {
+      "id": "engineering",
+      "label": "Engineering & QA",
+      "tag": "ENG",
+      "aliases": ["eng", "engineering", "qa", "2"],
+      "desc": "Unit tests, integration, API, middleware, security, perf, a11y, edge cases",
+      "agents": ["A01", "A02", "A03", "A04", "A05", "A06", "A07", "A08", "A09"],
+      "categories": ["ENG"],
+      "sub": [
+        { "id": "functional", "name": "Functional & Logic", "items": "Branches · state mutations · lifecycle · async (A.1)" },
+        { "id": "business-rules", "name": "Business Rules", "items": "Positive / negative / boundary per BR & INV (A.2)" },
+        { "id": "workflows", "name": "Workflow & State Machine", "items": "Transitions · guards · idempotency (A.3)" },
+        { "id": "api", "name": "API & Contract", "items": "Schema · status codes · versioning · backward compat (A.6)" },
+        { "id": "middleware", "name": "Middleware", "items": "Order · short-circuit · rate limit · CORS · auth (A.7)" },
+        { "id": "data-layer", "name": "Data Layer", "items": "Constraints · multi-tenancy · transactions · migrations (A.9)" },
+        { "id": "security-tests", "name": "Security Tests", "items": "AuthN/Z · injection · XSS · CSRF · OWASP Top 10 (A.14)" },
+        { "id": "performance", "name": "Performance", "items": "Latency budgets · N+1 · bundle size · cold start (A.13)" },
+        { "id": "accessibility", "name": "Accessibility", "items": "WCAG 2.1 AA · keyboard · screen reader · contrast (A.11)" },
+        { "id": "edge-cases", "name": "Edge Cases & Chaos", "items": "Boundaries · races · scope leaks · fuzz (A.17, A.18)" },
+        { "id": "integration", "name": "Integration Tests", "items": "Timeout · retry · circuit breaker · DLQ (A.8)" },
+        { "id": "e2e", "name": "E2E Workflows", "items": "Full stack: UI → controller → service → DB → UI (A.5)" }
+      ]
+    },
+    {
+      "id": "security",
+      "label": "Security & Compliance",
+      "tag": "SEC",
+      "aliases": ["sec", "security", "3"],
+      "desc": "OWASP Top 10, auth, secrets, threat model, compliance mapping",
+      "agents": ["A06", "A16"],
+      "categories": ["ENG", "COMP"],
+      "sub": [
+        { "id": "authentication", "name": "Authentication", "items": "Session mgmt · token lifecycle · MFA · OAuth/OIDC" },
+        { "id": "authorization", "name": "Authorization", "items": "RBAC · ABAC · IDOR · privilege escalation · cross-tenant" },
+        { "id": "injection", "name": "Injection & XSS", "items": "SQL injection · NoSQL injection · XSS · command injection" },
+        { "id": "csrf-ssrf", "name": "CSRF & SSRF", "items": "Token validation · origin checks · internal service access" },
+        { "id": "secrets", "name": "Secrets & Crypto", "items": "Hardcoded secrets · weak crypto · key management · secret scan" },
+        { "id": "supply-chain", "name": "Supply Chain", "items": "Dependency audit · lockfile integrity · typosquat detection" },
+        { "id": "compliance-map", "name": "Compliance Mapping", "items": "SOC2 · GDPR · HIPAA · PCI-DSS controls" },
+        { "id": "audit-evidence", "name": "Audit Evidence", "items": "Logging · audit trails · retention · tamper detection" }
+      ]
+    },
+    {
+      "id": "business",
+      "label": "Business & Product",
+      "tag": "BIZ",
+      "aliases": ["biz", "business", "product", "4"],
+      "desc": "Business rules, workflow validation, UAT scenarios, domain mapping",
+      "agents": ["A02", "A10", "A11"],
+      "categories": ["BIZ"],
+      "sub": [
+        { "id": "domain-mapping", "name": "Domain Mapping", "items": "Bounded contexts · aggregates · domain events · ubiquitous language" },
+        { "id": "business-rules", "name": "Business Rules", "items": "Invariants · calculations · decision tables · rule coverage" },
+        { "id": "workflow-validation", "name": "Workflow Validation", "items": "Happy path · exception flows · state transitions · rollback" },
+        { "id": "uat", "name": "UAT Scenarios", "items": "Acceptance criteria · user story coverage · edge personas" },
+        { "id": "product-risk", "name": "Product Risk", "items": "Feature flags · launch gates · rollback criteria · rollout plan" }
+      ]
+    },
+    {
+      "id": "operations",
+      "label": "Operations & SRE",
+      "tag": "OPS",
+      "aliases": ["ops", "operations", "sre", "5"],
+      "desc": "Runbooks, alerting, monitoring, chaos engineering, disaster recovery",
+      "agents": ["A03", "A09", "A12", "A13"],
+      "categories": ["OPS"],
+      "sub": [
+        { "id": "runbooks", "name": "Runbooks", "items": "Incident response · SOPs · escalation · post-mortem templates" },
+        { "id": "alerting", "name": "Alerting", "items": "SLO-based alerts · burn rate · multi-channel · routing rules" },
+        { "id": "observability", "name": "Observability", "items": "Metrics · traces · logs · dashboards · anomaly detection" },
+        { "id": "chaos", "name": "Chaos Engineering", "items": "Network partition · process kill · latency injection · CPU stress" },
+        { "id": "disaster-recovery", "name": "Disaster Recovery", "items": "RTO/RPO targets · failover · backup verification · DR drill" },
+        { "id": "infrastructure", "name": "Infrastructure", "items": "IaC coverage · config drift · capacity planning · cost hygiene" }
+      ]
+    },
+    {
+      "id": "support",
+      "label": "Support & Customer Experience",
+      "tag": "SUP",
+      "aliases": ["sup", "support", "cx", "6"],
+      "desc": "Triage trees, customer comms, known-issue DB, escalation paths",
+      "agents": ["A14", "A15"],
+      "categories": ["SUP"],
+      "sub": [
+        { "id": "triage", "name": "Triage Trees", "items": "Decision trees · symptom→cause mapping · auto-classification" },
+        { "id": "comms", "name": "Customer Communications", "items": "Status page · incident updates · post-mortem · notification templates" },
+        { "id": "known-issues", "name": "Known-Issue Database", "items": "Issue tracking · workaround docs · impact scoring · linked bugs" },
+        { "id": "escalation", "name": "Escalation Paths", "items": "L1→L2→L3 routing · on-call rotation · SLA tracking" },
+        { "id": "self-service", "name": "Self-Service", "items": "FAQ · knowledge base · chatbot fallback · community threads" }
+      ]
+    },
+    {
+      "id": "risk",
+      "label": "Risk & Compliance Only",
+      "tag": "RISK",
+      "aliases": ["risk", "compliance", "7"],
+      "desc": "Risk register, compliance mapping, audit evidence, secret scan",
+      "agents": ["A06", "A16", "A17"],
+      "categories": ["COMP"],
+      "sub": [
+        { "id": "risk-register", "name": "Risk Register", "items": "Likelihood · impact · severity scoring · mitigation tracking" },
+        { "id": "compliance-map", "name": "Compliance Mapping", "items": "SOC2 · GDPR Art. 5/25/32/35 · HIPAA · PCI-DSS · WCAG" },
+        { "id": "audit-evidence", "name": "Audit Evidence", "items": "Control verification · traceability matrix · retention policy" },
+        { "id": "secret-scan", "name": "Secret Scan & Lint", "items": "Hardcoded key detection · masked findings table · CI stage" },
+        { "id": "pii", "name": "PII Handling", "items": "Classification · data flow · retention · right to erasure" }
+      ]
+    },
+    {
+      "id": "quick",
+      "label": "Quick Smoke Test",
+      "tag": "QUICK",
+      "aliases": ["quick", "smoke", "fast", "8"],
+      "desc": "Discovery + critical path: security, perf, basic engineering",
+      "agents": ["A01", "A04", "A06", "A07"],
+      "categories": ["ENG"],
+      "sub": [
+        { "id": "discovery", "name": "Discovery", "items": "Tech stack · structure · entry points · dependencies" },
+        { "id": "security-critical", "name": "Security Critical", "items": "Auth · secrets · injection · top 5 OWASP quick check" },
+        { "id": "perf-quick", "name": "Performance Quick", "items": "Latency budget · N+1 scan · cold start · bundle size" },
+        { "id": "eng-basics", "name": "Engineering Basics", "items": "Unit test gaps · error handling · edge cases" }
+      ]
+    }
+  ]
+}
