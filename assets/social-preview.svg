@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  <defs>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe566"/>
+      <stop offset="50%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#b8860b"/>
+    </linearGradient>
+    <radialGradient id="divine-eye" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="30%" stop-color="#fffacd"/>
+      <stop offset="70%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#ff8c00" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="eye-halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd700" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#ff8c00" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ff4500" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bg" cx="50%" cy="48%" r="70%">
+      <stop offset="0%" stop-color="#0e131f"/>
+      <stop offset="100%" stop-color="#020305"/>
+    </radialGradient>
+    <filter id="ink-glow" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="eye-glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="text-glow" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+    <filter id="glow-heavy" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="35" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="640" fill="url(#bg)"/>
+
+  <!-- Subtle aurora blobs -->
+  <ellipse cx="400" cy="320" rx="320" ry="260" fill="#002855" filter="url(#glow-heavy)" opacity="0.2"/>
+  <ellipse cx="900" cy="300" rx="280" ry="220" fill="#0c1730" filter="url(#glow-heavy)" opacity="0.25"/>
+
+  <!-- ===== HELMET (left-center) ===== -->
+  <g transform="translate(310, 310) scale(1.2)" filter="url(#shadow)">
+    <!-- Dome -->
+    <path d="M-75,-130 C-78,-170 -55,-195 0,-200 C55,-195 78,-170 75,-130 C80,-75 70,-15 58,30 C46,60 26,85 0,95 C-26,85 -46,60 -58,30 C-70,-15 -80,-75 -75,-130 Z"
+      fill="#0b1120" stroke="url(#gold)" stroke-width="5"/>
+    <path d="M-55,-125 C-58,-155 -38,-175 0,-178 C38,-175 58,-155 55,-125 C58,-80 52,-35 44,10 L-44,10 C-52,-35 -58,-80 -55,-125 Z"
+      fill="#111d35"/>
+
+    <!-- Brow -->
+    <path d="M-78,-108 Q-42,-130 0,-132 Q42,-130 78,-108" fill="none" stroke="url(#gold)" stroke-width="7" stroke-linecap="round" filter="url(#ink-glow)"/>
+    <path d="M0,-140 L8,-132 L0,-124 L-8,-132 Z" fill="url(#gold)" filter="url(#ink-glow)"/>
+
+    <!-- Left Laurel -->
+    <g fill="url(#gold)" stroke="#b8860b" stroke-width="1" filter="url(#ink-glow)">
+      <path d="M-80,-95 C-102,-108 -112,-92 -100,-80 Z"/>
+      <path d="M-86,-64 C-110,-74 -116,-56 -103,-44 Z"/>
+      <path d="M-84,-34 C-108,-42 -112,-22 -98,-12 Z"/>
+      <path d="M-78,-6 C-98,-12 -104,8 -88,16 Z"/>
+      <path d="M-68,20 C-86,22 -92,40 -76,44 Z"/>
+    </g>
+    <!-- Right Laurel -->
+    <g fill="url(#gold)" stroke="#b8860b" stroke-width="1" filter="url(#ink-glow)">
+      <path d="M80,-95 C102,-108 112,-92 100,-80 Z"/>
+      <path d="M86,-64 C110,-74 116,-56 103,-44 Z"/>
+      <path d="M84,-34 C108,-42 112,-22 98,-12 Z"/>
+      <path d="M78,-6 C98,-12 104,8 88,16 Z"/>
+      <path d="M68,20 C86,22 92,40 76,44 Z"/>
+    </g>
+
+    <!-- Nose Guard -->
+    <path d="M-12,-108 L12,-108 L10,20 L0,42 L-10,20 Z" fill="#0d1528" stroke="url(#gold)" stroke-width="3.5"/>
+    <line x1="0" y1="-108" x2="0" y2="42" stroke="url(#gold)" stroke-width="1.5"/>
+
+    <!-- Cheek Guards -->
+    <path d="M-60,-65 L-75,38 L-42,72 L-34,14 Z" fill="#0a0f1e" stroke="url(#gold)" stroke-width="3.5"/>
+    <path d="M60,-65 L75,38 L42,72 L34,14 Z" fill="#0a0f1e" stroke="url(#gold)" stroke-width="3.5"/>
+
+    <!-- Wiring -->
+    <path d="M-56,-32 L-42,10" stroke="#00f2fe" stroke-width="3" stroke-linecap="round" filter="url(#ink-glow)"/>
+    <path d="M56,-32 L42,10" stroke="#00f2fe" stroke-width="3" stroke-linecap="round" filter="url(#ink-glow)"/>
+
+    <!-- Divine Eyes -->
+    <circle cx="-38" cy="-76" r="18" fill="url(#eye-halo)" filter="url(#eye-glow)"/>
+    <circle cx="38" cy="-76" r="18" fill="url(#eye-halo)" filter="url(#eye-glow)"/>
+    <path d="M-50,-76 L-38,-88 L-26,-76 L-38,-64 Z" fill="url(#divine-eye)" filter="url(#eye-glow)"/>
+    <path d="M26,-76 L38,-88 L50,-76 L38,-64 Z" fill="url(#divine-eye)" filter="url(#eye-glow)"/>
+    <circle cx="-38" cy="-76" r="5" fill="#fff" opacity="0.95"/>
+    <circle cx="38" cy="-76" r="5" fill="#fff" opacity="0.95"/>
+
+    <!-- Rays -->
+    <g stroke="#ffd700" stroke-width="1.5" opacity="0.35">
+      <line x1="-52" y1="-76" x2="-64" y2="-80"/>
+      <line x1="-52" y1="-76" x2="-62" y2="-68"/>
+      <line x1="-24" y1="-76" x2="-12" y2="-80"/>
+      <line x1="-24" y1="-76" x2="-12" y2="-68"/>
+      <line x1="52" y1="-76" x2="64" y2="-80"/>
+      <line x1="52" y1="-76" x2="62" y2="-68"/>
+      <line x1="24" y1="-76" x2="12" y2="-80"/>
+      <line x1="24" y1="-76" x2="12" y2="-68"/>
+    </g>
+
+    <!-- Chin -->
+    <path d="M-38,72 Q-18,100 0,106 Q18,100 38,72" fill="none" stroke="url(#gold)" stroke-width="3" opacity="0.7"/>
+  </g>
+
+  <!-- ===== RIGHT SIDE TEXT ===== -->
+  <g transform="translate(680, 200)">
+    <!-- PRAETOR -->
+    <text x="0" y="0"
+      font-family="Cinzel Decorative, Cinzel, Georgia, 'Times New Roman', serif"
+      font-weight="900" font-size="88"
+      fill="url(#gold)" letter-spacing="14"
+      filter="url(#text-glow)">
+      PRAETOR
+    </text>
+
+    <!-- Underline -->
+    <line x1="5" y1="20" x2="570" y2="20" stroke="url(#gold)" stroke-width="1.5" opacity="0.3"/>
+
+    <!-- Tagline -->
+    <text x="5" y="56"
+      font-family="'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif"
+      font-weight="700" font-size="18"
+      fill="#8892b0" letter-spacing="4">
+      AUTONOMOUS PRODUCTION READINESS
+    </text>
+    <text x="5" y="84"
+      font-family="'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif"
+      font-weight="700" font-size="18"
+      fill="#8892b0" letter-spacing="4">
+      &amp; AUDIT SYSTEM
+    </text>
+
+    <!-- Micro detail -->
+    <text x="5" y="120"
+      font-family="'Fira Code', Monaco, Consolas, 'Courier New', monospace"
+      font-weight="600" font-size="12"
+      fill="#4a5568" letter-spacing="2">
+      18 EXPERT AGENTS  ·  100% TRACEABILITY  ·  ZERO HALLUCINATION  ·  v2.8
+    </text>
+
+    <!-- Badges row -->
+    <g transform="translate(5, 155)">
+      <!-- Badge 1: MIT -->
+      <rect x="0" y="0" width="72" height="22" rx="4" fill="#1e293b" stroke="#DFBA73" stroke-width="0.8"/>
+      <text x="36" y="15" font-family="system-ui, sans-serif" font-weight="700" font-size="10" fill="#DFBA73" text-anchor="middle">MIT</text>
+
+      <!-- Badge 2: v2.8 -->
+      <rect x="80" y="0" width="72" height="22" rx="4" fill="#1e293b" stroke="#00f2fe" stroke-width="0.8"/>
+      <text x="116" y="15" font-family="system-ui, sans-serif" font-weight="700" font-size="10" fill="#00f2fe" text-anchor="middle">v2.8</text>
+
+      <!-- Badge 3: 18 Agents -->
+      <rect x="160" y="0" width="96" height="22" rx="4" fill="#1e293b" stroke="#a855f7" stroke-width="0.8"/>
+      <text x="208" y="15" font-family="system-ui, sans-serif" font-weight="700" font-size="10" fill="#a855f7" text-anchor="middle">18 AGENTS</text>
+
+      <!-- Badge 4: Zero Hallucination -->
+      <rect x="264" y="0" width="150" height="22" rx="4" fill="#1e293b" stroke="#00f260" stroke-width="0.8"/>
+      <text x="339" y="15" font-family="system-ui, sans-serif" font-weight="700" font-size="10" fill="#00f260" text-anchor="middle">ZERO HALLUCINATION</text>
+    </g>
+  </g>
+
+  <!-- Bottom accent bar -->
+  <rect x="0" y="635" width="1280" height="5" fill="url(#gold)" opacity="0.4"/>
+</svg>
