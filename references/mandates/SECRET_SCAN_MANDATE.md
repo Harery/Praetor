@@ -92,7 +92,10 @@ id = "jwt-dev-fallback"
 description = "JWT signing secret with hardcoded fallback (||, or, ??)"
 regex = '''(?i)JWT_SECRET[^\n]{0,40}(\|\||or|\?\?)[^\n]{0,10}['"][^'"]{6,}['"]'''
 [allowlist]
-description = "Test fixtures use deterministic non-production hashes"
+description = "Non-production test-data hashes only — NOT the Praetor self-test fixture"
+# Allowlist the consuming project's own fixture dir here (e.g. tests/fixtures/).
+# Do NOT allowlist Praetor's tests/sim/flawed-app/ — its planted secrets MUST
+# stay detectable; allowlisting it would defeat the regression harness.
 paths = ['''tests/fixtures/.*''']
 ```
 

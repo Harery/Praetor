@@ -94,7 +94,22 @@ The single rework chance is **total, not per-judge**: the resubmission is
 evaluated by the same judge-applicability rules as the original pass, and if
 it fixes the flagged judge's concern but introduces a new failure on a
 different judge's axis, the artifact still emits with QC_FAILED — the rework
-is consumed.
+is consumed. This is an accepted, bounded non-determinism: which secondary
+judge (if any) flags a reworked artifact can vary between runs. It is bounded
+by design — at most one rework, then emit-and-tag — so it never loops; the
+agent's discipline is to fix only the flagged concern and not regress others.
+
+### Standard QC_FAILED reasons (closed set)
+
+Every `QC_FAILED` carries one of these reason tokens after the judge number,
+so the vocabulary is enumerable rather than free-text:
+- `COVERAGE_GAP` (Judge 1) — declared scope not fully covered
+- `CITATION_DRIFT` (Judge 2) — a `file:line` claim didn't re-derive
+- `LOGIC_ERROR` (Judge 2) — the artifact's reasoning is wrong
+- `AUDIENCE_JARGON` (Judge 3) — undefined term for the target audience
+- `SKIP_UNDEFENDED` (Judge 4) — a `NO_WORK_FOUND` skip collapsed against the
+  risk register
+Free-text detail follows the token in the QC Note; the token itself is closed.
 
 ## Quality Bar
 

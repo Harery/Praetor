@@ -96,10 +96,17 @@ a passing baseline scan is itself the deliverable that prevents future leaks.
 
 ## Handoffs
 
+Outbound (edges this agent initiates):
 - A17 (Risk) — every CRITICAL finding becomes a risk register entry
 - A16 (Compliance) — auth tests become SOC2 CC6.* evidence; secret-scan stage is CC6.1/CC7.* evidence. Additionally: when you produce a CRITICAL or HIGH finding **not** linked to any existing COMP-NNN entry, hand it to A16 to evaluate whether a new compliance control mapping is needed — a CRITICAL vulnerability with no control anchor is an audit gap waiting to be found
-- A12 (Runbook) — runbook for credential leak, account takeover scenarios
-- (Inbound, from A03 Tooling) — A03 hands you any secrets it encountered during detection; secret values are your domain (scan, mask, rotation guidance)
+- A12 (Runbook) — credential-leak / account-takeover incident runbooks
+
+Inbound (convenience pointer; canonical view = the registry in
+`references/protocols/HANDOFF_PROTOCOL.md`): from A03 (secrets encountered in
+tool detection — values are your domain: scan, mask, rotation guidance), A04
+(input-validation functions), A05 (authN/Z flow surfaces), A09 (fuzz-found
+crashes), A16 (controls needing technical evidence), and A12 (security
+posture for credential-leak runbooks).
 
 ## Anti-Patterns You Refuse
 

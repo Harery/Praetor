@@ -12,15 +12,16 @@
 ## The 4 Compliance Artifacts
 
 > **Agent ownership** (who *generates* each artifact): A16 owns E.1, E.2, E.3;
-> A17 owns E.4. A06 feeds technical evidence via handoff (A16 → A06) when a
-> control needs it; A16 remains the emitting owner.
+> A17 owns E.4. A06 provides technical evidence when A16 requests it (the
+> A16 → A06 handoff: A16 initiates the request, A06 produces the evidence);
+> A16 remains the emitting owner.
 
 ### Group E.P0 — Must-have (3 artifacts)
 
 | # | Title | Output |
 |---|---|---|
 | E.1 | Control Mapping | Per COMP-NNN: control → implementation (`file:line`) → test evidence → gaps |
-| E.3 | Data-Flow & PII Map | Per PRV-NNN: data collected, storage, retention, erasure, lawful basis |
+| E.3 | Data-Flow & PII Map | Per PRV-NNN: data collected, storage, encryption, retention, erasure, lawful basis, cross-border transfers, log exposure |
 | E.4 | Risk Register Entries | Per security / compliance risk: severity, mitigation, owner |
 
 ### Group E.P1 — Should-have (1 artifact)
@@ -38,8 +39,13 @@
 ## E.3 PII Map Format
 
 ```
-| PRV ID | Data type | PII class | Storage | Encryption | Retention | Erasure path | Lawful basis (GDPR) |
+| PRV ID | Data type | PII class | Storage | Encryption | Retention | Erasure path | Lawful basis (GDPR) | Cross-border | Logged |
 ```
+
+(The columns mirror the PRV register schema 1:1 — see
+`references/registers/REGISTERS.md` §2.11. `Cross-border` names the transfer
+mechanism or `none`; `Logged` is Y/N — `Y` rows require A06's redaction
+check per A06 Rule 4.)
 
 ## Frameworks Commonly Detected
 

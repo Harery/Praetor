@@ -32,11 +32,11 @@ Status: READY
 Agent: A16
 Linked IDs: PRV-001..PRV-004, COMP-003 (GDPR Art. 17 marker)
 
-| PRV ID       | Data Type     | PII Class | Storage Location           | Encryption     | Retention            | Erasure Path                     | Lawful Basis (GDPR)        |
-| PRV-001      | email         | Basic     | users.email (PostgreSQL)   | At rest (TDE)  | Account lifetime+30d | DELETE /api/users/me triggers job | Contract performance       |
-| PRV-002      | name          | Basic     | users.full_name            | At rest (TDE)  | Account lifetime+30d | DELETE /api/users/me              | Contract performance       |
-| PRV-003      | payment_method| Sensitive | Vault by Stripe (not us)   | Tokenized      | Per Stripe retention | Stripe API: detach token          | Legitimate interest        |
-| PRV-004      | chat_history  | Basic     | messages table             | At rest (TDE)  | 90 days rolling      | Automated purge job (cron)        | Contract performance       |
+| PRV ID       | Data Type     | PII Class | Storage Location           | Encryption     | Retention            | Erasure Path                     | Lawful Basis (GDPR)        | Cross-Border         | Logged |
+| PRV-001      | email         | Basic     | users.email (PostgreSQL)   | At rest (TDE)  | Account lifetime+30d | DELETE /api/users/me triggers job | Contract performance       | None (EU region only) | N      |
+| PRV-002      | name          | Basic     | users.full_name            | At rest (TDE)  | Account lifetime+30d | DELETE /api/users/me              | Contract performance       | None (EU region only) | Y — see A06 redaction check |
+| PRV-003      | payment_method| Sensitive | Vault by Stripe (not us)   | Tokenized      | Per Stripe retention | Stripe API: detach token          | Legitimate interest        | SCCs (Stripe US)      | N      |
+| PRV-004      | chat_history  | Basic     | messages table             | At rest (TDE)  | 90 days rolling      | Automated purge job (cron)        | Contract performance       | None (EU region only) | N      |
 ```
 
 ## E.4 Risk Register Entry

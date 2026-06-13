@@ -94,9 +94,15 @@ Each finding becomes a perf risk entry handed to A17.
 
 ## Handoffs
 
-- A12 (Runbook) — capacity scaling runbooks
+Outbound (edges this agent initiates):
+- A12 (Runbook) — capacity scaling runbooks + bottleneck/headroom input (C.5)
 - A13 (Alerting) — perf-based alerts (latency threshold breaches)
 - A17 (Risk) — N+1 patterns and unbounded queries
+
+Inbound (convenience pointer; canonical view = the registry in
+`references/protocols/HANDOFF_PROTOCOL.md`): from A04 (hot-path functions),
+A13 (perf-threshold requests for alert definition), plus A02's broadcast
+registers.
 
 ## Anti-Patterns You Refuse
 

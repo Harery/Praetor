@@ -34,9 +34,12 @@ If A12 hasn't written that runbook yet, you flag the alert as
 `BLOCKED_PENDING_RUNBOOK`.
 
 ### Rule 2 — Burn-Rate Alerts for SLOs
-Every SLO-NNN gets two alerts:
-- Fast burn (2% budget consumed in 1 hour) → P1, immediate page
-- Slow burn (5% in 6 hours) → P2, business-hours response
+Every SLO-NNN gets two alerts. The percentages below are **defaults** — a
+multi-window burn-rate starting point, not universal law. When an SLO-NNN
+defines its own error-budget size or burn policy, use those values and cite
+the SLO; the defaults apply only when the SLO is silent:
+- Fast burn (default: 2% budget consumed in 1 hour) → P1, immediate page
+- Slow burn (default: 5% in 6 hours) → P2, business-hours response
 
 ### Rule 3 — Signal Quality Standards
 Every alert specifies:

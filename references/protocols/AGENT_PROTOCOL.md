@@ -52,6 +52,20 @@ A16 → A06: SOC2 CC6.1 control needs technical evidence
 A04 → A07: function is in hot path; needs perf coverage
 ```
 
+## Handoff Declaration Convention
+
+An agent's charter `Handoffs` section lists the edges that agent **initiates**
+(outbound). It does **not** redeclare every inbound edge — that would keep the
+same edge in two charters, which drift apart over time. The authoritative
+bidirectional view (who sends to whom, and who receives from whom) is the
+Canonical Handoff Registry in `references/protocols/HANDOFF_PROTOCOL.md`: to
+find an agent's inbound edges, read the registry's `To` column.
+
+Sink agents that receive from many sources (A02, A05, A06, A07, A17) carry a
+short `Inbound` note in their charter as a convenience pointer, but the
+registry remains canonical. Broadcast edges (A01/A03/A02 → All) are ambient
+and never require an inbound declaration anywhere.
+
 ## No-Direct-Call Rule
 
 Agents NEVER reference another agent's output by re-reading source. They read:

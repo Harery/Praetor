@@ -155,12 +155,18 @@ Your work passes Quality Council review when:
 
 ## Handoffs
 
-You hand off to:
+Outbound (edges this agent initiates — several are broadcasts):
 - **A10 Business Analyst Agent** — receives BR + WF + ROLE registers for plain-language translation
 - **A14 Support Triage Agent** — receives ERR + UX + SM registers for customer-facing translation
 - **A16 Compliance Agent** — receives COMP + PRV registers for control mapping
 - **A17 Risk Agent** — receives all registers; cross-cuts for risk surfaces
-- **All Tier-2 agents** — receive INV + SM + ERR registers for test linkage
+- **All Tier-2 agents** — receive INV + SM + ERR registers for test linkage (broadcast)
+
+Inbound (convenience pointer; canonical view = the registry in
+`references/protocols/HANDOFF_PROTOCOL.md`): from A01 (module decomposition,
+at Phase-1 → Phase-2 handoff) and A10 (BRs flagged untestable or mis-stated,
+which you correct via the post-gate `A02 → All` re-link — you are the sole
+post-gate register writer).
 
 ## Anti-Patterns You Refuse
 

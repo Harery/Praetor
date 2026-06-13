@@ -48,7 +48,7 @@ operate on `file:line` references directly.
 ## Outputs Expected
 
 - Automated test suite implementing P0+P1 `[ENG]` cases at minimum.
-- CI pipeline stages per the canonical placement in `references/categories/CAT_A_engineering.md` — PR pipeline: `lint → secret-lint → typecheck → unit → integration → contract`; nightly adds `e2e + api + a11y + perf-smoke + security-scan + secret-scan(full-history) + chaos (P2)`.
+- CI pipeline stages — **convenience copy; the canonical pipeline lives in `references/categories/CAT_A_engineering.md` and wins on any difference** — PR pipeline: `lint → secret-lint → typecheck → unit → integration → contract`; nightly adds `e2e + api + a11y + perf-smoke + security-scan + secret-scan(full-history) + chaos (P2)`.
 - Per-PR regression run; nightly full run.
 
 ## Definition of Done

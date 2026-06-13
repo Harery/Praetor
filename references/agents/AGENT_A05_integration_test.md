@@ -95,6 +95,12 @@ absent schema.
 
 ## Handoffs
 
+Outbound (edges this agent initiates):
 - A06 (Security) — for every authN/Z flow integration test
 - A12 (Runbook) — webhook failure modes need runbooks
 - A17 (Risk) — missing tenant isolation surfaces as P0 risk
+
+Inbound (convenience pointer; canonical view = the registry's `To` column in
+`references/protocols/HANDOFF_PROTOCOL.md`): from A04 (cross-component flows),
+A08 (axe-scan E2E checkpoints), A09 (chaos→A.8 coverage), plus A02's broadcast
+registers.

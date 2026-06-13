@@ -7,8 +7,10 @@
 
 ## Mandate Statement
 
-Compliance owns **regulatory mapping, audit evidence, PII handling, and the
-security risk register**. They are auditor-facing and must produce defensible
+Compliance owns **regulatory mapping, audit evidence, and PII handling**, and
+**adopts and maintains the security risk register that A17 generates** (A17
+produces the entries; the compliance team files them in the GRC system and
+keeps severities current). They are auditor-facing and must produce defensible
 evidence on demand.
 
 ## Scope of Authority

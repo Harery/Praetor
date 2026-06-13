@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Praetor — Schema-Conformance & Structure Consistency Checker (v2.8)
+# Praetor — Schema-Conformance & Structure Consistency Checker (v2.8.2)
 # Copyright (c) 2026 Mohamed Elharery (https://github.com/Harery). MIT License.
 #
 # 10 stages: dead links (md + sh), canonical counts, U4 closed-vocabulary
@@ -19,17 +19,18 @@ ok()   { echo "PASS  $*"; }
 
 echo "== Praetor consistency check @ $ROOT =="
 
-# 1) Dead-link check: every references/...md path cited must exist (skip templated <>)
-#    v2.8: shell scripts' citations are scanned too, not just markdown.
+# 1) Dead-link check: every cited kit path must exist (skip templated <>)
+#    v2.8: scans .md AND .sh; covers references/, tests/, and tools/ paths.
 echo "-- 1. link integrity"
 miss=0
 while read -r p; do
   case "$p" in *"<"*) continue;; esac
-  [ -f "$p" ] || { note "missing: $p"; miss=1; FAIL=1; }
-done < <(grep -rhoE "references/[A-Za-z0-9_/<>.-]+\.md" --include="*.md" --include="*.sh" \
+  case "$p" in *".js"|*".sql"|*".k6.js") continue;; esac  # illustrative example artifacts
+  [ -e "$p" ] || { note "missing: $p"; miss=1; FAIL=1; }
+done < <(grep -rhoE "(references|tests|tools)/[A-Za-z0-9_/<>.-]+\.(md|sh)" --include="*.md" --include="*.sh" \
   --exclude-dir=.git --exclude-dir=.archive --exclude-dir=.remember \
   --exclude-dir=.claude --exclude-dir=.sisyphus . | grep -v '\.\.\.' | sort -u)
-[ "$miss" -eq 0 ] && ok "no dead references/ links" || bad "dead links above"
+[ "$miss" -eq 0 ] && ok "no dead references/tests/tools links" || bad "dead links above"
 
 # 2) Canonical counts from BY_THE_NUMBERS must match reality
 echo "-- 2. canonical counts"
@@ -101,7 +102,13 @@ done
 echo "-- 6. secret-scan regression"
 if [ -f tests/sim/check_secrets.sh ]; then
   [ -x tests/sim/check_secrets.sh ] || echo "WARN  tests/sim/check_secrets.sh lost its executable bit (common after zip/copy) — running via bash; restore with: chmod +x tests/sim/check_secrets.sh"
-  if bash tests/sim/check_secrets.sh >/dev/null 2>&1; then ok "secret-scan harness green"; else bad "secret-scan harness RED"; fi
+  secret_out=$(bash tests/sim/check_secrets.sh 2>&1)
+  if printf '%s' "$secret_out" | grep -q "ALL PLANTED SECRETS CAUGHT"; then
+    ok "secret-scan harness green"
+  else
+    bad "secret-scan harness RED — output follows:"
+    printf '%s\n' "$secret_out" | sed 's/^/    /'
+  fi
 else
   bad "tests/sim/check_secrets.sh missing"
 fi
@@ -122,23 +129,29 @@ done < <(grep -rhoE "TC-(M_[A-Z0-9_]+|M[0-9]{2})-[A-Z0-9_]+-[A-Z0-9_]+-[0-9]{3}"
 [ "$slot_bad" -eq 0 ] && ok "all TC ids use declared Layer/Discipline tags" || bad "undeclared TC slot tokens above"
 
 # 8) Template mandatory fields: every template carries the five universal
-#    artifact fields from SKILL.md Output Discipline (rendered title-case)
+#    artifact fields. v2.8 (F-138): match only inside artifact blocks — a
+#    table row (`| Field |`) or a label line (`Field:`) — not loose prose.
 echo "-- 8. template mandatory fields"
 tpl_bad=0
 for tpl in references/templates/TEMPLATE_*.md; do
   for fld in "Audience" "Priority" "Status" "Agent" "Linked IDs"; do
-    grep -q "$fld" "$tpl" || { note "missing field '$fld' in $tpl"; tpl_bad=1; FAIL=1; }
+    if grep -qE "^\| *$fld *\||^ *$fld:|\| *$fld * \|" "$tpl" || grep -qE "^[[:space:]]*$fld:" "$tpl"; then
+      :
+    else
+      note "missing field '$fld' (as table row or label) in $tpl"; tpl_bad=1; FAIL=1
+    fi
   done
 done
-[ "$tpl_bad" -eq 0 ] && ok "all templates carry the 5 mandatory fields" || bad "template field gaps above"
+[ "$tpl_bad" -eq 0 ] && ok "all templates carry the 5 mandatory fields (as rows/labels)" || bad "template field gaps above"
 
-# 9) File count: BY_THE_NUMBERS' declared total must match the kit on disk
-#    (runtime dirs .git/.archive/.remember/.claude/.sisyphus excluded)
+# 9) File count: BY_THE_NUMBERS' declared total must match the kit on disk.
+#    Runtime/tooling dirs are excluded via a single shared list (F-038) so the
+#    exclusions never drift between this stage and BY_THE_NUMBERS.
 echo "-- 9. canonical file count"
-kit_files=$(find . -type f \
-  -not -path './.git/*' -not -path './.archive/*' -not -path './.remember/*' \
-  -not -path './.claude/*' -not -path './.sisyphus/*' -not -name '.DS_Store' \
-  | wc -l | tr -d ' ')
+RUNTIME_DIRS=".git .archive .remember .claude .sisyphus .opencode .vscode .idea node_modules"
+find_excludes=""
+for d in $RUNTIME_DIRS; do find_excludes="$find_excludes -not -path './$d/*'"; done
+kit_files=$(eval "find . -type f $find_excludes -not -name '.DS_Store'" | wc -l | tr -d ' ')
 declared_files=$(grep -oE 'Total files \| [0-9]+' references/reference/BY_THE_NUMBERS.md | grep -oE '[0-9]+')
 if [ -n "$declared_files" ] && [ "$kit_files" -eq "$declared_files" ]; then
   ok "kit file count = $kit_files (matches BY_THE_NUMBERS)"
@@ -158,6 +171,24 @@ for f in SKILL.md $(find references -name '*.md'); do
   fi
 done
 [ "$res_bad" -eq 0 ] && ok "no retired-vocabulary residue" || bad "residue above"
+
+# 11) CI-pipeline copy parity (v2.8, F-136): CAT_A is canonical; the two
+#     convenience copies (MANDATE_engineering, SECRET_SCAN_MANDATE) must carry
+#     the same PR-pipeline stage line. Compare the normalized stage sequence.
+echo "-- 11. CI pipeline copy parity"
+pr_line() { grep -hoE "lint *(→|->) *secret-lint[^|]*contract" "$1" 2>/dev/null | head -1 | tr -s ' ' | sed 's/ *$//'; }
+canon=$(pr_line references/categories/CAT_A_engineering.md)
+cp1=$(pr_line references/mandates/MANDATE_engineering.md)
+cp2=$(pr_line references/mandates/SECRET_SCAN_MANDATE.md)
+if [ -z "$canon" ]; then
+  bad "could not extract canonical PR pipeline from CAT_A"
+elif [ "$cp1" = "$canon" ] && [ "$cp2" = "$canon" ]; then
+  ok "CI PR-pipeline copies match canonical CAT_A"
+else
+  [ "$cp1" = "$canon" ] || note "MANDATE_engineering PR pipeline drifted: '$cp1' vs '$canon'"
+  [ "$cp2" = "$canon" ] || note "SECRET_SCAN_MANDATE PR pipeline drifted: '$cp2' vs '$canon'"
+  bad "CI pipeline copies drifted from canonical"
+fi
 
 echo "=="
 if [ "$FAIL" -eq 0 ]; then echo "RESULT: CONSISTENT — safe to ship."; else echo "RESULT: INCONSISTENCIES — fix above before shipping."; fi

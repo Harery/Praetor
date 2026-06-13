@@ -3,7 +3,7 @@
      Project repository: https://github.com/Harery/Praetor
      Licensed under the MIT License; see LICENSE at the repository root. -->
 
-# Operator's Cheat Sheet (v2.8)
+# Operator's Cheat Sheet (v2.8.2)
 
 ## Quick-Start
 1. Open a session with your AI agent (the Praetor skill triggers on phrases like "audit my code",
@@ -74,6 +74,10 @@ halt                         (emits a Resumable Snapshot you can paste back late
 | One critical module | `RUN_MODULES = [M_PAYMENTS]` |
 | Compliance audit prep | `RUN_CATEGORIES = [E]` |
 
+> These 5 are the most common. Full set of **10 recipes** (Business Package,
+> Ops Hardening, Pre-Release Smoke, Support KB Refresh, New Feature Drop, …):
+> `references/execution/RUN_MODES.md`.
+
 ## Team & Time
 - P0-only, 10 modules: 5 people, 4 business days
 - Full, 15 modules: 11 people, 4 weeks
@@ -89,3 +93,8 @@ halt                         (emits a Resumable Snapshot you can paste back late
 - Treat INFERRED items as facts (gate exists for this reason)
 - Ignore QC_FAILED tags on emit
 - Treat the Citations Index as externally certified — it's re-derived; spot-check it
+
+> QC rework is **one shot, total**: an agent fixes only the flagged judge's
+> concern. If a second judge flags a new issue on the reworked artifact, it
+> still emits `QC_FAILED` — the single rework is consumed (it is not one
+> rework per judge).

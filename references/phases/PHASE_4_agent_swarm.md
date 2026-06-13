@@ -74,3 +74,10 @@ Coverage Ledger. Omit the section only if no test in the module needs data state
 ```
 
 If approaching token budget, see `references/protocols/CHUNKING_PROTOCOL.md`.
+
+The user may reply `halt` at any module boundary or partial-module marker (not
+only `continue` / `continue module`); the Orchestrator then emits a Resumable
+Snapshot per `references/protocols/RESUMABLE_STATE.md` — a mid-chunk halt
+records the mid-module `STOPPED_AT` form. All Phase-4 replies are parsed by the
+same rules as the Phase-3 gate (see CONDITIONAL_CONTINUE, "Module-Boundary and
+Mid-Chunk Replies").

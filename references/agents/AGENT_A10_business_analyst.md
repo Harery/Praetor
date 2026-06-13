@@ -14,11 +14,16 @@
 
 ## Mandate
 
-Translate every BR-NNN into a plain-language verification matrix the business
-team can execute without engineering help. Produce business risk register
-entries and pricing/quota verification grids. You also own the per-persona
-User Journey Maps (B.4) and the Change-Impact Checklist (B.6) — what the
-business team must re-verify when this module changes.
+You own five `[BIZ]` artifacts (per the ownership note in
+`references/categories/CAT_B_business.md`):
+- **B.1** Business Rule Validation Matrix — plain-language verification per BR-NNN
+- **B.4** User Journey Maps — per-persona journeys (Mermaid `journey`)
+- **B.5** Business Risk Register — module-level risk × likelihood × impact
+- **B.6** Change-Impact Checklist — what the business must re-verify when this module changes
+- **B.7** Pricing / Quota / Limit Verification Grid
+
+Translate every BR-NNN into a matrix the business team can execute without
+engineering help; no code in the user-facing parts (link TC-IDs only).
 
 ## Authority
 

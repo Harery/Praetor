@@ -146,7 +146,7 @@
       font-family="'Fira Code', Monaco, Consolas, 'Courier New', monospace"
       font-weight="600" font-size="12"
       fill="#4a5568" letter-spacing="2">
-      18 EXPERT AGENTS  ·  100% TRACEABILITY  ·  ZERO HALLUCINATION  ·  v2.8
+      18 EXPERT AGENTS  ·  100% TRACEABILITY  ·  ZERO HALLUCINATION  ·  v2.8.2
     </text>
 
     <!-- Badges row -->
@@ -155,9 +155,9 @@
       <rect x="0" y="0" width="72" height="22" rx="4" fill="#1e293b" stroke="#DFBA73" stroke-width="0.8"/>
       <text x="36" y="15" font-family="system-ui, sans-serif" font-weight="700" font-size="10" fill="#DFBA73" text-anchor="middle">MIT</text>
 
-      <!-- Badge 2: v2.8 -->
-      <rect x="80" y="0" width="72" height="22" rx="4" fill="#1e293b" stroke="#00f2fe" stroke-width="0.8"/>
-      <text x="116" y="15" font-family="system-ui, sans-serif" font-weight="700" font-size="10" fill="#00f2fe" text-anchor="middle">v2.8</text>
+      <!-- Badge 2: v2.8.2 -->
+      <rect x="80" y="0" width="78" height="22" rx="4" fill="#1e293b" stroke="#00f2fe" stroke-width="0.8"/>
+      <text x="119" y="15" font-family="system-ui, sans-serif" font-weight="700" font-size="10" fill="#00f2fe" text-anchor="middle">v2.8.2</text>
 
       <!-- Badge 3: 18 Agents -->
       <rect x="160" y="0" width="96" height="22" rx="4" fill="#1e293b" stroke="#a855f7" stroke-width="0.8"/>

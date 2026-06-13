@@ -51,7 +51,12 @@ then continue
 ```
 
 Effect:
-- Orchestrator instructs A01/A02 to update; emits diff confirmation; proceeds.
+- Orchestrator instructs **A02** to update registers (A02 is the sole register
+  writer, per `references/protocols/AGENT_PROTOCOL.md` §1) and **A01** to
+  re-run only the affected Phase-1 classification/decomposition where the
+  correction touches module or layer structure; emits a diff confirmation;
+  proceeds. (A01 has no register-write role — it re-derives discovery output;
+  A02 owns the register mutation.)
 
 ### Format 4 — Scope override
 ```
@@ -90,8 +95,11 @@ Or any message that doesn't start with `continue` / `correct` / `override` —
 ### Format 7 — Question carve-out (v2.7.4)
 
 A gate reply that is a *question* — ends in `?`, or whose **first word** is an
-interrogative (`what / why / how / which / can / does / is / are`) followed by
-a space — is NOT a halt. (First-word-only: a correction beginning mid-sentence
+interrogative (`what / why / how / which / who / when / where / can / does /
+is / are / will / would / should / could`) followed by a space — is NOT a
+halt. (The terminal `?` is the primary, exhaustive detector; the
+first-word list is a non-exhaustive aid for question replies that omit the
+mark.) (First-word-only: a correction beginning mid-sentence
 with "is" does not trigger this; if a reply contains both a format keyword and
 question phrasing, the keyword wins — see Parsing Order.) The Orchestrator:
 

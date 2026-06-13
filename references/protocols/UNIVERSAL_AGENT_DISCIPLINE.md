@@ -67,9 +67,9 @@ is already covered, you emit `DUPLICATE_OF_<id>` (same layer) or
 
 After the final module of a run, Phase 6 wrap-up MUST emit, even if the
 run was scoped narrowly (e.g., `RUN_MODULES = [single module]`). The wrap-up
-sections are defined canonically in `references/phases/PHASE_6_wrap_up.md`
-(currently 15 sections) — that file's list governs; this rule only makes the
-wrap-up itself non-skippable. (A run scoped to end before Phase 4 — e.g.,
+sections are defined canonically in `references/phases/PHASE_6_wrap_up.md` —
+that file's list is authoritative for both content and count; this rule only
+makes the wrap-up itself non-skippable. (A run scoped to end before Phase 4 — e.g.,
 `RUN_PHASES = [0,1,2,3]` — generates no modules, so there is no "final
 module" and U6 is satisfied vacuously; see
 `references/execution/RUN_MODES.md` for the binding rule.)

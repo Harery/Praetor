@@ -1,7 +1,7 @@
 ---
 name: praetor
 description: "Multi-agent production readiness audit system. 18 expert agent personas across 7 phases serving 5 audiences. Reads any codebase and produces test cases (unit/integration/security/perf/a11y/chaos), runbooks, alerts, support triage trees, customer comms, compliance mappings (SOC2/GDPR/HIPAA/PCI/WCAG), a secret-scan/secret-lint CI stage, and a consolidated risk register — with file-line traceability. Use this skill whenever a user wants to QA, audit, review, harden, or assess a repo or service for production readiness. Trigger on phrases like 'audit my code', 'QA review', 'readiness check', 'find bugs', 'security review', 'compliance audit', 'SOC2 prep', 'GDPR audit', 'production readiness', 'pre-launch review', 'risk assessment', 'generate runbooks', 'write tests for my repo', 'harden this service', 'what could go wrong in this code', 'is this code ready to ship'. Also trigger when the user uploads or references a codebase or GitHub repo and asks for a thorough multi-team review even if they don't use the word 'Praetor'."
-version: "2.8.0"
+version: "2.8.2"
 license: "MIT — Copyright (c) 2026 Mohamed Elharery (https://github.com/Harery). All rights reserved. Repo: https://github.com/Harery/Praetor"
 copyright: "(c) 2026 Mohamed Elharery (https://github.com/Harery) — https://github.com/Harery/Praetor"
 ---

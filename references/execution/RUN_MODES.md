@@ -37,13 +37,24 @@ TC-IDs when CAT-A is excluded) carry `DEFERRED_TO_<category>` in place of the
 missing reference. The Coverage Ledger tracks these deferred links so a later
 run of the excluded category resolves them instead of regenerating.
 
-**Model-capacity guidance:** the run configuration is also the lever for the
-model tier executing the skill. Large/reasoning-tier models handle FULL runs;
-on faster or smaller-context tiers ("turbo"/"mini" classes), prefer narrower
-configurations — `RUN_PRIORITIES = [P0]` or single-category runs — chunk
-earlier (see `references/protocols/CHUNKING_PROTOCOL.md`), and lean on
-`halt` + Resumable Snapshot to split work across sessions. Scope discipline,
-not output abbreviation (U3), is how a smaller context completes a run.
+**Model-capacity guidance.** Praetor is model-agnostic; the run configuration
+is the lever that fits a run to whatever model tier executes it. Three
+provider-neutral tiers (every vendor has equivalents):
+
+- **Big / reasoning tier** (large context, deep reasoning — e.g. a flagship
+  reasoning model): handles a FULL run (all phases × categories × priorities)
+  in the fewest sessions; chunk at the default ~6000-token threshold.
+- **Standard tier** (mid context): prefer `RUN_PRIORITIES = [P0,P1]` or a few
+  categories per session; expect more `continue`/`continue module` turns.
+- **Fast / small-context tier** (a "turbo" or "mini" class — fast inference,
+  smaller context): scope tightly — `RUN_PRIORITIES = [P0]`, single-category
+  or single-module runs — chunk earlier (~4000 tokens, see
+  `references/protocols/CHUNKING_PROTOCOL.md`), and lean on `halt` + Resumable
+  Snapshot to span sessions.
+
+The discipline is the same at every tier: narrow the *scope*, never abbreviate
+agent *output* (U3 forbids "summarized for readability"). A smaller context
+completes the same run in more, smaller pieces — it never emits less per piece.
 
 ---
 

@@ -22,7 +22,9 @@ in all):
   `references/reference/FAILURE_RULES.md` §7
 - `priority` — P0/P1/P2 per `references/execution/PRIORITY_RUBRIC.md`;
   distribution per register is band-enforced by A02 Rule 3
-  (15-30% P0 / 30-50% P1 / 30-50% P2)
+  (15-30% P0 / 30-50% P1 / 30-50% P2). (Some schemas below render this
+  field under the label `criticality` — e.g., BR, DEP. Same field, same
+  rubric, same band enforcement; the label varies, the vocabulary does not.)
 - `module` — owning module ID, or `platform-wide` for entries that genuinely
   span modules (common for COMP, SLO, CFG)
 

@@ -19,7 +19,7 @@
 | Rollback             | Toggle `FEATURE_BACKUP_PROCESSOR` back to OFF once primary provider recovers |
 | Escalation Path      | If mitigation fails within 30 min → Page Engineering Lead (P1). If revenue impact > $10k/hr → Page CTO. |
 | Post-Incident Notes  | File template at /docs/incidents/template.md; include: timeline, customer impact, root cause, action items. |
-| Open Items           | (optional) Unverified references awaiting human confirmation, per A12 Rule 6 — e.g., [CONFIRM EXISTS: /docs/oncall-rotation.md] |
+| Open Items           | Unverified references, each marked `[CONFIRM EXISTS: <path>]` per A12 Rule 6. Row is omitted only when every reference verified; if any reference could not be confirmed, this row is mandatory (not optional). |
 ```
 
 ## Conventions

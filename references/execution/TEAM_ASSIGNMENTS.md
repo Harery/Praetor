@@ -35,12 +35,13 @@ contact who also covers ops/support sign-off temporarily).
 ## Phase-by-Phase Assignment
 
 ### Phase 0 — Source Resolution
-| Owner | Headcount | Effort | Wall-clock |
+| Owner | Headcount | Effort (human) | Wall-clock |
 |---|---|---|---|
-| Coordinator | 1 | 5 min | 5 min |
+| Coordinator | 1 | ~30 sec (provide URL/path) | ~5 min total |
 
-Coordinator provides Praetor with the GitHub URL or local repo path. No team
-involvement.
+Coordinator provides Praetor with the GitHub URL or local repo path. The ~5
+min is mostly the model resolving and fingerprinting the source; human effort
+is just supplying the pointer — no other team involvement.
 
 ### Phase 1 — Technical Discovery
 | Owner | Headcount | Effort | Wall-clock |
@@ -82,6 +83,10 @@ This is where the heavy work happens. **Praetor produces, humans validate and ad
 
 For each module, the generation is autonomous (5–20 min of model wall-clock).
 The human work is **post-generation adoption**.
+
+This grid is the **canonical** per-audience adoption rate; the Velocity
+Heuristics in `references/execution/TIMELINE_ESTIMATES.md` are a convenience
+copy of these numbers — change them here.
 
 | Audience | Per-module human effort | Headcount |
 |---|---|---|

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Praetor — Schema-Conformance & Structure Consistency Checker (v2.8)
+# Praetor — Schema-Conformance & Structure Consistency Checker (v2.8.2)
 # Copyright (c) 2026 Mohamed Elharery (https://github.com/Harery). MIT License.
 #
 # 10 stages: dead links (md + sh), canonical counts, U4 closed-vocabulary

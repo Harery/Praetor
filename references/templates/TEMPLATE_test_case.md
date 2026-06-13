@@ -23,7 +23,13 @@
 
 ## Conventions
 
-- `TC ID` format: `TC-<MODULE>-<LAYER>-<SLUG>-<NNN>`
+- `TC ID` format: `TC-<MODULE>-<TAG>-<SLUG>-<NNN>`, where `<TAG>` is **either**
+  a canonical Layer Tag (e.g., `CONTROLLER`) **or**, for cross-cutting tests, a
+  Discipline Tag (`SEC` / `A11Y` / `INT` / `PERF` / `I18N` / `CHAOS`) — see
+  `references/reference/ID_SCHEMES.md`. The example above uses `CONTROLLER`
+  (a Layer Tag); a security test would read `TC-M_AUTH-SEC-JWT_FALLBACK-001`.
+  The `Layer` column always carries a canonical Layer Tag regardless of which
+  the ID slot uses (dedup matches on the column, never the slot).
 - `Linked IDs` may be empty (`—`) if no register linkage applies
 - `Pre-conditions & Scope` always includes `file:line` reference to the component
 - `Steps` use `<br>` for inline line breaks

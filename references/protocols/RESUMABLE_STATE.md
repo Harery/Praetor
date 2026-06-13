@@ -38,7 +38,7 @@ the Praetor skill and supplying the source) to resume. It is intentionally
 compact — register *summaries* and IDs, not full register bodies.
 
 ```
-=== PRAETOR RESUMABLE SNAPSHOT v2.8 ===
+=== PRAETOR RESUMABLE SNAPSHOT v2.8.2 ===
 SOURCE: <github URL | path>   SNAPSHOT_TOKEN: <sha | upload-date | content-fingerprint>
 RUN_CONFIG: RUN_PHASES=[...] RUN_CATEGORIES=[...] RUN_PRIORITIES=[...] RUN_MODULES=[...]
 STOPPED_AT: <phase 3 gate | end of module M_X (n of N) | mid-module M_X (categories A,B done; C,D,E pending)>
@@ -62,7 +62,8 @@ Q1=<answer or unknown>  Q2=<...>  (these were CONFIRMED this session)
 COVERED_MODULES: M_AUTH, M_BILLING
 EMITTED_IDS: TC-M_AUTH-..., RR-M_AUTH-001, FX-M_AUTH-...
 QC_FAILED_IDS: <IDs that emitted with QC_FAILED, with one-word reason each — or none>
-PENDING_HANDOFFS: <in-flight HANDOFF chains not yet resolved — or none>
+PENDING_HANDOFFS: <in-flight broadcast/cross-module HANDOFF chains not yet resolved — or none>
+AGENTS_NOT_ACTIVATED: <conditional agents whose spawn condition was false, with reason — e.g., A08 (no FRONTEND_UI), A09 (P0-only non-critical) — or none>
 NEXT_MODULE: M_USERS (3 of 7)
 === END SNAPSHOT ===
 ```
@@ -98,6 +99,13 @@ The Orchestrator then:
   component triggers the drift warning. Known limitation: without the manifest
   hash, an add+delete pair that preserves count, bytes, and newest mtime
   collides — low probability, not zero; the manifest hash closes it.
+- **Mixed-environment normalization:** the SHA-256 component is optional
+  metadata, not part of the base comparison. Compare the base triple (count +
+  bytes + mtime) first; compare SHA-256 only when **both** the snapshot and the
+  live recomputation carry one. A SHA-256 present on one side but not the other
+  (e.g., snapshot written with a shell, resumed without one) is ignored — it
+  never by itself raises `SNAPSHOT_DRIFT`. This prevents a false drift when the
+  two sessions ran in different environments.
 - Tamper awareness (soft integrity check): the snapshot is user-editable by
   design (corrections are legitimate), so it carries no enforced signature.
   When a pasted snapshot contains internally inconsistent state (e.g., an

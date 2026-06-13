@@ -1,4 +1,4 @@
-# Operator's Cheat Sheet (v2.8)
+# Operator's Cheat Sheet (v2.8.2)
 
 ## Quick-Start
 1. Open a session with your AI agent (the Praetor skill triggers on phrases like "audit my code",

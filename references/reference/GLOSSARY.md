@@ -205,6 +205,32 @@ dispatches them.
 **Quality Council (QC)** — A 4-judge review panel (Coverage, Correctness,
 Clarity, Skip-Validity) that reviews every artifact before emission.
 
+**HANDOFF** — A Praetor-specific message one agent sends another (always
+routed by the Orchestrator) to request work: "A06 → A17, this CRITICAL
+finding needs a risk entry." The complete set of who-hands-to-whom is the
+Canonical Handoff Registry in `references/protocols/HANDOFF_PROTOCOL.md`.
+
+**SNAPSHOT_TOKEN** — A fingerprint of your source (a git commit SHA, an
+upload date, or a file count+size+date fingerprint for local folders) stored
+in a Resumable Snapshot, so a resumed run can tell whether your code changed
+since you stopped.
+
+**SNAPSHOT_DRIFT** — The warning Praetor raises on resume when the live
+source's SNAPSHOT_TOKEN no longer matches the one in your pasted snapshot —
+i.e., the code changed. Praetor asks whether to re-discover before continuing
+rather than trusting stale state.
+
+## Business & Severity Terms
+
+**MRR — Monthly Recurring Revenue** — The predictable subscription revenue a
+SaaS earns per month. Used as the default materiality yardstick for P0
+classification ("material revenue loss" defaults to >1% of MRR per day).
+
+**Sev1 / Sev2 — Incident Severity** — Industry-standard incident grades:
+Sev1 is a critical outage (major functionality down, broad customer impact);
+Sev2 is a serious but narrower degradation. A failure that would trigger
+either is P0 by the priority rubric.
+
 ## "What should I read first?" by Role
 
 - **BA / Product Owner**: Phase 3 Discovery Report, then [BIZ] artifacts (BV + UAT)

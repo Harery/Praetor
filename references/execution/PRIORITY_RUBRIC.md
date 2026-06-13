@@ -150,6 +150,11 @@ The most common mistake is calling everything P0. Use this discipline:
 - Healthy distribution: the v2 target bands — **15–30% P0 / 30–50% P1 /
   30–50% P2** (enforced by A02; see the v2 ADDITION below).
 
+> These three ranges are independent validity windows, not additive targets —
+> reading them as a sum (30+50+50) is a category error. The actual
+> distribution is one set of three percentages that total exactly 100% and
+> must fall inside all three windows simultaneously (e.g., 22% / 44% / 34%).
+
 A02 targets this distribution in Phase 2 and flags deviations in Phase 3.
 
 ---
@@ -178,7 +183,16 @@ is skewed:
    Reason: <e.g., "Platform is genuinely P0-heavy due to financial controls;
    58% of BRs touch money movement.">
    ```
-   Then proceeds. The user sees the deviation in Phase 3.
+   Then proceeds. This is A02's **legitimate protocol exit**, not a failure —
+   some platforms are genuinely structurally skewed (a payments module where
+   every error is revenue-critical). The Orchestrator does NOT block it (see
+   A00's refusal condition, which exempts an `UNCORRECTABLE_DISTRIBUTION`
+   emission). The Orchestrator surfaces it in the Phase 3 Discovery Report with
+   a one-line note asking the user to confirm acceptance at the gate. The 30%
+   cap above and this escape hatch are reconciled here: the cap is the target,
+   `UNCORRECTABLE_DISTRIBUTION` is the documented, human-confirmed override when
+   the skew is structural — the ERR example below (78.3% P0) is exactly such a
+   case, not a rule violation.
 
 ## Emitted Output
 

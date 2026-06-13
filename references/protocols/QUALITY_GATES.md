@@ -9,8 +9,11 @@
 
 ```
 Gate 1 — Discovery Gate (Phase 3)
-  Who reviews: the user (in team settings: the human Coordinator + audience
-               leads per references/execution/TEAM_ASSIGNMENTS.md)
+  Who reviews: the user (in team settings: the human Coordinator + the
+               register-owning leads who actually staff Phase 3 per
+               references/execution/TEAM_ASSIGNMENTS.md — BA, Engineering
+               Reviewer, Compliance Officer; OPS/SUP leads review their
+               registers asynchronously if not present at the gate)
   Pass criteria: Discovery Report accepted (user replies `continue`)
   Fails to: rework Phase 1/2 with corrections
 
@@ -56,9 +59,13 @@ Two forms, same fields, chosen by context:
 ```
 STATUS: QC_FAILED
 Failed judge: <1, 2, 3, or 4>
-Reason: <one-line specific failure>
+Reason: <one of the closed reason tokens — COVERAGE_GAP / CITATION_DRIFT /
+         LOGIC_ERROR / AUDIENCE_JARGON / SKIP_UNDEFENDED — plus free-text detail>
 Recommendation: <what to do>
 ```
+
+The reason tokens are the closed set defined in
+`references/agents/AGENT_quality_council.md` (Standard QC_FAILED reasons).
 
 Example:
 ```

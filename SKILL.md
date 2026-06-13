@@ -1,7 +1,7 @@
 ---
 name: praetor
 description: Multi-agent production readiness audit. Reads any codebase and produces test cases (unit/integration/security/perf/a11y/chaos), runbooks, alerts, support triage trees, customer comms, compliance mappings (SOC2/GDPR/HIPAA/PCI/WCAG), a secret-scan/secret-lint CI stage, and a consolidated risk register — with file-line traceability. Use this skill whenever a user wants to QA, audit, review, harden, or assess a repo or service for production readiness. Trigger on phrases like "audit my code", "QA review", "readiness check", "find bugs", "security review", "compliance audit", "SOC2 prep", "GDPR audit", "production readiness", "pre-launch review", "risk assessment", "generate runbooks", "write tests for my repo", "harden this service", "what could go wrong in this code", "is this code ready to ship". Also trigger when the user uploads or references a codebase or GitHub repo and asks for a thorough multi-team review even if they don't use the word "Praetor".
-version: "2.8.0"
+version: "2.8.2"
 license: "MIT — Copyright (c) 2026 Mohamed Elharery (https://github.com/Harery). All rights reserved. Repo: https://github.com/Harery/Praetor"
 copyright: "(c) 2026 Mohamed Elharery (https://github.com/Harery) — https://github.com/Harery/Praetor"
 ---
@@ -99,7 +99,7 @@ PRIORITIES (auto-enforced)
   P2  Standard    — target 30-50%
 ```
 
-Agents are dispatched together within a phase and sequentially simulated — none waits on another's approval; they share state only through the registers (read), the Coverage Ledger (write), and HANDOFF messages routed by the Orchestrator (per `references/protocols/AGENT_PROTOCOL.md`).
+Agents are dispatched together within a phase and sequentially simulated — none waits on another's approval; they share state only through the registers (read), the Coverage Ledger (Orchestrator-maintained — agents' emitted artifacts are recorded there; agents read it, they do not write it), and HANDOFF messages routed by the Orchestrator (per `references/protocols/AGENT_PROTOCOL.md`).
 
 ## Output Discipline
 
@@ -111,6 +111,7 @@ Agents are dispatched together within a phase and sequentially simulated — non
 - **Coverage Ledger:** maintained across modules; `DUPLICATE_OF` for same-layer matches, `RELATED_TO` for cross-layer scenarios.
 - **Chunking:** if a module's output approaches token limits, complete whole categories and continue on `continue module` — never abbreviate agent output.
 - **Secret hygiene:** A06 emits a masked secret-scan findings table plus a runnable secret-lint CI stage per `references/mandates/SECRET_SCAN_MANDATE.md`.
+- **Data handling:** Praetor reads your codebase in the model's context for the duration of the run; it produces specification artifacts and does not store, transmit, or persist your source beyond the session. Secret *values* are masked, never echoed (see `references/mandates/SECRET_SCAN_MANDATE.md`). Treat the model provider's own data-retention terms as the governing policy for what happens to context after a session.
 
 ## Universal Agent Discipline
 
@@ -131,7 +132,7 @@ Judge 1 Coverage, Judge 2 Correctness (citations re-derived; logic sound), Judge
 - Agent charters (18 + Quality Council + roster): `references/agents/`
 - Inter-agent protocols (13): `references/protocols/`
 - Quick reference, glossary, failure & ambiguity rules, ID schemes (11), canonical counts (`references/reference/BY_THE_NUMBERS.md`): `references/reference/`
-- Audit changelog (recent entries): `CHANGELOG.md`; full v2.6 → v2.7.8 history: `references/reference/CHANGELOG_ARCHIVE.md` (load only when researching a past decision — it is deliberately kept out of the working set to save context)
+- Audit changelog (recent entries): `CHANGELOG.md`; full v2.6 → v2.7.7 history: `references/reference/CHANGELOG_ARCHIVE.md` (load only when researching a past decision — it is deliberately kept out of the working set to save context)
 - Regression harness (fixture repo + secret-scan + consistency checks): `tests/sim/`, `tools/`
 
 ## What Praetor Does Not Do

@@ -18,7 +18,7 @@
 | Inter-agent protocols | 13 |
 | Artifact STATUS values | 7 core + extended set (see `references/protocols/ARTIFACT_STATUS.md`) |
 | ID schemes | 11 (see `references/reference/ID_SCHEMES.md`) |
-| Total files | 80 (71 markdown: SKILL.md + 67 reference files + CHANGELOG.md + tests/sim/README.md + tests/sim/flawed-app/README.md; + LICENSE + NOTICE; + 2 harness scripts `tools/check_consistency.sh`, `tests/sim/check_secrets.sh`; + 5 non-markdown fixture files under `tests/sim/flawed-app/`) |
+| Total files | 81 (71 markdown: SKILL.md + 67 reference files + CHANGELOG.md + tests/sim/README.md + tests/sim/flawed-app/README.md; + LICENSE + NOTICE; + 2 harness scripts `tools/check_consistency.sh`, `tests/sim/check_secrets.sh`; + 6 non-markdown fixture files under `tests/sim/flawed-app/` — package.json, migrations/001_init.sql, src/auth/login.js, src/auth/token.js, src/billing/refund.js, src/config/secrets.js) |
 
 > The count covers kit files only. Runtime directories created by tooling or
 > audit sessions (`.git/`, `.archive/`, `.remember/`, `.claude/`,

@@ -11,14 +11,16 @@ reliably caught. Two executable guards now catch them mechanically.
 
 ## What's here
 
-- **`flawed-app/`** — a tiny planted-flaw fixture repo (10 known defects across
-  auth + billing) used as seed corpus. It is intentionally insecure; it exists
-  only to prove the audit machinery fires. Planted flaws include a hardcoded
-  `sk_live_` secret, SQL injection, plaintext password compare, default
-  role-escalation in a JWT, a non-idempotent refund, a missing
-  `UNIQUE(email)` constraint, and JWT dev-secret fallbacks in both `||` and
-  nullish-coalescing `??` forms (FLAW-9/FLAW-10 — regression coverage for the
-  jwt-dev-fallback pattern class).
+- **`flawed-app/`** — a tiny planted-flaw fixture repo (13 known defects across
+  auth + billing + config) used as seed corpus. It is intentionally insecure; it
+  exists only to prove the audit machinery fires. Planted flaws include a
+  hardcoded `sk_live_` secret, SQL injection, plaintext password compare, default
+  role-escalation in a JWT, a non-idempotent refund, a missing `UNIQUE(email)`
+  constraint, JWT dev-secret fallbacks in both `||` and nullish-coalescing `??`
+  forms (FLAW-9/FLAW-10), and — in `src/config/secrets.js` — an AWS access key,
+  a postgres URL with embedded credentials, and an inline RSA private key
+  (FLAW-11/12/13, so the cloud-key / DB-URL / private-key pattern classes have
+  live positive coverage, not just regex-validity probes).
 - **`check_secrets.sh`** — runs every pattern class from
   `references/mandates/SECRET_SCAN_MANDATE.md` against the fixture and FAILS if
   any planted secret escapes. This is the regression test for the v2.7.4

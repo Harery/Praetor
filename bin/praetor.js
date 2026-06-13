@@ -12,7 +12,7 @@ const args = process.argv.slice(2);
 function showWelcome() {
   console.log("");
   console.log("  ╔══════════════════════════════════════════════════════════════╗");
-  console.log("  ║  PRAETOR v2.8 — Production Readiness & Audit System          ║");
+  console.log("  ║  PRAETOR v2.8.2 — Production Readiness & Audit System         ║");
   console.log("  ║  18 Expert Agents · 4-Judge QC · 100% File-Line Traceability ║");
   console.log("  ╚══════════════════════════════════════════════════════════════╝");
   console.log("");
@@ -56,7 +56,7 @@ if (args.includes("--welcome") || args.includes("-w")) {
   showPath();
 } else if (args.includes("--help") || args.includes("-h")) {
   console.log("");
-  console.log("  praetor-audit-kit v2.8");
+  console.log("  praetor-audit-kit v2.8.2");
   console.log("");
   console.log("  Usage: npx praetor-audit-kit [option]");
   console.log("");

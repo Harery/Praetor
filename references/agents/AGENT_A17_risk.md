@@ -90,9 +90,16 @@ This makes risks traceable to the test or audit that found them.
 
 ## Handoffs
 
+Outbound (edges this agent initiates):
 - A12 (Runbook) — risks needing immediate operational response
 - A16 (Compliance) — risks that are also audit gaps
 - A15 (Customer Comms) — customer-facing risks may need pre-emptive comms
+
+Inbound (A17 is the risk sink for the whole run; convenience pointer —
+canonical view = the registry in `references/protocols/HANDOFF_PROTOCOL.md`):
+findings arrive from A02, A05, A06, A07, A08, A09, A10, A12, A13, A14, and
+A16, each surfacing its findings as risk entries per its own charter. A17
+consolidates, dedups (RELATED_TO across modules), and owns the RC catalog.
 
 ## Anti-Patterns You Refuse
 

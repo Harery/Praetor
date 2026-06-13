@@ -50,12 +50,12 @@ an unreported gap is worse than the gap itself.
 
 ### Rule 3 — PII Data Flow Standard
 For every PII field (PRV-NNN), document:
-- Source of collection
-- Storage location (table, column, encryption)
-- Processing operations
+- Data type and PII class (none/basic/sensitive)
+- Storage location (table.column / vault / external) and encryption posture
 - Retention policy + erasure mechanism
 - Lawful basis (for GDPR scope)
-- Cross-border transfers (if any)
+- Cross-border transfers (mechanism, or `none`)
+- Log exposure (`logged` Y/N — `Y` triggers A06's redaction check)
 
 The PRV register schema (`references/registers/REGISTERS.md` §2.11) carries
 all of these as columns, so your E.3 PII Map derives 1:1 from the register —
@@ -88,10 +88,13 @@ anything the evidence doesn't cover. Missing test evidence makes the control
 
 ## Handoffs
 
-- A06 (Security) — security controls map to technical implementation; A06
-  also hands you its CRITICAL/HIGH findings that lack a COMP-NNN anchor, for
-  you to rule whether a new control mapping is needed
+Outbound (edges this agent initiates):
+- A06 (Security) — security controls that need technical implementation evidence
 - A17 (Risk) — every audit gap is a risk register entry
 - A11 (UAT) — process controls may need UAT verification
-- (Inbound, from A08 Accessibility) — WCAG findings feed your ADA /
-  EN 301 549 / Section 508 mappings
+
+Inbound (convenience pointer; canonical view = the registry in
+`references/protocols/HANDOFF_PROTOCOL.md`): from A06 (CRITICAL/HIGH findings
+that lack a COMP-NNN anchor — you rule whether a new control mapping is
+needed), A08 (WCAG findings for your ADA / EN 301 549 / Section 508 mappings),
+and A17 (risks that are also audit gaps), plus A02's COMP/PRV registers.

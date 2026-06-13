@@ -9,6 +9,81 @@
 > `references/reference/CHANGELOG_ARCHIVE.md` — split out in v2.8.0 so the
 > working changelog stays small in any model's context window.
 
+## v2.8.2 — Dual-Audit Consolidation: Handoff Graph Made Canonical + Bidirectionality Resolved (2026-06-12)
+
+Two independent BALA7-30 audits of v2.8.1 — "opencode" (38 findings: 0 P0,
+4 P1, 20 P2, 12 P3, 2 P4; one P0 self-declined as a false positive) and
+"Ro2a" (a delta on opencode adopting F-001–F-038 and adding F-101–F-141,
+40 new). Both converged on one systemic theme: **handoff bidirectionality** —
+agents declared outbound handoffs that receivers never acknowledged (~30 of
+the ~78 findings). Every finding adjudicated against source before fixing:
+**~70 distinct valid findings fixed**, **2 false positives confirmed**,
+a few reframed. Both harnesses green; patch bump (no schema/contract change
+beyond additive registry + checker stages), embedded markers stay v2.8.
+
+### Adjudication — false positives (confirmed against source)
+
+| Claim | Verdict |
+|---|---|
+| opencode F-012 (P0): BY_THE_NUMBERS file count off by 1 | **False — self-declined by the auditor.** The checker's stage-9 assertion is canonical; the count was correct. |
+| Ro2a F-036: `INFERRED_FAILURE_MODE` "attributed only to A13" | **False.** ARTIFACT_STATUS attributes it to `[OPS] A12`, and A12's charter uses it — attribution is correct and complete. No change. |
+
+Reframed rather than fixed-as-stated: the "one-sided handoff" findings
+(opencode F-007/F-026; Ro2a F-102/F-103/F-108–F-135) were **not** fixed by
+adding a redundant "Inbound" list to all 17 charters — that recreates the
+convenience-copy drift the kit fights. Instead the fix is structural (below):
+one canonical registry + a declaration convention. The intent (full
+bidirectional traceability) is satisfied; the redundancy is avoided.
+
+### Headline fixes
+
+| Theme | What changed | Findings closed |
+|---|---|---|
+| **Canonical handoff registry** | HANDOFF_PROTOCOL.md now carries the *complete* directed-edge graph (~55 edges), not a "common subset": broadcast-edge semantics (Tier-1/A02 → All are ambient, no per-recipient ack), circular-pair initiation order (A06↔A12, A12↔A13, A07↔A13 each get a named first-mover). AGENT_PROTOCOL declares the convention: charters list **outbound** edges; the registry is the canonical bidirectional view; sink agents (A02/A05/A06/A07/A17) carry a short Inbound pointer. ROSTER's incomplete 4-row table replaced with a pointer. | opencode F-007/F-008/F-026/F-035; Ro2a F-102/F-103/F-104/F-106/F-107/F-108/F-109/F-110/F-111/F-112/F-113/F-114/F-116–F-135 |
+| **A00 ↔ A02 protocol coherence** | A00's refusal condition now exempts A02's `UNCORRECTABLE_DISTRIBUTION` emission (its legitimate protocol exit); the rubric states the exit is human-confirmed at the gate, reconciling the 30% cap with the escape hatch. Coverage Ledger "(write)" misattribution corrected in SKILL + A00 (Orchestrator maintains it; agents read). | Ro2a F-101/F-105; opencode F-011/F-015 |
+| **Precision & determinism** | Priority bands stated as independent windows summing to 100% (not additive); `BLOCKED` umbrella replaced with "the specific `BLOCKED_BY_*` status"; gate Format 3 routes register writes to A02 only (A01 re-runs discovery); question-detection interrogative list expanded + reframed non-exhaustive; SNAPSHOT mixed-environment normalization rule (SHA-256 optional, ignored when one-sided); snapshot gains `AGENTS_NOT_ACTIVATED`; QC `QC_FAILED` reasons enumerated as a closed set; "currently 15 sections" → authoritative pointer. | opencode F-001/F-002/F-004/F-013/F-014/F-025/F-034; Ro2a F-121/F-122/F-123/F-130 |
+| **Risk-register consolidation** | PHASE_6 §13 states the master view absorbs B.5 + E.4, dedups via RELATED_TO. Compliance mandate ownership line precise: A17 generates, compliance adopts. | opencode F-005/F-023 |
+| **Glossary + model tiers** | Added HANDOFF, MRR, Sev1/Sev2, SNAPSHOT_TOKEN, SNAPSHOT_DRIFT. RUN_MODES "turbo/mini" replaced with a provider-neutral three-tier model-capacity section (big/reasoning, standard, fast/small-context) — scope discipline, never output abbreviation, at every tier. | opencode F-010/F-029/F-033 |
+| **Templates & mandates** | Support-playbook SLA claim bound to an SLO placeholder; escalations name roles (Platform Engineering, Billing Operations) with RB-IDs; TC-ID template label `LAYER` → `TAG` (Layer or Discipline); A13 burn-rate thresholds marked defaults; MANDATE_engineering CI copy disclaimer; runbook Open Items mandatory-when-unverified; gitleaks allowlist warns against allowlisting the self-test fixture; SKILL privacy/data-handling note; A10 cites its B.NNN IDs; velocity heuristics cross-referenced to canonical grid; license "All rights reserved" removed (MIT contradiction). | opencode F-009/F-016/F-017/F-018/F-020/F-021/F-022/F-024/F-027/F-028/F-030/F-031/F-032/F-037; Ro2a F-115/F-140 |
+| **Harness hardening** | Checker stage 1 scans tests/ + tools/ paths (not just references/); stage 8 matches fields only in table rows/labels (not prose); stage 9 uses a shared runtime-exclusion list; stage 6 prints harness output on failure; new stage 11 asserts CI-pipeline copy parity across the 3 files. Fixture gains FLAW-11/12/13 (AWS key, postgres-creds URL, RSA private key) so 3 previously probe-only classes have live positive coverage; negative control hardened to WARN-on-degrade. | opencode F-038; Ro2a F-120/F-136/F-137/F-138/F-139/F-141 |
+
+Verification: `tools/check_consistency.sh` (11 stages) → CONSISTENT;
+`tests/sim/check_secrets.sh` (13 planted flaws across 8 pattern classes) →
+ALL PLANTED SECRETS CAUGHT. File count 81, asserted by stage 9. Patch bump;
+embedded markers stay v2.8.
+
+
+## v2.8.1 — Fifth Full-Kit Coherence Audit: PRV↔E.3 Column Parity Restored (2026-06-12)
+
+Fresh-sandbox audit of v2.8.0: all 80 files copied to a clean workspace and
+read end-to-end; both harnesses executed live (green on first run; the F-A
+permission-stripped-copy WARN fired as designed). Mechanical sweeps:
+escaped-pipe-aware table column integrity (0 mismatches), dead-path scan
+across every cited kit path (sole hit remains the documented illustrative
+`tests/perf/login-p99.k6.js`), model-name residue scan (clean),
+roster-vs-ownership-map parity (17/17), archive-range cross-check, and
+placeholder-discipline sweep. The run was governed by the twenty declared
+quality dimensions (coherence, harmony, uniformity, alignment, stability,
+robustness, integrity, reliability, precision, fidelity, connectivity, flow,
+continuity, traceability, progression, cohesion, bridging, sequencing,
+linkage, transitioning). Five findings — 1 MED, 4 LOW — all fixed and
+re-verified.
+
+| ID | Sev | Finding | Fix |
+|---|---|---|---|
+| P-01 | MED | **PRV↔E.3 derivation chain broken three ways** — REGISTERS §2.11, A16 Rule 3, and the v2.8.0 changelog all declare the PRV register's 10 columns map 1:1, column-for-column, onto E.3, but both E.3 formats (CAT_E + TEMPLATE_compliance_control) carried 8 columns (`Cross-Border`, `Logged` missing); A16 Rule 3's own bullet list additionally claimed "Source of collection" and "Processing operations" as PRV columns, neither of which exists in the schema (alignment, fidelity, traceability, linkage) | Both E.3 formats extended to the full 10 columns (template example rows populated, including a `Logged=Y` row exercising the A06 redaction-check path); CAT_E's E.3 artifact descriptor extended; A16 Rule 3 bullets realigned to the register's actual columns |
+| P-02 | LOW | D.4 comm-template example in TEMPLATE_support_playbook used `[Customer Name]`, violating A15 Rule 3's named-placeholder discipline (`{customer_name}` style) that governs the same artifact class (uniformity, harmony) | Placeholder corrected to `{customer_name}` |
+| P-03 | LOW | SKILL Reference Map claimed the archive holds "v2.6 → v2.7.8"; the archive title and CHANGELOG both say v2.6 → v2.7.7 — v2.7.8 lives in the working CHANGELOG (precision, continuity) | SKILL line corrected to v2.7.7 |
+| P-04 | LOW | `tests/sim/check_secrets.sh` header still read "(v2.7.4)" although the script gained v2.8 changes (the separate `??` nullish-coalescing assertion); the sibling checker header reads (v2.8) (uniformity, fidelity) | Header bumped to the v2.8 family with an explicit provenance note (introduced v2.7.4, extended v2.8) |
+| P-05 | LOW | REGISTERS' universal entry fields declare the field `priority`, while the BR and DEP schemas in the same file label it `criticality` with no declared bridge — two names for one field (precision, bridging) | Universal-fields note now states the label variance explicitly: same field, same rubric, same band enforcement |
+
+Verification: `tools/check_consistency.sh` (10 stages) → CONSISTENT;
+`tests/sim/check_secrets.sh` → ALL PLANTED SECRETS CAUGHT; full re-read of
+every touched file plus a second pass of the table-integrity, dead-path, and
+placeholder sweeps → zero open findings. Embedded markers stay `v2.8` per
+the family-marker policy (patch bump only). File count unchanged at 80.
+
+
 ## v2.8.0 — Tri-Audit Consolidation: Three Independent Reports Adjudicated, All Valid Findings Fixed (2026-06-12)
 
 Three independent BALA7-30 audits of v2.7.8 ran on the same day — two by one

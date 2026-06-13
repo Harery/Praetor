@@ -113,9 +113,13 @@ These refusals are **features, not bugs**. They surface real gaps.
 
 ## Inter-Agent Handoffs
 
-Documented in `references/protocols/HANDOFF_PROTOCOL.md`. Common handoffs:
+The **complete** inter-agent dependency graph — all ~55 directed edges,
+including broadcast and circular-pair rules — is canonical in
+`references/protocols/HANDOFF_PROTOCOL.md` (Canonical Handoff Registry). This
+roster does not duplicate it; consult the registry for any handoff question.
+A few illustrative edges, to orient:
 
 - A14 (Support) → A12 (Runbook) when triage dead-ends
-- A06 (Security) → A17 (Risk) when CRITICAL finding emerges
-- A04/A05 (Test) → A07 (Performance) when budget enforcement needed
-- A16 (Compliance) → A06 (Security) when control needs technical evidence
+- A06 (Security) → A17 (Risk) when a CRITICAL finding emerges
+- A04 (Unit) → A07 (Performance) for hot-path functions
+- A16 (Compliance) → A06 (Security) when a control needs technical evidence

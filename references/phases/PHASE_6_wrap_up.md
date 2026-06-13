@@ -35,7 +35,13 @@ NEW in v2:
 10. **QC Flag Summary** — items the Quality Council flagged
 11. **Priority Distribution Final Report** — A02's final P0/P1/P2 percentages
 12. **Tooling Adoption Recommendations** — from A03 where tools were missing
-13. **Risk Register Master View** — A17's consolidated risk register
+13. **Risk Register Master View** — A17's consolidated risk register. This
+    master view **absorbs** the module-level Business Risk Register (B.5, A10)
+    and the compliance/security Risk Register Entries (E.4, A17 under CAT-E):
+    A17 merges all three sources into one list, deduplicating overlaps with
+    `RELATED_TO` links (a business risk and a compliance risk describing the
+    same exposure become one entry citing both). B.5 and E.4 remain the
+    per-audience views; the master view is the single cross-audience truth.
 14. **Regression Prevention Plan** — for each CRITICAL/HIGH risk fixed, a
     plan to prevent regression:
     - Which test goes into CI (cite TC-ID)

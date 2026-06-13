@@ -41,7 +41,7 @@ certification).
 | Method | Command |
 |:---|:---|
 | **npm** | `npx praetor-audit-kit` |
-| **GitHub Release** | Download [`praetor-prompt-kit-v2.8.zip`](https://github.com/Harery/Praetor/releases/tag/v2.8) |
+| **GitHub Release** | Download [`praetor-prompt-kit-v2.8.2.zip`](https://github.com/Harery/Praetor/releases/tag/v2.8.2) |
 | **Claude Code** | `claude skill install Skill/praetor.skill` |
 | **Direct** | Copy `00-orchestrator/MASTER_PROMPT.md` into your LLM context |
 
