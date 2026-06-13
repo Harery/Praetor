@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/logo-horizontal.svg" alt="PRAETOR — Autonomous Production Readiness & Audit System" width="100%">
+<img src="assets/social-preview.svg" alt="PRAETOR — Autonomous Production Readiness & Audit System" width="100%">
 
 <br/>
 <br/>
@@ -246,7 +246,7 @@ All generated artifacts pass through the Quality Council before emission. Any fi
 
 ```
 praetor/
-├── assets/                                   ← Graphic assets & social previews
+├── assets/                                   ← Logo suite & social preview
 ├── Skill/                                    ← Claude Code skill manifests
 ├── prompt/
 │   ├── 00-orchestrator/                      ← Master Prompt & Agent Roster (START HERE)
@@ -296,7 +296,7 @@ Praetor is distributed under the **MIT License**. Use it, modify it, and distrib
 
 <div align="center">
 
-<img src="assets/logo-stacked.svg" alt="Praetor" width="140">
+<img src="assets/logo.svg" alt="Praetor" width="100">
 
 <br/>
 <br/>
