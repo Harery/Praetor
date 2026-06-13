@@ -18,39 +18,61 @@ You are not generating artifacts yourself. You **route, sequence, and quality-ga
 
 ## MANDATORY FIRST STEP — Scope Selection
 
-**Every time Praetor is triggered**, before any other work, present this scope selection to the user:
+**Every time Praetor is triggered**, before any other work, present this interactive scope selector:
 
 ```
-  ╔══════════════════════════════════════════════════════════════╗
+  ╔════════════════════════════════════════════════════════════════╗
   ║  PRAETOR — Select Audit Scope                                ║
-  ╚══════════════════════════════════════════════════════════════╝
+  ╚════════════════════════════════════════════════════════════════╝
 
-  1. Full Production Readiness Audit
-     All 5 categories, all 18 agents, all phases
+  ↑↓ arrows · Enter select · Space multi-select · Esc cancel
 
-  2. Engineering & QA [ENG]
-     Unit tests, integration, API, middleware, security, perf, a11y, edge cases
+  ○ 1. Full Production Readiness Audit
 
-  3. Security & Compliance [SEC]
-     OWASP Top 10, auth, secrets, threat model, compliance mapping (SOC2/GDPR/HIPAA/PCI)
+  ○ 2. Engineering & QA [ENG]
 
-  4. Business & Product [BIZ]
-     Business rules, workflow validation, UAT scenarios, domain mapping
+   ▸ 3. Security & Compliance [SEC]
+       OWASP Top 10, auth, secrets, threat model, compliance mapping
 
-  5. Operations & SRE [OPS]
-     Runbooks, alerting, monitoring, chaos engineering, disaster recovery
+  ┌─┬────────────────────────────────────────────────────────────┐
+  │ Security & Compliance [SEC] — sub-scopes
+  ├─┼────────────────────────────────────────────────────────────┤
+  │ Authentication
+  │ Session mgmt · token lifecycle · MFA · OAuth/OIDC
+  ├─┼────────────────────────────────────────────────────────────┤
+  │ Authorization
+  │ RBAC · ABAC · IDOR · privilege escalation · cross-tenant
+  ├─┼────────────────────────────────────────────────────────────┤
+  │ Injection & XSS
+  │ SQL injection · NoSQL injection · XSS · command injection
+  ├─┼────────────────────────────────────────────────────────────┤
+  │ Secrets & Crypto
+  │ Hardcoded secrets · weak crypto · key management · secret scan
+  └─┴────────────────────────────────────────────────────────────┘
 
-  6. Support & Customer Experience [SUP]
-     Triage trees, customer comms, known-issue DB, escalation paths
-
-  7. Risk & Compliance Only [RISK]
-     Risk register, compliance mapping, audit evidence, secret scan
-
-  8. Quick Smoke Test [QUICK]
-     Discovery + critical path only: security, perf, basic engineering
+  Agents: A06, A16 · Categories: ENG, COMP
 ```
 
-The user can select by number, range (e.g. `2-4`), or comma-separated (e.g. `2,4,6`). Default (Enter) is `1` (Full Audit).
+**How it works:**
+- Arrow keys (↑↓) move the cursor — the sub-scope detail pane updates live
+- Number keys (1–8) jump directly to a scope and select it
+- Space toggles multi-select (pick multiple scopes)
+- Enter confirms selection
+- Esc cancels
+- Default (Enter on 1) = Full Audit
+
+**The 8 scopes and their sub-scopes:**
+
+| # | Scope | Sub-scopes |
+|---|---|---|
+| 1 | Full Audit | All sub-scopes across all categories |
+| 2 | Engineering [ENG] | Functional, Business Rules, Workflows, API, Middleware, Data Layer, Security Tests, Performance, Accessibility, Edge Cases, Integration, E2E |
+| 3 | Security [SEC] | Authentication, Authorization, Injection/XSS, CSRF/SSRF, Secrets/Crypto, Supply Chain, Compliance Mapping, Audit Evidence |
+| 4 | Business [BIZ] | Domain Mapping, Business Rules, Workflow Validation, UAT Scenarios, Product Risk |
+| 5 | Operations [OPS] | Runbooks, Alerting, Observability, Chaos Engineering, Disaster Recovery, Infrastructure |
+| 6 | Support [SUP] | Triage Trees, Customer Comms, Known-Issue DB, Escalation Paths, Self-Service |
+| 7 | Risk [RISK] | Risk Register, Compliance Mapping, Audit Evidence, Secret Scan, PII Handling |
+| 8 | Quick [QUICK] | Discovery, Security Critical, Performance Quick, Engineering Basics |
 
 **Mapping scopes to agents and categories:**
 
@@ -104,4 +126,4 @@ On `halt`, emit a Resumable Snapshot per `08-protocols/RESUMABLE_STATE.md` so a 
 
 It produces specifications; it does not execute tests, deploy fixes, send communications, or file tickets. Citations are re-derived, not externally certified — spot-check before using as audit evidence.
 
-**BEGIN by presenting the scope selector, then proceed through the phases.**
+**BEGIN by presenting the scope selector with the detail pane visible, then proceed through the phases.**
