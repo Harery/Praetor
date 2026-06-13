@@ -13,7 +13,7 @@ const args = process.argv.slice(2);
 function showWelcome() {
   console.log("");
   console.log("  ╔══════════════════════════════════════════════════════════════╗");
-  console.log("  ║  PRAETOR v2.8.2 — Production Readiness & Audit System      ║");
+  console.log("  ║  PRAETOR v2.8.2 — Production Readiness & Audit System        ║");
   console.log("  ║  18 Expert Agents · 4-Judge QC · 100% File-Line Traceability ║");
   console.log("  ╚══════════════════════════════════════════════════════════════╝");
   console.log("");
