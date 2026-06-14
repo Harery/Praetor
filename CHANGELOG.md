@@ -9,6 +9,19 @@
 > `references/reference/CHANGELOG_ARCHIVE.md` — split out in v2.8.0 so the
 > working changelog stays small in any model's context window.
 
+## v2.9.0 — Interactive TUI Rewrite: 13 Tools, Sub-scope Detail, Update Progress, Disclaimers (2026-06-14)
+
+**Interactive TUI overhaul:**
+- **13 agentic tool support**: Expanded from 3 to 13 — Claude Code, OpenCode, Cursor, Windsurf, GitHub Copilot, Cline, Amazon Q Developer, Gemini CLI, Aider, Continue.dev, Codex CLI, Roo Code, Sourcegraph Cody
+- **Docker terminal fix**: Replaced raw-mode stdin with `readline` for Enter-to-return prompts — eliminates phantom `\r\n` key events that caused empty-screen bugs in Docker/Linux terminals. All screen writes are now atomic (single buffer flush)
+- **Sub-scope detail screen**: Selecting a sub-scope now shows assigned agents (with descriptions parsed live from `prompt/07-agents/*.md`), areas covered, AI agent compatibility (all 13 tools listed), LLM disclaimer, and a 5-step installation guide with exact commands for the selected scope
+- **Update progress screen**: Four-step progress (local version → npm registry → version comparison → skill file verification) with spinners. Already-latest path shows full installation inventory + "All dependencies and skill files are on the latest version. Nothing to update." Update-available path shows what will be updated + changelog highlights + download animation + post-update summary
+- **Banner LLM disclaimer**: Main menu banner now explicitly states Praetor does NOT provide any LLM API key, subscription, or model access
+- **Pre-flight attention banner**: Red ATTENTION box at end of `--check` clarifying Praetor does NOT install, provide, or help install any AI agentic tool — it only installs its audit skill INTO tools already present
+- **Install fallback removal**: `--install` now refuses to install when zero tools are detected (was blindly writing to all 13)
+- **Bin field dual mapping**: Both `praetor-audit-kit` and `praetor` resolve to `bin/praetor.js`
+- **`--drill` CLI handler**: `npx praetor-audit-kit --drill eng 4` works from CLI without entering TUI
+
 ## v2.8.5 — 10 Production Hardening Fixes + Interactive Scope Selector (2026-06-13)
 
 **P0 — Breakage fixes:**

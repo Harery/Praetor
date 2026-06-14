@@ -42,7 +42,7 @@ certification).
 |:---|:---|:---|
 | **npm** | `npx praetor-audit-kit` | |
 | **Install to tools** | `npx praetor-audit-kit --install` | Claude Code, OpenCode, Cursor |
-| **GitHub Release** | Download [`praetor-prompt-kit-v2.8.6.zip`](https://github.com/Harery/Praetor/releases/tag/v2.8.6) | |
+| **GitHub Release** | Download [`praetor-prompt-kit-v2.9.0.zip`](https://github.com/Harery/Praetor/releases/tag/v2.9.0) | |
 | **Direct** | Copy `00-orchestrator/MASTER_PROMPT.md` into your LLM context | |
 | **Scope selection** | `npx praetor-audit-kit --scope biz` | Number, alias, or range |
 | **Uninstall** | `npx praetor-audit-kit --uninstall` | Removes from all tools |

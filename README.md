@@ -11,7 +11,7 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-DFBA73?style=flat)](https://github.com/Harery/Praetor/blob/main/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-00f260?style=flat)](https://github.com/Harery/Praetor/pulls)
-[![Version 2.8.5 Stable](https://img.shields.io/badge/v2.8.6-Stable-00f2fe?style=flat)](https://github.com/Harery/Praetor/releases)
+[![Version 2.8.5 Stable](https://img.shields.io/badge/v2.9.0-Stable-00f2fe?style=flat)](https://github.com/Harery/Praetor/releases)
 [![npm](https://img.shields.io/npm/v/praetor-audit-kit?style=flat)](https://www.npmjs.com/package/praetor-audit-kit)
 [![GitHub Stars](https://img.shields.io/github/stars/Harery/Praetor?style=social)](https://github.com/Harery/Praetor/stargazers)
 [![GitHub Discussions](https://img.shields.io/badge/Discussions-Join-9cf?style=flat)](https://github.com/Harery/Praetor/discussions)
@@ -53,6 +53,9 @@ No assumptions. No hallucinations. Just mathematically precise, file-line cited 
 | 🚀 | **Multiple Install Options** | Run via `npx praetor-audit-kit --install` (Claude Code, OpenCode, Cursor), GitHub Release, or direct paste — no runtime dependencies |
 || 🎯 | **Interactive Scope Selector** | 8 audit scopes with 52 sub-scopes — arrow-key TUI or `--scope biz` for CLI/CI |
 || 🔄 | **Self-Update** | `npx praetor-audit-kit --update` checks npm and installs the latest version |
+|| 🔍 | **13 Agentic Tools** | Auto-detects Claude Code, OpenCode, Cursor, Windsurf, Copilot, Cline, Amazon Q, Gemini, Aider, Continue.dev, Codex CLI, Roo Code, Cody |
+|| 📋 | **Sub-scope Detail** | Each sub-scope shows assigned agents, areas covered, AI tool compatibility, and a 5-step install guide |
+|| ⚠ | **Honest Disclaimers** | Banner + pre-flight explicitly state Praetor does NOT provide LLM API keys or install AI tools |
 
 ---
 
