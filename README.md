@@ -11,7 +11,7 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-DFBA73?style=flat)](https://github.com/Harery/Praetor/blob/main/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-00f260?style=flat)](https://github.com/Harery/Praetor/pulls)
-[![v2.9.0 Stable](https://img.shields.io/badge/v2.9.0-Stable-00f2fe?style=flat)](https://github.com/Harery/Praetor/releases)
+[![v2.9.1 Stable](https://img.shields.io/badge/v2.9.1-Stable-00f2fe?style=flat)](https://github.com/Harery/Praetor/releases)
 [![npm](https://img.shields.io/npm/v/praetor-audit-kit?style=flat)](https://www.npmjs.com/package/praetor-audit-kit)
 [![GitHub Stars](https://img.shields.io/github/stars/Harery/Praetor?style=social)](https://github.com/Harery/Praetor/stargazers)
 [![GitHub Discussions](https://img.shields.io/badge/Discussions-Join-9cf?style=flat)](https://github.com/Harery/Praetor/discussions)

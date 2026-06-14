@@ -9,6 +9,17 @@
 > `references/reference/CHANGELOG_ARCHIVE.md` — split out in v2.8.0 so the
 > working changelog stays small in any model's context window.
 
+## v2.9.1 — Branding & Assets (2026-06-14)
+
+**Packaging:**
+- Added `assets/` directory to npm package (logo suite + social preview + favicon ship with the package)
+- README badges: fixed stale label, added "13 Agentic Tools" and "4-Judge Quality Council" badges
+- All 6 branding assets attached to GitHub release v2.9.0
+
+**Wiki:**
+- Home page: added logo, slogan, badge row, center-aligned branding header
+- Quick Start: updated to 13-tool support, added --drill command, added interactive TUI reference
+
 ## v2.9.0 — Interactive TUI Rewrite: 13 Tools, Sub-scope Detail, Update Progress, Disclaimers (2026-06-14)
 
 **Interactive TUI overhaul:**
