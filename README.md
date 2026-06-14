@@ -11,12 +11,13 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-DFBA73?style=flat)](https://github.com/Harery/Praetor/blob/main/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-00f260?style=flat)](https://github.com/Harery/Praetor/pulls)
-[![Version 2.8.5 Stable](https://img.shields.io/badge/v2.9.0-Stable-00f2fe?style=flat)](https://github.com/Harery/Praetor/releases)
+[![v2.9.0 Stable](https://img.shields.io/badge/v2.9.0-Stable-00f2fe?style=flat)](https://github.com/Harery/Praetor/releases)
 [![npm](https://img.shields.io/npm/v/praetor-audit-kit?style=flat)](https://www.npmjs.com/package/praetor-audit-kit)
 [![GitHub Stars](https://img.shields.io/github/stars/Harery/Praetor?style=social)](https://github.com/Harery/Praetor/stargazers)
 [![GitHub Discussions](https://img.shields.io/badge/Discussions-Join-9cf?style=flat)](https://github.com/Harery/Praetor/discussions)
 [![18 Expert Agents](https://img.shields.io/badge/18-Expert_Agents-a855f7?style=flat)](#-the-18-expert-agents)
-[![Claude Code Compatible](https://img.shields.io/badge/Claude_Code-Compatible-6366f1?style=flat)](#-quick-start)
+[![13 Agentic Tools](https://img.shields.io/badge/13-Agentic_Tools-6366f1?style=flat)](#-quick-start)
+[![4-Judge Quality Council](https://img.shields.io/badge/4-Judge-Quality_Council-f43f5e?style=flat)](#-the-4-judge-quality-council)
 
 <br/>
 

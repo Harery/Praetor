@@ -38,6 +38,7 @@
     "prompt/",
     "references/",
     "bin/",
+    "assets/",
     "SKILL.md",
     "CHANGELOG.md",
     "llms.txt",
