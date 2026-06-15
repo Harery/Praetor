@@ -1,11 +1,11 @@
 # Praetor
 
-> Praetor is a single-prompt, multi-agent orchestration framework that transforms any codebase into a comprehensive production readiness and audit package. It dispatches 18 autonomous domain experts overseen by a 4-Judge Quality Council, performing multi-disciplinary audits (security, compliance, performance, accessibility, operations) with 100% source-code traceability. Runs inside long-context LLM environments (Claude, GPT-5, Gemini). No installation required.
+> Praetor is a single-prompt, multi-agent orchestration framework that transforms any codebase into a comprehensive production readiness and audit package. It dispatches 18 autonomous domain experts overseen by a 4-Judge Quality Council, performing multi-disciplinary audits (security, compliance, performance, accessibility, operations) with 100% source-code traceability. Runs inside long-context LLM environments (Claude, GPT-5, Gemini). Install via npm — no runtime dependencies.
 
 ## Documentation
 
 - [README.md](README.md): Project overview, features, quick start guide, architecture, and agent roster.
-- [prompt/GETTING_STARTED.md](prompt/GETTING_STARTED.md): Step-by-step first-time walkthrough with copy-paste examples.
+- [prompt/GETTING_STARTED.md](prompt/GETTING_STARTED.md): Step-by-step first-time walkthrough.
 - [prompt/VERSION.md](prompt/VERSION.md): Version history, design properties, and system capabilities.
 
 ## Architecture
@@ -17,7 +17,7 @@
 
 ## Core System (Prompt Kit)
 
-- [prompt/00-orchestrator/MASTER_PROMPT.md](prompt/00-orchestrator/MASTER_PROMPT.md): The master prompt — paste this to start a Praetor run.
+- [prompt/00-orchestrator/MASTER_PROMPT.md](prompt/00-orchestrator/MASTER_PROMPT.md): The master prompt — loaded automatically when Praetor is installed.
 - [prompt/00-orchestrator/AGENT_ROSTER.md](prompt/00-orchestrator/AGENT_ROSTER.md): All 18 agents and QC judges at a glance.
 - [prompt/07-agents/](prompt/07-agents/): Individual persona definitions for each of the 18 expert agents.
 - [prompt/08-protocols/](prompt/08-protocols/): Inter-agent protocols — citations, handoffs, quality gates, conditional continue, resumable state.

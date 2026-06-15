@@ -9,7 +9,7 @@ const https = require("https");
 const PKG_ROOT = path.join(__dirname, "..");
 const PROMPT_DIR = path.join(PKG_ROOT, "prompt");
 const MASTER_PROMPT = path.join(PROMPT_DIR, "00-orchestrator", "MASTER_PROMPT.md");
-const VERSION = "2.9.1";
+const VERSION = "2.9.2";
 
 const args = process.argv.slice(2);
 

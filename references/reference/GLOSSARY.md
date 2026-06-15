@@ -190,7 +190,7 @@ the gate is not a command — it's answered in place and the gate is re-shown,
 with no state lost. Defined in the Conditional Continue protocol.
 
 **Resumable Snapshot** — A compact plain-text block Praetor emits on
-`halt`. Copy it and paste it back in a later session to resume the run
+`halt`. Provide it in a later session to resume the run
 exactly where it stopped, without re-running discovery.
 
 **Citations Index** — A table at the end of every module listing each
@@ -216,7 +216,7 @@ in a Resumable Snapshot, so a resumed run can tell whether your code changed
 since you stopped.
 
 **SNAPSHOT_DRIFT** — The warning Praetor raises on resume when the live
-source's SNAPSHOT_TOKEN no longer matches the one in your pasted snapshot —
+source's SNAPSHOT_TOKEN no longer matches the one in your supplied snapshot —
 i.e., the code changed. Praetor asks whether to re-discover before continuing
 rather than trusting stale state.
 

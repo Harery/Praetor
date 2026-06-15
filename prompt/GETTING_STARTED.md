@@ -16,40 +16,61 @@ risk register — each tied to a specific file and line so you can trust it.
 - Your source code, in one of these forms:
   - a public GitHub URL, or
   - files you can upload, or
-  - code you can paste.
+  - code you can attach as context.
 - 10–15 minutes for a first small run. Large repos take longer and run in
   pieces (you will be prompted to continue).
 
 ## The 7 steps
 
-### Step 1 — Load the system
-Open `00-orchestrator/MASTER_PROMPT.md`. Copy everything from the line of
-`═══` characters onward. Paste it into a new conversation with your LLM.
+### Step 1 — Install Praetor
 
-> **Tip:** You can also install Praetor via npm:
+Install Praetor into your agentic LLM so it's available as a skill:
+
+```
+npx praetor-audit-kit --install
+```
+
+This auto-detects and installs into Claude Code, OpenCode, Cursor, and other
+supported tools. To install into a specific tool only:
+
+```
+npx praetor-audit-kit --install "OpenCode"
+```
+
+> **Tip:** You can also run standalone without installing into a tool:
 > `npx praetor-audit-kit`
 
 ### Step 2 — Point it at your code
-On the next line after the pasted prompt, add one line:
+
+Start a conversation with your LLM and say:
+
+```
+audit my codebase for production readiness
+```
+
+Then provide your source:
 
 ```
 Source: https://github.com/yourname/yourrepo
 ```
 
-(Or `Source: the files I just uploaded`, or paste the code below that line.)
+(Or `Source: the files I just uploaded`, or attach the code as context.)
 Send the message.
 
 ### Step 3 — Let it look around (silent, ~1–2 min)
+
 Praetor reads your repo, classifies files, maps your domain, and detects your
 tools. You will not see much yet — this is intentional. It is working.
 
 ### Step 4 — Read the Discovery Report and the "MUST CONFIRM" block
+
 Praetor stops and shows you what it found, including a short list of things it
 **inferred but is not sure about** (the MUST CONFIRM block). This is the most
 important moment for you: it is asking you to confirm assumptions before it
 does the heavy work.
 
 ### Step 5 — Reply at the gate
+
 Reply using one of these simple forms (full reference:
 `08-protocols/CONDITIONAL_CONTINUE.md`):
 
@@ -75,6 +96,7 @@ Reply using one of these simple forms (full reference:
 (the critical items). You will see how it works without a giant wall of output.
 
 ### Step 6 — Receive results, module by module
+
 Praetor emits results for one module at a time, grouped by audience:
 Engineering, Business, Operations, Support, Compliance. After each module it
 pauses. Reply:
@@ -87,6 +109,7 @@ to get the next one. If a single module is large, it may pause mid-way and
 ask you to reply `continue module`.
 
 ### Step 7 — Read the wrap-up
+
 After the last module, Praetor automatically emits a cross-audience summary:
 coverage by audience, a gap report, the consolidated risk register, and —
 importantly — a Regression Prevention Plan that ties each serious fix to a
@@ -132,16 +155,18 @@ single-module P0 run might emit a few dozen; a full multi-module run, many
 hundreds. See `99-reference/BY_THE_NUMBERS.md` for the system's own counts.
 
 **Can I stop and resume tomorrow?**
-Yes. Reply `halt`; Praetor gives you a snapshot. Next session, paste the master
-prompt, your source, and that snapshot. See `08-protocols/RESUMABLE_STATE.md`.
+Yes. Reply `halt`; Praetor gives you a snapshot. Next session, re-run Praetor
+and provide that snapshot to resume. See `08-protocols/RESUMABLE_STATE.md`.
 
 **Where do I learn the jargon?**
 `99-reference/GLOSSARY.md`. For quick command reference, `99-reference/CHEATSHEET.md`.
 
-## A safe first run, copy-paste
+## A safe first run
+
+Install Praetor, then tell your LLM:
 
 ```
-[paste contents of 00-orchestrator/MASTER_PROMPT.md here]
+audit my codebase for production readiness
 
 Source: https://github.com/yourname/yourrepo
 override: RUN_MODULES = [M_AUTH], RUN_PRIORITIES = [P0]

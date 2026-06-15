@@ -2,7 +2,7 @@
 
 > **Production Readiness, Audit, Evidence, Testing, Operations, & Review**
 >
-> Copy from the `═══` line onward and paste into Claude with your source.
+> This is the master prompt — loaded automatically when Praetor is installed.
 
 ═══════════════════════════════════════════════════════════════════════════════
 

@@ -1,7 +1,7 @@
 # Run Modes — How to Invoke Partial or Targeted Runs
 
 Praetor accepts a `RUN CONFIGURATION` block at the end of your message
-(skill-based invocation — no separate prompt file to paste). Default = FULL
+(skill-based invocation — no separate prompt file to load). Default = FULL
 (all phases × all categories × all priorities × all modules).
 
 ## Override Syntax
@@ -186,11 +186,11 @@ must **re-supply the source** (repo URL or files). Praetor will re-run
 discovery silently but should land on the same module inventory if the repo
 hasn't changed.
 
-For very large repos, save the Discovery Report from Recipe 1 and paste it as
+For very large repos, save the Discovery Report from Recipe 1 and provide it as
 context in session 2 alongside the source, so Praetor can skip rediscovery.
 
 Better still: reply `halt` (at the gate or at any module boundary) and
-Praetor emits a **Resumable Snapshot** — a structured paste-back block that
+Praetor emits a **Resumable Snapshot** — a structured resumable block that
 restores discovery, registers, gate answers, and the Coverage Ledger in one
 shot. See `08-protocols\/RESUMABLE_STATE.md`. Wall-clock planning for
 each recipe lives in `05-execution\/TIMELINE_ESTIMATES.md`.

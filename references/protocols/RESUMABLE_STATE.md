@@ -7,7 +7,7 @@
 
 > Purpose: `halt` must leave enough state behind that a later session can
 > continue without re-running discovery. This protocol defines a compact,
-> paste-back snapshot for that.
+> resumable snapshot for that.
 
 ## When it emits
 
@@ -33,12 +33,12 @@ session skip rediscovery and continue exactly where it stopped.
 > within a family; `SNAPSHOT_DRIFT` compares the SNAPSHOT_TOKEN (source state),
 > never the kit patch level. Bump embedded markers only on a minor/major bump.
 
-The snapshot is plain text the user copies and pastes back (after triggering
+The snapshot is plain text the user supplies back (after triggering
 the Praetor skill and supplying the source) to resume. It is intentionally
 compact — register *summaries* and IDs, not full register bodies.
 
 ```
-=== PRAETOR RESUMABLE SNAPSHOT v2.9.1 ===
+=== PRAETOR RESUMABLE SNAPSHOT v2.9.2 ===
 SOURCE: <github URL | path>   SNAPSHOT_TOKEN: <sha | upload-date | content-fingerprint>
 RUN_CONFIG: RUN_PHASES=[...] RUN_CATEGORIES=[...] RUN_PRIORITIES=[...] RUN_MODULES=[...]
 STOPPED_AT: <phase 3 gate | end of module M_X (n of N) | mid-module M_X (categories A,B done; C,D,E pending)>
@@ -76,7 +76,7 @@ re-enters that module at the first pending category.
 
 ## Resume procedure
 
-On a new session the user triggers the Praetor skill, supplies the source, and pastes this snapshot.
+On a new session the user triggers the Praetor skill, supplies the source, and provides this snapshot.
 The Orchestrator then:
 
 1. Treats `MODULES`, `STACK`, `TOOLING_PROFILE` as A01/A03 output — does NOT
@@ -108,7 +108,7 @@ The Orchestrator then:
   two sessions ran in different environments.
 - Tamper awareness (soft integrity check): the snapshot is user-editable by
   design (corrections are legitimate), so it carries no enforced signature.
-  When a pasted snapshot contains internally inconsistent state (e.g., an
+  When a supplied snapshot contains internally inconsistent state (e.g., an
   `EMITTED_IDS` entry for a module not in `COVERED_MODULES`, or a confidence
   upgrade with no matching `Q*` answer), the Orchestrator flags the
   inconsistency and asks before trusting it — it never silently repairs.
@@ -121,5 +121,5 @@ The Orchestrator then:
 
 `references/execution/RUN_MODES.md` already tells users to save the Discovery Report
 and re-supply source across sessions. This protocol formalizes that into a
-structured, paste-back block and extends it to mid-run (per-module) resumption,
+structured, resumable block and extends it to mid-run (per-module) resumption,
 not just discovery-only.

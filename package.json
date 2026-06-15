@@ -1,6 +1,6 @@
 {
   "name": "praetor-audit-kit",
-  "version": "2.9.1",
+  "version": "2.9.2",
   "description": "Autonomous production readiness and audit system — 18 expert AI agents, 4-judge quality council, 100% file-line traceability for security, compliance, and release gates",
   "keywords": [
     "production-readiness",

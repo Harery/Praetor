@@ -185,7 +185,7 @@ the gate is not a command — it's answered in place and the gate is re-shown,
 with no state lost. Defined in the Conditional Continue protocol.
 
 **Resumable Snapshot** — A compact plain-text block Praetor emits on
-`halt`. Copy it and paste it back in a later session to resume the run
+`halt`. Provide it in a later session to resume the run
 exactly where it stopped, without re-running discovery.
 
 **Citations Index** — A table at the end of every module listing each

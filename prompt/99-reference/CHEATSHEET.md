@@ -1,4 +1,4 @@
-# Operator's Cheat Sheet (v2.9.1)
+# Operator's Cheat Sheet (v2.9.2)
 
 ## Quick-Start
 1. Open a session with your AI agent (the Praetor skill triggers on phrases like "audit my code",
@@ -55,7 +55,7 @@ continue
 continue with: Q1=..., Q2=unknown, Q3=...
 correct: <list of corrections> then continue
 override: RUN_X = [...] then continue
-halt                         (emits a Resumable Snapshot you can paste back later)
+halt                         (emits a Resumable Snapshot you can supply in a later session)
 <any question>               (answered in place; gate re-shown — NOT a halt,
                               no snapshot, no state loss)
 ```

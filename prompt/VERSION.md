@@ -1,6 +1,6 @@
 # Praetor Version
 
-**Current: 2.9.1**
+**Current: 2.9.2**
 
 ## What Praetor Contains
 
@@ -16,7 +16,7 @@
 - 11 ID schemes (single source of truth: `99-reference/ID_SCHEMES.md`)
 - Test fixtures (seed SQL + teardown) for every data-dependent test
 - Secret-key scan + secret-lint CI stage (A06)
-- Resumable state: `halt` emits a paste-back snapshot
+- Resumable state: `halt` emits a resumable snapshot
 - Self-consistency CI guards under `tools/`
 - Skill manifest (`SKILL.md`) for Claude Code loading
 - First-time user guide (`GETTING_STARTED.md`)
@@ -24,7 +24,7 @@
 
 ## Design Properties
 
-- **Single-prompt gateway** — one paste serves QA, QC, Security, Operations,
+- **Single-system gateway** — one install serves QA, QC, Security, Operations,
   Support, and Compliance.
 - **Autonomous expert agents** — each operates without supervision in its
   scope, with a declared persona, authority, and refusal conditions.
@@ -47,7 +47,7 @@
 - **Secret hygiene** — A06 emits a masked findings table and a runnable
   secret-lint CI stage.
 - **Resumability** — `halt` produces a compact snapshot that a later session
-  pastes back to continue without re-running discovery.
+  supplies to continue without re-running discovery.
 - **Universal Agent Discipline** — 6 rules (U1–U6) every agent obeys:
   no self-skip, citation discipline, no output abbreviation, status-tag
   discipline, Coverage Ledger awareness, mandatory Phase 6 wrap-up.

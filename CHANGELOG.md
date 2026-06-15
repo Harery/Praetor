@@ -9,6 +9,21 @@
 > `references/reference/CHANGELOG_ARCHIVE.md` — split out in v2.8.0 so the
 > working changelog stays small in any model's context window.
 
+## v2.9.2 — Install-Only Documentation (2026-06-14)
+
+**Removed all copy/paste instructions across every doc.** Praetor is now
+documented as install-only — either into your agentic LLM (`--install`) or
+standalone via npm. No more "copy from the ═══ line, paste into your LLM."
+
+**Changes:**
+- README: rewrote Quick Start to install-only (Option A: `--install` into agentic LLM; Option B: standalone via npm); removed "direct paste" from install options; tagline, TL;DR, and How It Works updated to remove paste references
+- README: removed "Expertise" column from all 4 agent tier tables (Tier 1–4)
+- MASTER_PROMPT.md: removed "Copy from the ═══ line onward and paste into Claude" header instruction
+- wiki/Quick-Start-Guide.md: rewritten to install-only; removed Options that involved manual copy/paste
+- wiki/Home.md: removed "Direct" install row (manual paste option)
+- GETTING_STARTED.md: rewritten to install-first flow; removed copy-paste walkthrough
+- llms.txt: changed "No installation required" → "Install via npm"; removed copy-paste references
+
 ## v2.9.1 — Branding & Assets (2026-06-14)
 
 **Packaging:**

@@ -5,13 +5,13 @@
 <br/>
 <br/>
 
-### **One prompt into your LLM. 18 autonomous experts audit your entire codebase. Zero hallucinations.**
+### **18 autonomous experts audit your entire codebase. Zero hallucinations.**
 
 <br/>
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-DFBA73?style=flat)](https://github.com/Harery/Praetor/blob/main/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-00f260?style=flat)](https://github.com/Harery/Praetor/pulls)
-[![v2.9.1 Stable](https://img.shields.io/badge/v2.9.1-Stable-00f2fe?style=flat)](https://github.com/Harery/Praetor/releases)
+[![v2.9.2 Stable](https://img.shields.io/badge/v2.9.2-Stable-00f2fe?style=flat)](https://github.com/Harery/Praetor/releases)
 [![npm](https://img.shields.io/npm/v/praetor-audit-kit?style=flat)](https://www.npmjs.com/package/praetor-audit-kit)
 [![GitHub Stars](https://img.shields.io/github/stars/Harery/Praetor?style=social)](https://github.com/Harery/Praetor/stargazers)
 [![GitHub Discussions](https://img.shields.io/badge/Discussions-Join-9cf?style=flat)](https://github.com/Harery/Praetor/discussions)
@@ -29,12 +29,12 @@
 
 ## What is Praetor?
 
-**Praetor** (Production Readiness, Audit, Evidence, Testing, Operations & Review) is a single-prompt, multi-agent orchestration framework that transforms any codebase into a comprehensive **production readiness audit package**. You paste one master prompt into your LLM — Claude, GPT-5, or Gemini — and **18 autonomous domain experts** fan out across your entire codebase, analyzing security, compliance, performance, accessibility, and operations. A **4-Judge Quality Council** independently verifies every citation before a single word reaches you. The result: test cases, runbooks, compliance evidence, risk registers, and support playbooks — every finding tied to a verified `file:line` citation, packaged for six distinct audiences.
+**Praetor** (Production Readiness, Audit, Evidence, Testing, Operations & Review) is a single-prompt, multi-agent orchestration framework that transforms any codebase into a comprehensive **production readiness audit package**. Install it into your agentic LLM (Claude Code, OpenCode, Cursor, and more) or run it standalone — **18 autonomous domain experts** fan out across your entire codebase, analyzing security, compliance, performance, accessibility, and operations. A **4-Judge Quality Council** independently verifies every citation before a single word reaches you. The result: test cases, runbooks, compliance evidence, risk registers, and support playbooks — every finding tied to a verified `file:line` citation, packaged for six distinct audiences.
 
 No assumptions. No hallucinations. Just mathematically precise, file-line cited evidence packages for engineering, compliance, operations, and business stakeholders.
 
 > [!NOTE]
-> **TL;DR** — You paste one prompt into your LLM. Praetor reads your codebase and returns test cases, runbooks, compliance evidence, risk registers, and support playbooks — every finding tied to a real `file:line` citation, verified by an independent quality council.
+> **TL;DR** — Install Praetor and point it at your codebase. It returns test cases, runbooks, compliance evidence, risk registers, and support playbooks — every finding tied to a real `file:line` citation, verified by an independent quality council.
 
 ---
 
@@ -51,7 +51,7 @@ No assumptions. No hallucinations. Just mathematically precise, file-line cited 
 | 🔑 | **Secret Hygiene** | Built-in secret-key scanning with a runnable secret-lint CI stage |
 | ⏸️ | **Resumable Sessions** | `halt` emits a compact snapshot — resume tomorrow without re-running discovery |
 | 🚦 | **Release Gate Hooks** | Ready-to-run shell gates tying every CRITICAL/HIGH fix to CI pipelines, alerts, and runbooks |
-| 🚀 | **Multiple Install Options** | Run via `npx praetor-audit-kit --install` (Claude Code, OpenCode, Cursor), GitHub Release, or direct paste — no runtime dependencies |
+| 🚀 | **Multiple Install Options** | Install into your agentic LLM via `--install` (Claude Code, OpenCode, Cursor, and more) or run standalone via npm — no runtime dependencies |
 || 🎯 | **Interactive Scope Selector** | 8 audit scopes with 52 sub-scopes — arrow-key TUI or `--scope biz` for CLI/CI |
 || 🔄 | **Self-Update** | `npx praetor-audit-kit --update` checks npm and installs the latest version |
 || 🔍 | **13 Agentic Tools** | Auto-detects Claude Code, OpenCode, Cursor, Windsurf, Copilot, Cline, Amazon Q, Gemini, Aider, Continue.dev, Codex CLI, Roo Code, Cody |
@@ -63,19 +63,27 @@ No assumptions. No hallucinations. Just mathematically precise, file-line cited 
 ## 🚀 Quick Start
 
 > [!IMPORTANT]
-> Praetor runs inside long-context LLM environments (Claude, GPT-5, Gemini, etc.). **No software downloads or API key configurations are required to get started.**
+> Praetor runs inside long-context LLM environments (Claude, GPT-5, Gemini, etc.). Install it into your agentic LLM or run it standalone — no API key configuration required.
 
-### 1 — Copy the Master Prompt
+### Option A — Install Into Your Agentic LLM (Recommended)
 
-Open [`prompt/00-orchestrator/MASTER_PROMPT.md`](prompt/00-orchestrator/MASTER_PROMPT.md) and copy everything starting from the `═══` separator line.
-
-### 2 — Paste into Your LLM
-
-Paste the prompt into a new conversation, then append your target codebase:
-
-```markdown
-Source Codebase: https://github.com/your-organization/your-repository.git
+```bash
+npx praetor-audit-kit --install
 ```
+
+This auto-detects and installs Praetor into Claude Code, OpenCode, Cursor, and other supported tools. Then just tell your LLM:
+
+```
+audit my codebase for production readiness
+```
+
+### Option B — Run Standandalone
+
+```bash
+npx praetor-audit-kit
+```
+
+Launches the interactive scope selector. Use `--scope biz` for CLI/CI, or `--scope 2-4` for a range of scopes.
 
 ### 3 — Confirm & Execute
 
@@ -94,7 +102,7 @@ then continue
 
 **That's it.** Praetor handles the rest — module by module, audience by audience.
 
-📖 **First time?** Read the [step-by-step walkthrough](prompt/GETTING_STARTED.md) with copy-paste examples.
+📖 **First time?** Read the [step-by-step walkthrough](prompt/GETTING_STARTED.md).
 
 </div>
 
@@ -120,7 +128,7 @@ flowchart LR
 
 | Phase | What Happens |
 |:---|:---|
-| **1. Master Prompt** | Paste the orchestrator into your LLM context — the system initializes |
+| **1. Initialization** | Praetor loads into your LLM context — the system initializes |
 | **2. Technical Discovery** | Auto-detects language stacks, frameworks, databases, and monitoring libraries |
 | **3. MUST CONFIRM Gate** | Stop-point requiring your explicit confirmation and parameter tuning |
 | **4. Agent Swarm** | Parallelized execution of 18 specialized analysis mandates across your codebase |
@@ -160,49 +168,49 @@ flowchart LR
 <details>
 <summary><strong>Tier 1 — Discovery & Domain Mapping</strong></summary>
 
-| ID | Role | Expertise |
-|:---|:---|:---|
-| **A01** | Discovery — Principal Software Archaeologist | 20y exp |
-| **A02** | Domain Mapping — DDD Architect | 15y exp |
-| **A03** | Tooling Discovery — DevOps & CI/CD Integrator | 12y exp |
+| ID | Role |
+|:---|:---|
+| **A01** | Discovery — Principal Software Archaeologist |
+| **A02** | Domain Mapping — DDD Architect |
+| **A03** | Tooling Discovery — DevOps & CI/CD Integrator |
 
 </details>
 
 <details>
 <summary><strong>Tier 2 — Quality & Robustness Specialists</strong></summary>
 
-| ID | Role | Expertise |
-|:---|:---|:---|
-| **A04** | Unit Test — Senior Test Automation Engineer | 12y exp |
-| **A05** | Integration Test — System Test Lead | 15y exp |
-| **A06** | Security — OWASP Top 10 Specialist | 18y exp |
-| **A07** | Performance — Scaling & Volumetric Architect | 15y exp |
-| **A08** | Accessibility — WCAG Compliance Expert | 10y exp |
-| **A09** | Chaos — SRE Chaos & Resiliency Lead | 12y exp |
+| ID | Role |
+|:---|:---|
+| **A04** | Unit Test — Senior Test Automation Engineer |
+| **A05** | Integration Test — System Test Lead |
+| **A06** | Security — OWASP Top 10 Specialist |
+| **A07** | Performance — Scaling & Volumetric Architect |
+| **A08** | Accessibility — WCAG Compliance Expert |
+| **A09** | Chaos — SRE Chaos & Resiliency Lead |
 
 </details>
 
 <details>
 <summary><strong>Tier 3 — Business & Operations Leaders</strong></summary>
 
-| ID | Role | Expertise |
-|:---|:---|:---|
-| **A10** | Business Analyst — Senior Requirements Lead | 15y exp |
-| **A11** | UAT — User Acceptance Testing Specialist | 12y exp |
-| **A12** | Runbook — Staff SRE & Runbook Architect | 15y exp |
-| **A13** | Alerting — Observability & Alerting Specialist | 12y exp |
+| ID | Role |
+|:---|:---|
+| **A10** | Business Analyst — Senior Requirements Lead |
+| **A11** | UAT — User Acceptance Testing Specialist |
+| **A12** | Runbook — Staff SRE & Runbook Architect |
+| **A13** | Alerting — Observability & Alerting Specialist |
 
 </details>
 
 <details>
 <summary><strong>Tier 4 — Governance, Compliance & Communications</strong></summary>
 
-| ID | Role | Expertise |
-|:---|:---|:---|
-| **A14** | Support Triage — Helpdesk & CX Lead | 12y exp |
-| **A15** | Customer Comms — Customer Communications Lead | 10y exp |
-| **A16** | Compliance — Compliance and Audit Director | 18y exp |
-| **A17** | Risk — Risk Management Lead | 15y exp |
+| ID | Role |
+|:---|:---|
+| **A14** | Support Triage — Helpdesk & CX Lead |
+| **A15** | Customer Comms — Customer Communications Lead |
+| **A16** | Compliance — Compliance and Audit Director |
+| **A17** | Risk — Risk Management Lead |
 
 </details>
 
@@ -310,7 +318,7 @@ Praetor is distributed under the **MIT License**. Use it, modify it, and distrib
 <br/>
 <br/>
 
-**One prompt. Eighteen experts. Six disciplines. Full traceability.**
+**One system. Eighteen experts. Six disciplines. Full traceability.**
 
 <br/>
 

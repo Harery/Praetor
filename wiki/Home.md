@@ -12,10 +12,9 @@ By utilizing **18 autonomous expert agents** under the strict review of a **4-Ju
 |:---|:---|:---|
 | **npm** | `npx praetor-audit-kit` | |
 | **Install to tools** | `npx praetor-audit-kit --install` | Claude Code, OpenCode, Cursor |
-| **GitHub Release** | [Download v2.9.1](https://github.com/Harery/Praetor/releases/tag/v2.9.1) | |
+| **GitHub Release** | [Download v2.9.2](https://github.com/Harery/Praetor/releases/tag/v2.9.2) | |
 | **Scope selection** | `npx praetor-audit-kit --scope biz` | Number, alias, or range |
 | **Uninstall** | `npx praetor-audit-kit --uninstall` | Removes from all tools |
-| **Direct** | Copy `prompt/00-orchestrator/MASTER_PROMPT.md` into your LLM context | |
 
 ---
 

@@ -42,8 +42,7 @@ certification).
 |:---|:---|:---|
 | **npm** | `npx praetor-audit-kit` | |
 | **Install to tools** | `npx praetor-audit-kit --install` | Claude Code, OpenCode, Cursor |
-| **GitHub Release** | Download [`praetor-prompt-kit-v2.9.1.zip`](https://github.com/Harery/Praetor/releases/tag/v2.9.1) | |
-| **Direct** | Copy `00-orchestrator/MASTER_PROMPT.md` into your LLM context | |
+| **GitHub Release** | Download [`praetor-prompt-kit-v2.9.2.zip`](https://github.com/Harery/Praetor/releases/tag/v2.9.2) | |
 | **Scope selection** | `npx praetor-audit-kit --scope biz` | Number, alias, or range |
 | **Uninstall** | `npx praetor-audit-kit --uninstall` | Removes from all tools |
 | **Update** | `npx praetor-audit-kit --update` | Self-update from npm |
@@ -53,9 +52,9 @@ certification).
 > **New to Praetor?** Read `GETTING_STARTED.md` for a first-time, step-by-step
 > walkthrough written for non-experienced users. The steps below are the short version.
 
-1. Copy the contents of `00-orchestrator/MASTER_PROMPT.md`
-2. Paste into your LLM (Claude, GPT-5, Gemini, or any long-context model)
-3. Append:
+1. Install Praetor into your agentic LLM: `npx praetor-audit-kit --install`
+2. Tell your LLM: `audit my codebase for production readiness`
+3. Provide your source:
    ```
    Source: <github URL | local path | uploaded files>
    ```
@@ -72,7 +71,7 @@ certification).
    then continue
    ```
 6. Per-module outputs follow. Reply `continue` for the next module, or
-   `halt` to stop with a resumable snapshot you can paste back later.
+   `halt` to stop with a resumable snapshot you can provide in a later session.
 7. Phase 6 wrap-up emits automatically with the executive summary.
 
 For non-technical audiences, see `99-reference/GLOSSARY.md`.
@@ -88,7 +87,7 @@ prompt/
 ├── GETTING_STARTED.md                        ← first-time, step-by-step guide
 │
 ├── 00-orchestrator/
-│   ├── MASTER_PROMPT.md                      ← THE PROMPT (paste this)
+│   ├── MASTER_PROMPT.md                      ← THE PROMPT (loaded on install)
 │   └── AGENT_ROSTER.md                       ← all 18 agents at a glance
 │
 ├── 01-phases/                                ← 7 phases of the run
@@ -161,7 +160,7 @@ prompt/
 │   ├── ARTIFACT_STATUS.md                    ← canonical status set (7 core + extended)
 │   ├── HANDOFF_PROTOCOL.md
 │   ├── QUALITY_GATES.md
-│   ├── RESUMABLE_STATE.md                    ← halt → paste-back snapshot
+│   ├── RESUMABLE_STATE.md                    ← halt → resumable snapshot
 │   ├── ROOT_CAUSE_GROUPING.md
 │   ├── TEST_FIXTURES.md                      ← seed SQL + teardown
 │   └── UNIVERSAL_AGENT_DISCIPLINE.md         ← U1-U6 rules every agent obeys
@@ -237,6 +236,6 @@ Use it, modify it, and share it with your teams. Attribution appreciated but not
 
 ---
 
-**One prompt. Eighteen experts. Six disciplines. Full traceability.**
+**One system. Eighteen experts. Six disciplines. Full traceability.**
 
 > See [CHANGELOG.md](../CHANGELOG.md) for release history. See [llms.txt](../llms.txt) for AI agent documentation index.

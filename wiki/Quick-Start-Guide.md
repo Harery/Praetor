@@ -5,40 +5,33 @@ Get Praetor running on your codebase in under 2 minutes.
 ## Prerequisites
 
 - Access to a long-context LLM (Claude, GPT-5, Gemini, or similar)
-- Your source code — as a public GitHub URL, uploaded files, or pasted code
+- Your source code — as a public GitHub URL, uploaded files, or attached context
 
-## Option A: npm (Recommended)
+## Option A: Install Into Your Agentic LLM (Recommended)
+
+```bash
+npx praetor-audit-kit --install
+```
+
+This auto-detects and installs Praetor into all supported agentic tools on your machine (Claude Code, OpenCode, Cursor, and more). Then simply tell your LLM:
+
+```
+audit my codebase for production readiness
+```
+
+To install into a specific tool only:
+
+```bash
+npx praetor-audit-kit --install "OpenCode"
+```
+
+## Option B: Run Standalone via npm
 
 ```bash
 npx praetor-audit-kit
 ```
 
-This downloads the prompt kit and displays the quick start guide. Then:
-
-1. Open the printed path to `MASTER_PROMPT.md`
-2. Copy everything from the `═══` separator line onward
-3. Paste into your LLM and append:
-   ```
-   Source: https://github.com/yourname/yourrepo
-   ```
-4. Send and reply `continue` when prompted
-
-## Option B: GitHub Release
-
-1. Go to [Releases](https://github.com/Harery/Praetor/releases/tag/v2.9.1)
-2. Download `praetor-prompt-kit-v2.9.1.zip`
-3. Extract and open `prompt/00-orchestrator/MASTER_PROMPT.md`
-4. Copy from the `═══` line, paste into your LLM with your source URL
-5. Reply `continue` when prompted
-
-## Option C: Agentic Tool Install (Claude Code, OpenCode, Cursor)
-
-```bash
-npx praetor-audit-kit --install            # auto-detect & install to all
-npx praetor-audit-kit --install "OpenCode" # specific tool
-```
-
-Then simply say: `audit my codebase for production readiness`
+Launches the interactive scope selector. Pick a scope, review the agents and areas covered, then point it at your codebase.
 
 **Other CLI commands:**
 
@@ -50,12 +43,11 @@ npx praetor-audit-kit --update             # update to latest from npm
 npx praetor-audit-kit --uninstall          # remove from all tools
 ```
 
-## Option D: Direct
+## Option C: GitHub Release
 
-1. Clone or download the repo
-2. Open `prompt/00-orchestrator/MASTER_PROMPT.md`
-3. Copy from the `═══` line, paste into your LLM with your source URL
-4. Reply `continue` when prompted
+1. Go to [Releases](https://github.com/Harery/Praetor/releases/tag/v2.9.2)
+2. Download `praetor-prompt-kit-v2.9.2.zip`
+3. Extract and run `npx praetor-audit-kit --install` from the extracted directory
 
 ## After the Discovery Report
 
